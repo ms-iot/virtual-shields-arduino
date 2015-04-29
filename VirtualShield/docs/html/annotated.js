@@ -1,0 +1,25 @@
+var annotated =
+[
+    [ "Accelerometer", "class_accelerometer.html", "class_accelerometer" ],
+    [ "ARGB", "struct_a_r_g_b.html", "struct_a_r_g_b" ],
+    [ "Attr", "struct_attr.html", "struct_attr" ],
+    [ "Camera", "class_camera.html", "class_camera" ],
+    [ "Compass", "class_compass.html", "class_compass" ],
+    [ "Email", "class_email.html", "class_email" ],
+    [ "EPtr", "struct_e_ptr.html", "struct_e_ptr" ],
+    [ "Geolocator", "class_geolocator.html", "class_geolocator" ],
+    [ "Gyrometer", "class_gyrometer.html", "class_gyrometer" ],
+    [ "LightSensor", "class_light_sensor.html", "class_light_sensor" ],
+    [ "Microphone", "class_microphone.html", "class_microphone" ],
+    [ "Notification", "class_notification.html", "class_notification" ],
+    [ "Orientation", "class_orientation.html", "class_orientation" ],
+    [ "Screen", "class_screen.html", "class_screen" ],
+    [ "Sensor", "class_sensor.html", "class_sensor" ],
+    [ "SensorEvent", "struct_sensor_event.html", "struct_sensor_event" ],
+    [ "ShieldEvent", "struct_shield_event.html", "struct_shield_event" ],
+    [ "Sms", "class_sms.html", "class_sms" ],
+    [ "Speech", "class_speech.html", "class_speech" ],
+    [ "Vibrate", "class_vibrate.html", "class_vibrate" ],
+    [ "VirtualShield", "class_virtual_shield.html", "class_virtual_shield" ],
+    [ "Web", "class_web.html", "class_web" ]
+];
