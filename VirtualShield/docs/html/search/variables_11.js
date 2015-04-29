@@ -1,0 +1,25 @@
+var searchData=
+[
+  ['sensor',['sensor',['../struct_sensor_event.html#a7fd9eb45f77abbfeda2a427fa012bcf0',1,'SensorEvent']]],
+  ['sensorcount',['sensorCount',['../_virtual_shield_8cpp.html#a7684a3a1397a2241ed8618d2b946d5f6',1,'VirtualShield.cpp']]],
+  ['sensors',['SENSORS',['../_sensor_8cpp.html#a9d0761c934e570be77ac6e862c66df6d',1,'SENSORS():&#160;Sensor.cpp'],['../_virtual_shield_8cpp.html#a1077f27fcc2a8c1bf7cb72f1d83e7b09',1,'sensors():&#160;VirtualShield.cpp']]],
+  ['sensortype',['sensorType',['../class_sensor.html#a98f9bf14694bd1e5a21aec4fc72bb9d6',1,'Sensor']]],
+  ['service_5fcamera',['SERVICE_CAMERA',['../_camera_8cpp.html#afa62c7a198b6adb0071bb5089ec39b1b',1,'Camera.cpp']]],
+  ['service_5femail',['SERVICE_EMAIL',['../_email_8cpp.html#a924a81f6a9f71837b00033d93495e73c',1,'Email.cpp']]],
+  ['service_5fmicrophone',['SERVICE_MICROPHONE',['../_microphone_8cpp.html#a8bb85758ff7dd5a6f565673217c0cd4c',1,'Microphone.cpp']]],
+  ['service_5fname_5fgraphics',['SERVICE_NAME_GRAPHICS',['../_screen_8cpp.html#aa38fabd5db0ad05b132612d3e1526429',1,'Screen.cpp']]],
+  ['service_5fname_5flcdtext',['SERVICE_NAME_LCDTEXT',['../_screen_8cpp.html#a3ac39081bd26b01c3bf8bd2e2345b1bd',1,'Screen.cpp']]],
+  ['service_5fname_5frecognize',['SERVICE_NAME_RECOGNIZE',['../_speech_8cpp.html#ac3b950aa39ac04151530167d65e7c26e',1,'Speech.cpp']]],
+  ['service_5fname_5fservice',['SERVICE_NAME_SERVICE',['../_virtual_shield_8cpp.html#a15b35555a045847d295479ae8772c16e',1,'VirtualShield.cpp']]],
+  ['service_5fname_5fspeech',['SERVICE_NAME_SPEECH',['../_speech_8cpp.html#a67290a868d8225c73694a4faa9ef5d8e',1,'Speech.cpp']]],
+  ['service_5fnotification',['SERVICE_NOTIFICATION',['../_notification_8cpp.html#ac0f1e99c04b2e12a13df5bc13c965665',1,'Notification.cpp']]],
+  ['service_5fsensors',['SERVICE_SENSORS',['../_sensor_8cpp.html#a309f64888e58a2c0d7bd3e835ac13c9e',1,'Sensor.cpp']]],
+  ['service_5fsms',['SERVICE_SMS',['../_sms_8cpp.html#a79acaf3536f9683e30ecc8b03e9607d1',1,'Sms.cpp']]],
+  ['service_5fvibrate',['SERVICE_VIBRATE',['../_vibrate_8cpp.html#a28af9d7e9e814ee5d9335401f43180a9',1,'Vibrate.cpp']]],
+  ['service_5fweb',['SERVICE_WEB',['../_web_8cpp.html#a746a591e963323a3241f2a88a51a148f',1,'Web.cpp']]],
+  ['shield',['shield',['../class_sensor.html#a984723758f808506fe9030a9b270a859',1,'Sensor']]],
+  ['shieldeventtype',['shieldEventType',['../struct_shield_event.html#a9b5346929e453b53e2321cc0a7ed9a1e',1,'ShieldEvent']]],
+  ['speech_5fui',['SPEECH_UI',['../_speech_8cpp.html#a64cba4d5958f6841c6073a5066166153',1,'Speech.cpp']]],
+  ['subject',['SUBJECT',['../_email_8cpp.html#af65966c2dacefbd76b3d0c6a939fee8f',1,'SUBJECT():&#160;Email.cpp'],['../_sms_8cpp.html#af65966c2dacefbd76b3d0c6a939fee8f',1,'SUBJECT():&#160;Sms.cpp']]],
+  ['system_5fevent',['SYSTEM_EVENT',['../_virtual_shield_8cpp.html#a8b63a900a1fb9e160ac4dc6d46e16726',1,'VirtualShield.cpp']]]
+];

@@ -1,0 +1,43 @@
+#include "Email.h"
+
+extern "C" {
+#include <string.h>
+#include <stdlib.h>
+}
+
+const PROGMEM char SERVICE_EMAIL[] = "EMAIL";
+const PROGMEM char SUBJECT[] = "Subject";
+const PROGMEM char CC[] = "Cc";
+
+/// <summary>
+/// Initializes a new instance of the <see cref="Email"/> class.
+/// </summary>
+/// <param name="shield">The shield.</param>
+Email::Email(const VirtualShield &shield) : Sensor(shield, 'Y') {
+}
+
+/// <summary>
+/// Initiates an email.
+/// </summary>
+/// <param name="to">To email address.</param>
+/// <param name="subject">The subject.</param>
+/// <param name="message">The message.</param>
+/// <param name="cc">The cc email address.</param>
+/// <param name="attachment">The attachment url.</param>
+/// <returns>The id of the message. Negative if an error.</returns>
+int Email::send(String to, String subject, String message, String cc, String attachment) {
+	EPtr eptrs[] = { EPtr(MemPtr, TO, to.c_str()), EPtr(MemPtr, SUBJECT, subject.c_str()), 
+		EPtr(MemPtr, MESSAGE, message.c_str()), EPtr(cc ? MemPtr : None, CC, cc.c_str()), 
+		EPtr(attachment ? MemPtr : None, ATTACHMENT, attachment.c_str()) };
+	return shield.writeAll(SERVICE_EMAIL, eptrs, 5);
+}
+
+/// <summary>
+/// Event called when a valid json message was received. 
+/// Consumes the proper values for this sensor.
+/// </summary>
+/// <param name="root">The root json object.</param>
+/// <param name="shieldEvent">The shield event.</param>
+void Email::onJsonReceived(JsonObject& root, ShieldEvent* shieldEvent) {
+	Sensor::onJsonReceived(root, shieldEvent);
+}
