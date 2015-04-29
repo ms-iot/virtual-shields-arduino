@@ -1,3 +1,27 @@
+/*
+    Copyright(c) Microsoft Open Technologies, Inc. All rights reserved.
+
+    The MIT License(MIT)
+
+    Permission is hereby granted, free of charge, to any person obtaining a copy
+    of this software and associated documentation files(the "Software"), to deal
+    in the Software without restriction, including without limitation the rights
+    to use, copy, modify, merge, publish, distribute, sublicense, and / or sell
+    copies of the Software, and to permit persons to whom the Software is
+    furnished to do so, subject to the following conditions :
+
+    The above copyright notice and this permission notice shall be included in
+    all copies or substantial portions of the Software.
+
+    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+    FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.IN NO EVENT SHALL THE
+    AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+    LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+    OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+    THE SOFTWARE.
+*/
+
 #include <ArduinoJson.h>
 
 #include <VirtualShield.h>
@@ -16,7 +40,8 @@ void recognitionEvent(ShieldEvent* event)
 {
   if (event->resultId > 0) {
 	digitalWrite(LED_PIN, recognition.recognizedIndex == 1 ? HIGH : LOW);
-	recognition.listenFor("on,off");	    // reset up the recognition after each event
+        screen.printAt(4, "Heard " + String(recognition.recognizedIndex == 1 ? "on" : "off"));
+	recognition.listenFor("on,off", false);	    // reset up the recognition after each event
   }
 }
 
@@ -29,7 +54,7 @@ void refresh(ShieldEvent* event)
 	screen.print(message);
         speech.speak(message); 
 
-	recognition.listenFor("on,off");	// NON-blocking instruction to recognize speech
+	recognition.listenFor("on,off", false);	// NON-blocking instruction to recognize speech
 }
 
 void setup()
@@ -48,3 +73,4 @@ void loop()
 {
 	shield.checkSensors();		    // handles Virtual Shield events.
 }			
+
