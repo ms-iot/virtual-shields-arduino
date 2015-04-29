@@ -81,11 +81,6 @@ bool Recognition::heard(String text)
 {
 	const char* recognizedText = (const char*) this->openTextBuffer;
 
-    Serial.print("[");
-    Serial.print(this->length[0]);
-    Serial.print(recognizedText);
-    Serial.print("]");
-
 	if (recognizedText) {
 		int length = this->length[0];
 		//recognized open text often ends with a period - do a comparison without.
