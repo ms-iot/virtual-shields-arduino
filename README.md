@@ -89,7 +89,7 @@ Capabilities:
 
 ###Set up ArduinoJson library
  1. From the [ArduinoJson repository](https://github.com/bblanchon/ArduinoJson), branch the reporsitory or download the zip.
- 2. Place the repository (or at least the ArduinoJson.h and ArduinoJson.cpp files) into your libraries folder (i.e. Documents\Arduino\libraries\ArduinoJson\).
+ 2. Place the whole repository into your libraries folder (i.e. Documents\Arduino\libraries\ArduinoJson\).
 
 ###Set up this repository.
  1. Branch this repository or download the zip.
