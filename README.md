@@ -68,13 +68,17 @@ Capabilities:
 ###Set up your Arduino
  1. Prepare the Bluetooth module if necessary (the Bluetooth module may need to have headers soldered onto it).
  2. Except for one difference below, connect the Bluetooth module to the Arduino per your wiring diagram ([BlueSMiRF wiring diagram](https://learn.sparkfun.com/tutorials/using-the-bluesmirf/hardware-hookup)).
-    DIFFERENCE: Use pins 0 and 1 instead of 2 and 3:
-    The Bluetooth TX should connect to pin 0 (Arduino RX).
-    The Bluetooth RX should connect to pin 1 (Arduino TX).
+    
+    DIFFERENCE: Use pins 0 and 1 instead of 2 and 3:  
+        The Bluetooth TX should connect to pin 0 (Arduino RX).  
+        The Bluetooth RX should connect to pin 1 (Arduino TX).  
 
 ###Set up your Windows 10 phone ( [using the virtual-shields-universal repository](https://github.com/ms-iot/virtual-shields-universal))
  1. Windows 8 users can get the "Windows Insider" application from the app store. This allows the user to opt into receiving Windows 10 Technical Previews as updates.
- 2. Pair the Bluetooth device in the Bluetooth settings. (BlueSMiRF default pin code is 1234. NOTE: The red blinking light on the BlueSMiRF continues to blink red after a successful pairing. This is expected. It only turns green after a connecting with the application).
+ 2. Pair the Bluetooth device in the Bluetooth settings.  
+    BlueSMiRF default pin code is 1234.  
+    NOTE: The red blinking light on the BlueSMiRF continues to blink red after a successful pairing. This is expected. It only turns green after a connecting with the application.  
+    When pairing you should see a device name like "RNBT-76BC" the last four characters are the last four characters of the MAC address printed on the sticker of the module.  
 
 ##Getting Started : Software
 
@@ -82,7 +86,7 @@ Capabilities:
  1. Arduino IDE 1.6 or better.
  2. ArduinoJson library.
  3. This repository.
- 4. Visual Studio 2015 to sideload UWA (phone app) onto developer unlocked phone - or download "Virtual Shields for Arduino" app from the Windows 10 app store.
+ 4. Visual Studio 2015 to sideload UWA (phone app) onto developer unlocked phone.
 
 ###Set up your Arduino IDE
  1. Download and install the [Arduino IDE](http://www.arduino.cc/en/Main/Software).
