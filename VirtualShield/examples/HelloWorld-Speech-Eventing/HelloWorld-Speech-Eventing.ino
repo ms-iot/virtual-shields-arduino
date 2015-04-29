@@ -16,7 +16,7 @@ void recognitionEvent(ShieldEvent* event)
 {
   if (event->resultId > 0) {
 	digitalWrite(LED_PIN, recognition.recognizedIndex == 1 ? HIGH : LOW);
-	recognition.listenFor("on,off");	    // reset up the recognition after each event
+	recognition.listenFor("on,off", false);	    // reset up the recognition after each event
   }
 }
 
@@ -29,7 +29,7 @@ void refresh(ShieldEvent* event)
 	screen.print(message);
         speech.speak(message); 
 
-	recognition.listenFor("on,off");	// NON-blocking instruction to recognize speech
+	recognition.listenFor("on,off", false);	// NON-blocking instruction to recognize speech
 }
 
 void setup()

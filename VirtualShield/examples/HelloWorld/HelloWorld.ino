@@ -14,7 +14,17 @@ void setup()
     // clears the screen
 	screen.clear();
 
-	screen.printAt(0, "Hello Virtual Shields");	 
+      int y = 0;
+      while(1)
+      {
+	screen.printAt(y, "Hello Virtual Shields");	 
+        y++;
+        if (y > 10)
+        {
+          y = 0;
+        }
+        delay(1000);
+      }
 }
 
 void loop()

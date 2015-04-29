@@ -26,12 +26,13 @@ void setup()
         
 	screen.print(message);
         speech.speak(message);
+        delay(3000);
 }
 
 void loop()
 {
 	// blocks until a word is recognized, or times out
-	if (recognition.listenFor("on,off"))	
+	if (recognition.listenFor("on,off", false))	
 	{
 		digitalWrite(LED_PIN, recognition.recognizedIndex == 1 ? HIGH : LOW);
 	}
