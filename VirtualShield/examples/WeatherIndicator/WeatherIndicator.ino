@@ -1,12 +1,12 @@
 #include <ArduinoJson.h>
 
 #include <VirtualShield.h>
-#include <../VirtualShield/Screen.h>
-#include <../VirtualShield/Web.h>
-#include <../VirtualShield/Geolocator.h>
+#include <Text.h>
+#include <Web.h>
+#include <Geolocator.h>
 
 VirtualShield shield;
-Screen screen = Screen(shield);
+Text screen = Text(shield);
 Geolocator gps = Geolocator(shield);
 Web web = Web(shield);
 
