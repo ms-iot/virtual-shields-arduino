@@ -40,7 +40,7 @@ void recognitionEvent(ShieldEvent* event)
 {
   if (event->resultId > 0) {
 	digitalWrite(LED_PIN, recognition.recognizedIndex == 1 ? HIGH : LOW);
-    screen.printAt(4, "Heard " + String(recognition.recognizedIndex == 1 ? "on" : "off"));
+        screen.printAt(4, "Heard " + String(recognition.recognizedIndex == 1 ? "on" : "off"));
 	recognition.listenFor("on,off", false);	    // reset up the recognition after each event
   }
 }
