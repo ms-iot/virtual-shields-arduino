@@ -69,8 +69,8 @@ Capabilities:
  1. Prepare the Bluetooth module if necessary (the Bluetooth module may need to have headers soldered onto it).
  2. Except for one difference below, connect the Bluetooth module to the Arduino per your wiring diagram ([BlueSMiRF wiring diagram](https://learn.sparkfun.com/tutorials/using-the-bluesmirf/hardware-hookup)).
     DIFFERENCE: Use pins 0 and 1 instead of 2 and 3:
-    a. The Bluetooth TX should connect to pin 0 (Arduino RX).
-    b. The Bluetooth RX should connect to pin 1 (Arduino TX).
+    The Bluetooth TX should connect to pin 0 (Arduino RX).
+    The Bluetooth RX should connect to pin 1 (Arduino TX).
 
 ###Set up your Windows 10 phone ( [using the virtual-shields-universal repository](https://github.com/ms-iot/virtual-shields-universal))
  1. Windows 8 users can get the "Windows Insider" application from the app store. This allows the user to opt into receiving Windows 10 Technical Previews as updates.
