@@ -22,7 +22,7 @@
     THE SOFTWARE.
 */
 
-﻿const long RED = 0xFF0000;
+const long RED = 0xFF0000;
 const long GREEN = 0xFF00;
 const long BLUE = 0xFF;
 const long BLACK = 0;
