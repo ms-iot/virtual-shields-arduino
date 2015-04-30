@@ -77,7 +77,7 @@ const int maxRememberedSensors = 10;
 const int maxReadBuffer = 128;
 const int maxJsonReadBuffer = 130;
 
-char* readBuffer = new char[maxReadBuffer];
+char readBuffer[maxReadBuffer];
 int readBufferIndex = 0;
 
 int bracketCount = 0;
