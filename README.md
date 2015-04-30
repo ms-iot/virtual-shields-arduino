@@ -115,9 +115,6 @@ Capabilities:
  5. Press the Reset button on the Arduino to restart the sketch.
  6. (You should see a message on your phone and be able to interact).
 
-##Helpful Links
- * [API Documentation](http://./docs/html/index.html)
-
 ##Examples included in this package:
  1. Print Hello World on your phone (Screen text).
  2. Using buttons on your phone to control pins (Screen graphics).
