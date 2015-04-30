@@ -1,6 +1,10 @@
 var searchData=
 [
-  ['sensorshieldeventtype',['SensorShieldEventType',['../_shield_event_8h.html#a756675764c30381de4a13bc31cd32c54aeaab09cd003484fa3cf2065bf8bbe4b5',1,'ShieldEvent.h']]],
-  ['start',['Start',['../_sensor_models_8h.html#a81057b596bbe6eddf79b17caa56b8ff6abd5f9c956752ce4dc707b4624b3a36f7',1,'SensorModels.h']]],
-  ['stop',['Stop',['../_sensor_models_8h.html#a81057b596bbe6eddf79b17caa56b8ff6af98d707eb4ed173ccfdbaf4eaa87100d',1,'SensorModels.h']]]
+  ['once',['Once',['../_sensor_models_8h.html#a81057b596bbe6eddf79b17caa56b8ff6a96be73c339468e5d0d9aed7ccc384bcc',1,'SensorModels.h']]],
+  ['onceonchange',['OnceOnChange',['../_sensor_models_8h.html#a81057b596bbe6eddf79b17caa56b8ff6a9171af31b20cf4a04b7d17a93a8b1f8e',1,'SensorModels.h']]],
+  ['orientation_5flandscape',['Orientation_Landscape',['../_graphics_8h.html#a871118a09520247c78a71ecd7b0abd58a17609f5a254ecd32beca5f705bdc2419',1,'Graphics.h']]],
+  ['orientation_5flandscapeflipped',['Orientation_LandscapeFlipped',['../_graphics_8h.html#a871118a09520247c78a71ecd7b0abd58a44ec06ac8a3f43aaf8e1df6a038ace6b',1,'Graphics.h']]],
+  ['orientation_5fnone',['Orientation_None',['../_graphics_8h.html#a871118a09520247c78a71ecd7b0abd58a75de328dd7f224bb87878d7a798350c3',1,'Graphics.h']]],
+  ['orientation_5fportrait',['Orientation_Portrait',['../_graphics_8h.html#a871118a09520247c78a71ecd7b0abd58af071b59e993df75a946872947c425050',1,'Graphics.h']]],
+  ['orientation_5fportraitflipped',['Orientation_PortraitFlipped',['../_graphics_8h.html#a871118a09520247c78a71ecd7b0abd58aec2cf9731aa94b39dd050406eb2025b1',1,'Graphics.h']]]
 ];

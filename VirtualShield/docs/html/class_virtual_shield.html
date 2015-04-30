@@ -4,18 +4,10 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.9.1"/>
-<title>VirtualShield: VirtualShield Class Reference</title>
+<title>Windows Virtual Shields for Arduino: VirtualShield Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
-<link href="navtree.css" rel="stylesheet" type="text/css"/>
-<script type="text/javascript" src="resize.js"></script>
-<script type="text/javascript" src="navtreedata.js"></script>
-<script type="text/javascript" src="navtree.js"></script>
-<script type="text/javascript">
-  $(document).ready(initResizable);
-  $(window).load(resizeHeight);
-</script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
@@ -30,9 +22,9 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr style="height: 56px;">
-  <td id="projectlogo"><img alt="Logo" src="Logo.scale-100.png"/></td>
+  <td id="projectlogo"><img alt="Logo" src="Shields300x300.png"/></td>
   <td style="padding-left: 0.5em;">
-   <div id="projectname">VirtualShield
+   <div id="projectname">Windows Virtual Shields for Arduino
    </div>
   </td>
  </tr>
@@ -76,21 +68,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="functions.html"><span>Class&#160;Members</span></a></li>
     </ul>
   </div>
-</div><!-- top -->
-<div id="side-nav" class="ui-resizable side-nav-resizable">
-  <div id="nav-tree">
-    <div id="nav-tree-contents">
-      <div id="nav-sync" class="sync"></div>
-    </div>
-  </div>
-  <div id="splitbar" style="-moz-user-select:none;" 
-       class="ui-resizable-handle">
-  </div>
-</div>
-<script type="text/javascript">
-$(document).ready(function(){initNavTree('class_virtual_shield.html','');});
-</script>
-<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -105,9 +82,11 @@ $(document).ready(function(){initNavTree('class_virtual_shield.html','');});
 </iframe>
 </div>
 
+</div><!-- top -->
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-static-methods">Static Public Member Functions</a> &#124;
 <a href="#pub-attribs">Public Attributes</a> &#124;
 <a href="#pro-methods">Protected Member Functions</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a> &#124;
@@ -130,18 +109,20 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a17ac1edde45f6d47760d46199092508f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_virtual_shield.html#a17ac1edde45f6d47760d46199092508f">setPort</a> (int port)</td></tr>
 <tr class="memdesc:a17ac1edde45f6d47760d46199092508f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the port for bluetooth (this only works for <b>AVR_ATmega32U4</b> where there are more than one port).  <a href="#a17ac1edde45f6d47760d46199092508f">More...</a><br /></td></tr>
 <tr class="separator:a17ac1edde45f6d47760d46199092508f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adeaf52d45f42e1ccccecb640ae750c16"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_virtual_shield.html#adeaf52d45f42e1ccccecb640ae750c16">checkSensors</a> (int watchForId=0, long timeout=0)</td></tr>
-<tr class="memdesc:adeaf52d45f42e1ccccecb640ae750c16"><td class="mdescLeft">&#160;</td><td class="mdescRight">Receives events as long as they exist, or until an optional timeout occurs.  <a href="#adeaf52d45f42e1ccccecb640ae750c16">More...</a><br /></td></tr>
-<tr class="separator:adeaf52d45f42e1ccccecb640ae750c16"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af3087437088bd43fd09dc9001b42aba9"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_virtual_shield.html#af3087437088bd43fd09dc9001b42aba9">waitFor</a> (int id, long timeout=<a class="el" href="_virtual_shield_8h.html#a22a848681d68cb305e9bb503a6f7b91f">WAITFOR_TIMEOUT</a>, bool asSuccess=true)</td></tr>
-<tr class="memdesc:af3087437088bd43fd09dc9001b42aba9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Blocks and awaits an event with an id.  <a href="#af3087437088bd43fd09dc9001b42aba9">More...</a><br /></td></tr>
-<tr class="separator:af3087437088bd43fd09dc9001b42aba9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a55a0d8a1142f7c970217119534fa7ec3"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_virtual_shield.html#a55a0d8a1142f7c970217119534fa7ec3">checkSensors</a> (int watchForId=0, long timeout=0, int waitForResultId=-1)</td></tr>
+<tr class="memdesc:a55a0d8a1142f7c970217119534fa7ec3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Receives events as long as they exist, or until an optional timeout occurs.  <a href="#a55a0d8a1142f7c970217119534fa7ec3">More...</a><br /></td></tr>
+<tr class="separator:a55a0d8a1142f7c970217119534fa7ec3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a90c822fe0b4636aea0c521365d85347f"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_virtual_shield.html#a90c822fe0b4636aea0c521365d85347f">waitFor</a> (int id, long timeout=<a class="el" href="_virtual_shield_8h.html#a22a848681d68cb305e9bb503a6f7b91f">WAITFOR_TIMEOUT</a>, bool asSuccess=true, int resultId=-1)</td></tr>
+<tr class="memdesc:a90c822fe0b4636aea0c521365d85347f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Blocks and awaits an event with an id.  <a href="#a90c822fe0b4636aea0c521365d85347f">More...</a><br /></td></tr>
+<tr class="separator:a90c822fe0b4636aea0c521365d85347f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7f98e632b63d481e497d108ec28f4ab5"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_virtual_shield.html#a7f98e632b63d481e497d108ec28f4ab5">hasError</a> (<a class="el" href="struct_shield_event.html">ShieldEvent</a> *shieldEvent=0)</td></tr>
 <tr class="memdesc:a7f98e632b63d481e497d108ec28f4ab5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns true  <a href="#a7f98e632b63d481e497d108ec28f4ab5">More...</a><br /></td></tr>
 <tr class="separator:a7f98e632b63d481e497d108ec28f4ab5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a86cd9abf63a6c03a469098c5e892ea15"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_virtual_shield.html#a86cd9abf63a6c03a469098c5e892ea15">getEvent</a> (<a class="el" href="struct_shield_event.html">ShieldEvent</a> *shieldEvent)</td></tr>
 <tr class="memdesc:a86cd9abf63a6c03a469098c5e892ea15"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets zero or one available events for processing.  <a href="#a86cd9abf63a6c03a469098c5e892ea15">More...</a><br /></td></tr>
 <tr class="separator:a86cd9abf63a6c03a469098c5e892ea15"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a514aeba90d165bafef0654ff4d075db6"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_virtual_shield.html#a514aeba90d165bafef0654ff4d075db6">directToSerial</a> (const char *cmd)</td></tr>
+<tr class="separator:a514aeba90d165bafef0654ff4d075db6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1f91452bc31bd2a3ac97274323dc9795"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_virtual_shield.html#a1f91452bc31bd2a3ac97274323dc9795">addSensor</a> (<a class="el" href="class_sensor.html">Sensor</a> *sensor)</td></tr>
 <tr class="memdesc:a1f91452bc31bd2a3ac97274323dc9795"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds a sensor to the list of known sensors in order to match and dispatch for incoming events.  <a href="#a1f91452bc31bd2a3ac97274323dc9795">More...</a><br /></td></tr>
 <tr class="separator:a1f91452bc31bd2a3ac97274323dc9795"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -151,9 +132,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a072987d27e55391719e9b06156387bad"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_virtual_shield.html#a072987d27e55391719e9b06156387bad">write</a> (const char *text)</td></tr>
 <tr class="memdesc:a072987d27e55391719e9b06156387bad"><td class="mdescLeft">&#160;</td><td class="mdescRight">Writes the specified text to the communication channel.  <a href="#a072987d27e55391719e9b06156387bad">More...</a><br /></td></tr>
 <tr class="separator:a072987d27e55391719e9b06156387bad"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9ee30d21f47f631ff638831e96e8fdd1"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_virtual_shield.html#a9ee30d21f47f631ff638831e96e8fdd1">writeAll</a> (const char *serviceName, <a class="el" href="struct_e_ptr.html">EPtr</a> values[], int count, <a class="el" href="struct_attr.html">Attr</a> extraAttributes[]=0, int extraAttributeCount=0)</td></tr>
-<tr class="memdesc:a9ee30d21f47f631ff638831e96e8fdd1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Writes all <a class="el" href="struct_e_ptr.html">EPtr</a> values to the communication channel.  <a href="#a9ee30d21f47f631ff638831e96e8fdd1">More...</a><br /></td></tr>
-<tr class="separator:a9ee30d21f47f631ff638831e96e8fdd1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa8a28539e01990aeb5a9f43cf281cdb6"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_virtual_shield.html#aa8a28539e01990aeb5a9f43cf281cdb6">writeAll</a> (const char *serviceName, <a class="el" href="struct_e_ptr.html">EPtr</a> values[], int count, <a class="el" href="struct_attr.html">Attr</a> extraAttributes[]=0, int extraAttributeCount=0, const char sensorType= '\0')</td></tr>
+<tr class="memdesc:aa8a28539e01990aeb5a9f43cf281cdb6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Writes all <a class="el" href="struct_e_ptr.html">EPtr</a> values to the communication channel.  <a href="#aa8a28539e01990aeb5a9f43cf281cdb6">More...</a><br /></td></tr>
+<tr class="separator:aa8a28539e01990aeb5a9f43cf281cdb6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad49f3a3a4bfe98080c835c4f3397d23a"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_virtual_shield.html#ad49f3a3a4bfe98080c835c4f3397d23a">writeAll</a> (const char *serviceName)</td></tr>
 <tr class="memdesc:ad49f3a3a4bfe98080c835c4f3397d23a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Writes the service name only to the communication channel.  <a href="#ad49f3a3a4bfe98080c835c4f3397d23a">More...</a><br /></td></tr>
 <tr class="separator:ad49f3a3a4bfe98080c835c4f3397d23a"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -163,27 +144,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a27d8aa7dc2309a4712be9dbe50a3c5ff"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_virtual_shield.html#a27d8aa7dc2309a4712be9dbe50a3c5ff">write</a> (<a class="el" href="struct_e_ptr.html">EPtr</a> eptr) const </td></tr>
 <tr class="memdesc:a27d8aa7dc2309a4712be9dbe50a3c5ff"><td class="mdescLeft">&#160;</td><td class="mdescRight">Writes the specified eptr.  <a href="#a27d8aa7dc2309a4712be9dbe50a3c5ff">More...</a><br /></td></tr>
 <tr class="separator:a27d8aa7dc2309a4712be9dbe50a3c5ff"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a74d2c95c9d7aec799841b31db0ef4439"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_virtual_shield.html#a74d2c95c9d7aec799841b31db0ef4439">writePair</a> (const char *key, double value) const </td></tr>
-<tr class="memdesc:a74d2c95c9d7aec799841b31db0ef4439"><td class="mdescLeft">&#160;</td><td class="mdescRight">Writes the specified key / value.  <a href="#a74d2c95c9d7aec799841b31db0ef4439">More...</a><br /></td></tr>
-<tr class="separator:a74d2c95c9d7aec799841b31db0ef4439"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab265fead1773749377066019d5a22010"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_virtual_shield.html#ab265fead1773749377066019d5a22010">writePair</a> (const char *key, bool value) const </td></tr>
-<tr class="memdesc:ab265fead1773749377066019d5a22010"><td class="mdescLeft">&#160;</td><td class="mdescRight">Writes the specified key / value.  <a href="#ab265fead1773749377066019d5a22010">More...</a><br /></td></tr>
-<tr class="separator:ab265fead1773749377066019d5a22010"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a110350d4763685cfceee88428df256dc"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_virtual_shield.html#a110350d4763685cfceee88428df256dc">writePair</a> (const char *key, <a class="el" href="_sensor_models_8h.html#a36cb3b01d81ffd844bbbfb54003e06ec">UINT</a> value) const </td></tr>
-<tr class="memdesc:a110350d4763685cfceee88428df256dc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Writes the specified key / value.  <a href="#a110350d4763685cfceee88428df256dc">More...</a><br /></td></tr>
-<tr class="separator:a110350d4763685cfceee88428df256dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa5eb9cec677c93958570f92f8bfe4f58"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_virtual_shield.html#aa5eb9cec677c93958570f92f8bfe4f58">writePair</a> (const char *key, const char *value) const </td></tr>
-<tr class="memdesc:aa5eb9cec677c93958570f92f8bfe4f58"><td class="mdescLeft">&#160;</td><td class="mdescRight">Writes the specified key / memory value.  <a href="#aa5eb9cec677c93958570f92f8bfe4f58">More...</a><br /></td></tr>
-<tr class="separator:aa5eb9cec677c93958570f92f8bfe4f58"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae3408e489d96d8a35953baba99fa8d82"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_virtual_shield.html#ae3408e489d96d8a35953baba99fa8d82">writePairFromFlash</a> (const char *key, const char *value) const </td></tr>
-<tr class="memdesc:ae3408e489d96d8a35953baba99fa8d82"><td class="mdescLeft">&#160;</td><td class="mdescRight">Writes the specified key / PROGMEM value.  <a href="#ae3408e489d96d8a35953baba99fa8d82">More...</a><br /></td></tr>
-<tr class="separator:ae3408e489d96d8a35953baba99fa8d82"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a00d3b1b51a3f0d0c262277bcd96bd92b"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_virtual_shield.html#a00d3b1b51a3f0d0c262277bcd96bd92b">endWrite</a> ()</td></tr>
 <tr class="memdesc:a00d3b1b51a3f0d0c262277bcd96bd92b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Ends the write operation.  <a href="#a00d3b1b51a3f0d0c262277bcd96bd92b">More...</a><br /></td></tr>
 <tr class="separator:a00d3b1b51a3f0d0c262277bcd96bd92b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aecfd6391a7b9eb1476e392866efd6594"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_virtual_shield.html#aecfd6391a7b9eb1476e392866efd6594">block</a> (int id, bool blocking)</td></tr>
-<tr class="memdesc:aecfd6391a7b9eb1476e392866efd6594"><td class="mdescLeft">&#160;</td><td class="mdescRight">Blocks while waiting for a specific id-based response (only when blocking is true and allowAutoBlocking is true).  <a href="#aecfd6391a7b9eb1476e392866efd6594">More...</a><br /></td></tr>
-<tr class="separator:aecfd6391a7b9eb1476e392866efd6594"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1f84f52def50f94abd8afc08ca0cb574"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_virtual_shield.html#a1f84f52def50f94abd8afc08ca0cb574">block</a> (int id, bool blocking, long timeout=<a class="el" href="_virtual_shield_8h.html#a22a848681d68cb305e9bb503a6f7b91f">WAITFOR_TIMEOUT</a>, int waitForResultId=-1)</td></tr>
+<tr class="memdesc:a1f84f52def50f94abd8afc08ca0cb574"><td class="mdescLeft">&#160;</td><td class="mdescRight">Blocks while waiting for a specific id-based response (only when blocking is true and allowAutoBlocking is true).  <a href="#a1f84f52def50f94abd8afc08ca0cb574">More...</a><br /></td></tr>
+<tr class="separator:a1f84f52def50f94abd8afc08ca0cb574"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad44613f175ef62c22f3afa82d328cd84"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_virtual_shield.html#ad44613f175ef62c22f3afa82d328cd84">setOnEvent</a> (void(*<a class="el" href="class_virtual_shield.html#a9a6372f71047221dd965dcc57681db26">onEvent</a>)(<a class="el" href="struct_shield_event.html">ShieldEvent</a> *))</td></tr>
 <tr class="separator:ad44613f175ef62c22f3afa82d328cd84"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab6f3d6eb134861f3af32f1b4b4ae38ab"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_virtual_shield.html#ab6f3d6eb134861f3af32f1b4b4ae38ab">setOnConnect</a> (void(*<a class="el" href="class_virtual_shield.html#a6c4f3d68ef7dfa237ae15bff86d90a0d">onConnect</a>)(<a class="el" href="struct_shield_event.html">ShieldEvent</a> *))</td></tr>
@@ -195,8 +161,15 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:af1b2e499b75067fad2f1c0fc42c55552"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_virtual_shield.html#af1b2e499b75067fad2f1c0fc42c55552">setOnResume</a> (void(*<a class="el" href="class_virtual_shield.html#a6d0217ae5707cd795ea7d2b7ac004c8a">onResume</a>)(<a class="el" href="struct_shield_event.html">ShieldEvent</a> *))</td></tr>
 <tr class="separator:af1b2e499b75067fad2f1c0fc42c55552"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0d197a9d728c432ff38a817cec433749"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_virtual_shield.html#a0d197a9d728c432ff38a817cec433749">enableAutoBlocking</a> (bool enable)</td></tr>
-<tr class="memdesc:a0d197a9d728c432ff38a817cec433749"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enables or disables <a class="el" href="class_virtual_shield.html#aecfd6391a7b9eb1476e392866efd6594" title="Blocks while waiting for a specific id-based response (only when blocking is true and allowAutoBlocki...">block()</a> to block for specific id-based responses.  <a href="#a0d197a9d728c432ff38a817cec433749">More...</a><br /></td></tr>
+<tr class="memdesc:a0d197a9d728c432ff38a817cec433749"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enables or disables <a class="el" href="class_virtual_shield.html#a1f84f52def50f94abd8afc08ca0cb574" title="Blocks while waiting for a specific id-based response (only when blocking is true and allowAutoBlocki...">block()</a> to block for specific id-based responses.  <a href="#a0d197a9d728c432ff38a817cec433749">More...</a><br /></td></tr>
 <tr class="separator:a0d197a9d728c432ff38a817cec433749"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9605d67071deb43e3b98620ff5c899cb"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_virtual_shield.html#a9605d67071deb43e3b98620ff5c899cb">parseToHash</a> (const char *text, unsigned int *<a class="el" href="class_virtual_shield.html#a81cd588e8d8ede49da5a7ebc76e97327">hash</a>, int hashCount, char separator= ' ', unsigned int length=-1)</td></tr>
+<tr class="separator:a9605d67071deb43e3b98620ff5c899cb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
+Static Public Member Functions</h2></td></tr>
+<tr class="memitem:a81cd588e8d8ede49da5a7ebc76e97327"><td class="memItemLeft" align="right" valign="top">static unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_virtual_shield.html#a81cd588e8d8ede49da5a7ebc76e97327">hash</a> (const char *s, unsigned int len=-1, unsigned int seed=0)</td></tr>
+<tr class="separator:a81cd588e8d8ede49da5a7ebc76e97327"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
@@ -213,11 +186,9 @@ Public Attributes</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
-<tr class="memitem:adafed32824176794bdd0276eb705c9d8"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_virtual_shield.html#adafed32824176794bdd0276eb705c9d8">sendFlashStringOnSerial</a> (const char *flashStringAdr) const </td></tr>
-<tr class="memdesc:adafed32824176794bdd0276eb705c9d8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sends the flash (PROGMEM) string on the communication channel.  <a href="#adafed32824176794bdd0276eb705c9d8">More...</a><br /></td></tr>
-<tr class="separator:adafed32824176794bdd0276eb705c9d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1eb4bde63b47541e26b8f6fabe96c25d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_virtual_shield.html#a1eb4bde63b47541e26b8f6fabe96c25d">sendServiceTiming</a> (const char *serviceName, int milliseconds)</td></tr>
-<tr class="separator:a1eb4bde63b47541e26b8f6fabe96c25d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5ed897857e83ef4062d81630a198c049"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_virtual_shield.html#a5ed897857e83ef4062d81630a198c049">sendFlashStringOnSerial</a> (const char *flashStringAdr, int start=-1, bool encode=false) const </td></tr>
+<tr class="memdesc:a5ed897857e83ef4062d81630a198c049"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sends the flash (PROGMEM) string on the communication channel.  <a href="#a5ed897857e83ef4062d81630a198c049">More...</a><br /></td></tr>
+<tr class="separator:a5ed897857e83ef4062d81630a198c049"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af8877b77e41b34c2216fff1aec6c41db"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_virtual_shield.html#af8877b77e41b34c2216fff1aec6c41db">onJsonStringReceived</a> (char *json, <a class="el" href="struct_shield_event.html">ShieldEvent</a> *shieldEvent)</td></tr>
 <tr class="memdesc:af8877b77e41b34c2216fff1aec6c41db"><td class="mdescLeft">&#160;</td><td class="mdescRight">Event callback for when a full json string is received.  <a href="#af8877b77e41b34c2216fff1aec6c41db">More...</a><br /></td></tr>
 <tr class="separator:af8877b77e41b34c2216fff1aec6c41db"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -326,7 +297,7 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="aecfd6391a7b9eb1476e392866efd6594"></a>
+<a class="anchor" id="a1f84f52def50f94abd8afc08ca0cb574"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -340,7 +311,19 @@ Protected Attributes</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">bool&#160;</td>
-          <td class="paramname"><em>blocking</em>&#160;</td>
+          <td class="paramname"><em>blocking</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">long&#160;</td>
+          <td class="paramname"><em>timeout</em> = <code><a class="el" href="_virtual_shield_8h.html#a22a848681d68cb305e9bb503a6f7b91f">WAITFOR_TIMEOUT</a></code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>watchForResultId</em> = <code>-1</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -354,7 +337,7 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="adeaf52d45f42e1ccccecb640ae750c16"></a>
+<a class="anchor" id="a55a0d8a1142f7c970217119534fa7ec3"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -368,7 +351,13 @@ Protected Attributes</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">long&#160;</td>
-          <td class="paramname"><em>timeout</em> = <code>0</code>&#160;</td>
+          <td class="paramname"><em>timeout</em> = <code>0</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>watchForResultId</em> = <code>-1</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -387,6 +376,22 @@ Protected Attributes</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>true if the id matched an incoming event, or if no id, any event.</dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a514aeba90d165bafef0654ff4d075db6"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int VirtualShield::directToSerial </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>cmd</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
 
 </div>
 </div>
@@ -412,7 +417,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Enables or disables <a class="el" href="class_virtual_shield.html#aecfd6391a7b9eb1476e392866efd6594" title="Blocks while waiting for a specific id-based response (only when blocking is true and allowAutoBlocki...">block()</a> to block for specific id-based responses. </p>
+<p>Enables or disables <a class="el" href="class_virtual_shield.html#a1f84f52def50f94abd8afc08ca0cb574" title="Blocks while waiting for a specific id-based response (only when blocking is true and allowAutoBlocki...">block()</a> to block for specific id-based responses. </p>
 
 </div>
 </div>
@@ -507,6 +512,46 @@ Protected Attributes</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>The matching id, or zero if not found.</dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a81cd588e8d8ede49da5a7ebc76e97327"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned int VirtualShield::hash </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>s</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned int&#160;</td>
+          <td class="paramname"><em>len</em> = <code>-1</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned int&#160;</td>
+          <td class="paramname"><em>seed</em> = <code>0</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
 
 </div>
 </div>
@@ -646,7 +691,51 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="adafed32824176794bdd0276eb705c9d8"></a>
+<a class="anchor" id="a9605d67071deb43e3b98620ff5c899cb"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int VirtualShield::parseToHash </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>text</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned int *&#160;</td>
+          <td class="paramname"><em>hash</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>hashCount</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char&#160;</td>
+          <td class="paramname"><em>separator</em> = <code>'&#160;'</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned int&#160;</td>
+          <td class="paramname"><em>length</em> = <code>-1</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a5ed897857e83ef4062d81630a198c049"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -657,8 +746,24 @@ Protected Attributes</h2></td></tr>
           <td class="memname">int VirtualShield::sendFlashStringOnSerial </td>
           <td>(</td>
           <td class="paramtype">const char *&#160;</td>
-          <td class="paramname"><em>flashStringAdr</em></td><td>)</td>
-          <td> const</td>
+          <td class="paramname"><em>flashStringAdr</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>start</em> = <code>-1</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>encode</em> = <code>false</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
         </tr>
       </table>
   </td>
@@ -676,40 +781,6 @@ Protected Attributes</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Zero if no error, negative if an error.</dd></dl>
-
-</div>
-</div>
-<a class="anchor" id="a1eb4bde63b47541e26b8f6fabe96c25d"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void VirtualShield::sendServiceTiming </td>
-          <td>(</td>
-          <td class="paramtype">const char *&#160;</td>
-          <td class="paramname"><em>serviceName</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>milliseconds</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
 
 </div>
 </div>
@@ -857,7 +928,7 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="af3087437088bd43fd09dc9001b42aba9"></a>
+<a class="anchor" id="a90c822fe0b4636aea0c521365d85347f"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -877,7 +948,13 @@ Protected Attributes</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">bool&#160;</td>
-          <td class="paramname"><em>asSuccess</em> = <code>true</code>&#160;</td>
+          <td class="paramname"><em>asSuccess</em> = <code>true</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>resultId</em> = <code>-1</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -948,7 +1025,7 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a9ee30d21f47f631ff638831e96e8fdd1"></a>
+<a class="anchor" id="aa8a28539e01990aeb5a9f43cf281cdb6"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -980,7 +1057,13 @@ Protected Attributes</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>extraAttributeCount</em> = <code>0</code>&#160;</td>
+          <td class="paramname"><em>extraAttributeCount</em> = <code>0</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char&#160;</td>
+          <td class="paramname"><em>sensorType</em> = <code>'\0'</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -1025,186 +1108,6 @@ Protected Attributes</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>int.</dd></dl>
-
-</div>
-</div>
-<a class="anchor" id="a74d2c95c9d7aec799841b31db0ef4439"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int VirtualShield::writePair </td>
-          <td>(</td>
-          <td class="paramtype">const char *&#160;</td>
-          <td class="paramname"><em>key</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">double&#160;</td>
-          <td class="paramname"><em>value</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td> const</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Writes the specified key / value. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">key</td><td>The key.</td></tr>
-    <tr><td class="paramname">value</td><td>The value.</td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>Zero if no error, negative if an error.</dd></dl>
-
-</div>
-</div>
-<a class="anchor" id="ab265fead1773749377066019d5a22010"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int VirtualShield::writePair </td>
-          <td>(</td>
-          <td class="paramtype">const char *&#160;</td>
-          <td class="paramname"><em>key</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">bool&#160;</td>
-          <td class="paramname"><em>value</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td> const</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Writes the specified key / value. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">key</td><td>The key.</td></tr>
-    <tr><td class="paramname">value</td><td>The value.</td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>Zero if no error, negative if an error.</dd></dl>
-
-</div>
-</div>
-<a class="anchor" id="a110350d4763685cfceee88428df256dc"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int VirtualShield::writePair </td>
-          <td>(</td>
-          <td class="paramtype">const char *&#160;</td>
-          <td class="paramname"><em>key</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="_sensor_models_8h.html#a36cb3b01d81ffd844bbbfb54003e06ec">UINT</a>&#160;</td>
-          <td class="paramname"><em>value</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td> const</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Writes the specified key / value. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">key</td><td>The key.</td></tr>
-    <tr><td class="paramname">value</td><td>The value.</td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>Zero if no error, negative if an error.</dd></dl>
-
-</div>
-</div>
-<a class="anchor" id="aa5eb9cec677c93958570f92f8bfe4f58"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int VirtualShield::writePair </td>
-          <td>(</td>
-          <td class="paramtype">const char *&#160;</td>
-          <td class="paramname"><em>key</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const char *&#160;</td>
-          <td class="paramname"><em>text</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td> const</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Writes the specified key / memory value. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">key</td><td>The key.</td></tr>
-    <tr><td class="paramname">value</td><td>The value (from memory).</td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>Zero if no error, negative if an error.</dd></dl>
-
-</div>
-</div>
-<a class="anchor" id="ae3408e489d96d8a35953baba99fa8d82"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int VirtualShield::writePairFromFlash </td>
-          <td>(</td>
-          <td class="paramtype">const char *&#160;</td>
-          <td class="paramname"><em>key</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const char *&#160;</td>
-          <td class="paramname"><em>value</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td> const</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Writes the specified key / PROGMEM value. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">key</td><td>The key.</td></tr>
-    <tr><td class="paramname">value</td><td>The value (from PROGMEM).</td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>Zero if no error, negative if an error.</dd></dl>
 
 </div>
 </div>
@@ -1290,19 +1193,15 @@ Protected Attributes</h2></td></tr>
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li><a class="el" href="_virtual_shield_8h_source.html">VirtualShield.h</a></li>
-<li><a class="el" href="_virtual_shield_8cpp.html">VirtualShield.cpp</a></li>
+<li>C:/Users/jgord/Documents/ms-iot/virtual-shields-arduino/VirtualShield/<a class="el" href="_virtual_shield_8h_source.html">VirtualShield.h</a></li>
+<li>C:/Users/jgord/Documents/ms-iot/virtual-shields-arduino/VirtualShield/<a class="el" href="_virtual_shield_8cpp.html">VirtualShield.cpp</a></li>
 </ul>
 </div><!-- contents -->
-</div><!-- doc-content -->
 <!-- start footer part -->
-<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
-  <ul>
-    <li class="navelem"><a class="el" href="class_virtual_shield.html">VirtualShield</a></li>
-    <li class="footer">Generated on Tue Apr 7 2015 00:10:52 for VirtualShield by
-    <a href="http://www.doxygen.org/index.html">
-    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.9.1 </li>
-  </ul>
-</div>
+<hr class="footer"/><address class="footer"><small>
+Generated on Wed Apr 29 2015 17:37:05 for Windows Virtual Shields for Arduino by &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.9.1
+</small></address>
 </body>
 </html>

@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['drawat',['drawAt',['../class_screen.html#a63862528e43bbb40e594c8069db3ea96',1,'Screen']]],
-  ['drawimage',['drawImage',['../class_screen.html#a3aa3a4398b85351dfdded90d277ca7ec',1,'Screen']]]
+  ['directtoserial',['directToSerial',['../class_virtual_shield.html#a514aeba90d165bafef0654ff4d075db6',1,'VirtualShield']]],
+  ['drawat',['drawAt',['../class_graphics.html#ad6a3b8225400feeefb0e45db046d98f1',1,'Graphics']]],
+  ['drawimage',['drawImage',['../class_graphics.html#a02ff6e037a667410957defa40ebc1b4b',1,'Graphics']]]
 ];

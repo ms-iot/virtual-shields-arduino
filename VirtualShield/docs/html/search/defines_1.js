@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['connect_5fhash',['CONNECT_HASH',['../_virtual_shield_8h.html#a332b8774cc1db1567a3c03104f3c58d8',1,'VirtualShield.h']]]
+  ['ping_5fhash',['PING_HASH',['../_virtual_shield_8h.html#a0f4200ba83ddded1cd23e6e576fbd6f8',1,'VirtualShield.h']]]
 ];

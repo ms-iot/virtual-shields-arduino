@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['web_2ecpp',['Web.cpp',['../_web_8cpp.html',1,'']]],
-  ['web_2eh',['Web.h',['../_web_8h.html',1,'']]]
+  ['text_2ecpp',['Text.cpp',['../_text_8cpp.html',1,'']]],
+  ['text_2eh',['Text.h',['../_text_8h.html',1,'']]]
 ];

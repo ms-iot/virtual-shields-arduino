@@ -1,7 +1,7 @@
 var searchData=
 [
   ['haserror',['hasError',['../class_virtual_shield.html#a7f98e632b63d481e497d108ec28f4ab5',1,'VirtualShield']]],
-  ['hash',['hash',['../_virtual_shield_8cpp.html#a21a464a11e0493703a91defd0538ca25',1,'VirtualShield.cpp']]],
-  ['heard',['heard',['../class_speech.html#aecfd929795be039a6c2a976f57077707',1,'Speech::heard(String text)'],['../class_speech.html#aa653e3702a68303d53253bf0eea986ec',1,'Speech::heard(int spokenNumber)']]],
-  ['hex',['hex',['../struct_a_r_g_b.html#acd0271bd6afb09624e1deaa5c17766cd',1,'ARGB']]]
+  ['hash',['hash',['../class_virtual_shield.html#a81cd588e8d8ede49da5a7ebc76e97327',1,'VirtualShield']]],
+  ['heard',['heard',['../class_recognition.html#a94f5ef3f17f02aaab96e58c0b8dd89be',1,'Recognition::heard(String text)'],['../class_recognition.html#af542acda286a8d15e08dbadfc3e42ec3',1,'Recognition::heard(int spokenNumber)']]],
+  ['hex',['hex',['../union_a_r_g_b.html#acd0271bd6afb09624e1deaa5c17766cd',1,'ARGB']]]
 ];

@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['suspend_5fhash',['SUSPEND_HASH',['../_virtual_shield_8h.html#a865912e9cf1dce0cbe10946b185b1a5f',1,'VirtualShield.h']]]
+  ['virtual_5fserial_5fport0',['VIRTUAL_SERIAL_PORT0',['../_virtual_shield_8cpp.html#a2943f9e017bce0c18d69a606a83a9397',1,'VirtualShield.cpp']]],
+  ['virtual_5fserial_5fport1',['VIRTUAL_SERIAL_PORT1',['../_virtual_shield_8cpp.html#ac5c387d95f1f3d7ce22c5e4c742a13dc',1,'VirtualShield.cpp']]]
 ];

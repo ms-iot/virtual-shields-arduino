@@ -5,5 +5,6 @@ var searchData=
   ['getevent',['getEvent',['../class_virtual_shield.html#a86cd9abf63a6c03a469098c5e892ea15',1,'VirtualShield']]],
   ['getonchange',['getOnChange',['../class_sensor.html#a88566a8887104fa11070993250e025d2',1,'Sensor']]],
   ['getresponse',['getResponse',['../class_web.html#a4c062c0c67ad47f5b895b6a4b0671b70',1,'Web']]],
+  ['graphics',['Graphics',['../class_graphics.html#a560bd1d8d45456542eecfc1507ce2321',1,'Graphics']]],
   ['gyrometer',['Gyrometer',['../class_gyrometer.html#aacf158e5537704b54f68a3240dc40e0c',1,'Gyrometer']]]
 ];

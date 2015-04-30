@@ -4,18 +4,10 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.9.1"/>
-<title>VirtualShield: Speech Class Reference</title>
+<title>Windows Virtual Shields for Arduino: Speech Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
-<link href="navtree.css" rel="stylesheet" type="text/css"/>
-<script type="text/javascript" src="resize.js"></script>
-<script type="text/javascript" src="navtreedata.js"></script>
-<script type="text/javascript" src="navtree.js"></script>
-<script type="text/javascript">
-  $(document).ready(initResizable);
-  $(window).load(resizeHeight);
-</script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
@@ -30,9 +22,9 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr style="height: 56px;">
-  <td id="projectlogo"><img alt="Logo" src="Logo.scale-100.png"/></td>
+  <td id="projectlogo"><img alt="Logo" src="Shields300x300.png"/></td>
   <td style="padding-left: 0.5em;">
-   <div id="projectname">VirtualShield
+   <div id="projectname">Windows Virtual Shields for Arduino
    </div>
   </td>
  </tr>
@@ -76,21 +68,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="functions.html"><span>Class&#160;Members</span></a></li>
     </ul>
   </div>
-</div><!-- top -->
-<div id="side-nav" class="ui-resizable side-nav-resizable">
-  <div id="nav-tree">
-    <div id="nav-tree-contents">
-      <div id="nav-sync" class="sync"></div>
-    </div>
-  </div>
-  <div id="splitbar" style="-moz-user-select:none;" 
-       class="ui-resizable-handle">
-  </div>
-</div>
-<script type="text/javascript">
-$(document).ready(function(){initNavTree('class_speech.html','');});
-</script>
-<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -105,6 +82,7 @@ $(document).ready(function(){initNavTree('class_speech.html','');});
 </iframe>
 </div>
 
+</div><!-- top -->
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
@@ -127,24 +105,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a3d956750ae6453b84c993cd3b65c3a42"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_speech.html#a3d956750ae6453b84c993cd3b65c3a42">speak</a> (String message)</td></tr>
 <tr class="memdesc:a3d956750ae6453b84c993cd3b65c3a42"><td class="mdescLeft">&#160;</td><td class="mdescRight">Speaks the specified message.  <a href="#a3d956750ae6453b84c993cd3b65c3a42">More...</a><br /></td></tr>
 <tr class="separator:a3d956750ae6453b84c993cd3b65c3a42"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7bb70886ccab7df1be77a2892b9ab28a"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_speech.html#a7bb70886ccab7df1be77a2892b9ab28a">recognize</a> (String constraint, int expectedConfidence=<a class="el" href="_speech_8h.html#a198da3023e278ac8ee6bd87219f93e22">Confidence_Medium</a>)</td></tr>
-<tr class="memdesc:a7bb70886ccab7df1be77a2892b9ab28a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Recognizes the specified constricted recognition text without a UI.  <a href="#a7bb70886ccab7df1be77a2892b9ab28a">More...</a><br /></td></tr>
-<tr class="separator:a7bb70886ccab7df1be77a2892b9ab28a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8928f57f734f26bf033677b50a9b22bc"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_speech.html#a8928f57f734f26bf033677b50a9b22bc">recognize</a> (char *openTextBuffer, int *length)</td></tr>
-<tr class="memdesc:a8928f57f734f26bf033677b50a9b22bc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Recognizes open text / not constricted without a UI.  <a href="#a8928f57f734f26bf033677b50a9b22bc">More...</a><br /></td></tr>
-<tr class="separator:a8928f57f734f26bf033677b50a9b22bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a586cae28b78fbbd7f2d66762a14cdfed"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_speech.html#a586cae28b78fbbd7f2d66762a14cdfed">recognizeUI</a> (String constraint, int expectedConfidence=<a class="el" href="_speech_8h.html#a198da3023e278ac8ee6bd87219f93e22">Confidence_Medium</a>)</td></tr>
-<tr class="memdesc:a586cae28b78fbbd7f2d66762a14cdfed"><td class="mdescLeft">&#160;</td><td class="mdescRight">Recognizes the specified constricted recognition text (words or groups) using the UI.  <a href="#a586cae28b78fbbd7f2d66762a14cdfed">More...</a><br /></td></tr>
-<tr class="separator:a586cae28b78fbbd7f2d66762a14cdfed"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab8b3800de6f46bd3bb445f8875d04d16"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_speech.html#ab8b3800de6f46bd3bb445f8875d04d16">recognizeUI</a> (char *openTextBuffer, int *length)</td></tr>
-<tr class="memdesc:ab8b3800de6f46bd3bb445f8875d04d16"><td class="mdescLeft">&#160;</td><td class="mdescRight">Recognizes open text / not constricted using the UI.  <a href="#ab8b3800de6f46bd3bb445f8875d04d16">More...</a><br /></td></tr>
-<tr class="separator:ab8b3800de6f46bd3bb445f8875d04d16"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aecfd929795be039a6c2a976f57077707"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_speech.html#aecfd929795be039a6c2a976f57077707">heard</a> (String text)</td></tr>
-<tr class="memdesc:aecfd929795be039a6c2a976f57077707"><td class="mdescLeft">&#160;</td><td class="mdescRight">Verifies if the recognized spoken text matches the text parameter.  <a href="#aecfd929795be039a6c2a976f57077707">More...</a><br /></td></tr>
-<tr class="separator:aecfd929795be039a6c2a976f57077707"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa653e3702a68303d53253bf0eea986ec"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_speech.html#aa653e3702a68303d53253bf0eea986ec">heard</a> (int spokenNumber)</td></tr>
-<tr class="memdesc:aa653e3702a68303d53253bf0eea986ec"><td class="mdescLeft">&#160;</td><td class="mdescRight">Verifies if the recognized spoken number matches the number parameter.  <a href="#aa653e3702a68303d53253bf0eea986ec">More...</a><br /></td></tr>
-<tr class="separator:aa653e3702a68303d53253bf0eea986ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4765bdc9cb026362e921da78fb924b90"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_speech.html#a4765bdc9cb026362e921da78fb924b90">stop</a> () override</td></tr>
+<tr class="memdesc:a4765bdc9cb026362e921da78fb924b90"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stops this sensor.  <a href="#a4765bdc9cb026362e921da78fb924b90">More...</a><br /></td></tr>
+<tr class="separator:a4765bdc9cb026362e921da78fb924b90"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adb4ecebfc0e79482f3806ebc1c557279"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_speech.html#adb4ecebfc0e79482f3806ebc1c557279">onJsonReceived</a> (JsonObject &amp;root, <a class="el" href="struct_shield_event.html">ShieldEvent</a> *shieldEvent) override</td></tr>
 <tr class="memdesc:adb4ecebfc0e79482f3806ebc1c557279"><td class="mdescLeft">&#160;</td><td class="mdescRight">Event called when a valid json message was received. Consumes the proper values for this sensor.  <a href="#adb4ecebfc0e79482f3806ebc1c557279">More...</a><br /></td></tr>
 <tr class="separator:adb4ecebfc0e79482f3806ebc1c557279"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -155,9 +118,6 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:abfb2b0528abb9073412d0511d6ec19e4 inherit pub_methods_class_sensor"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sensor.html#abfb2b0528abb9073412d0511d6ec19e4">start</a> (double delta=0, long interval=0)</td></tr>
 <tr class="memdesc:abfb2b0528abb9073412d0511d6ec19e4 inherit pub_methods_class_sensor"><td class="mdescLeft">&#160;</td><td class="mdescRight">Starts the sensor, triggered when longer than the interval and larger than the delta.  <a href="#abfb2b0528abb9073412d0511d6ec19e4">More...</a><br /></td></tr>
 <tr class="separator:abfb2b0528abb9073412d0511d6ec19e4 inherit pub_methods_class_sensor"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a78dbb562696597b7a3f39598aebdf589 inherit pub_methods_class_sensor"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sensor.html#a78dbb562696597b7a3f39598aebdf589">stop</a> ()</td></tr>
-<tr class="memdesc:a78dbb562696597b7a3f39598aebdf589 inherit pub_methods_class_sensor"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stops this sensor.  <a href="#a78dbb562696597b7a3f39598aebdf589">More...</a><br /></td></tr>
-<tr class="separator:a78dbb562696597b7a3f39598aebdf589 inherit pub_methods_class_sensor"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab1a1bd491cae99916d9c33a466909818 inherit pub_methods_class_sensor"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sensor.html#ab1a1bd491cae99916d9c33a466909818">get</a> ()</td></tr>
 <tr class="memdesc:ab1a1bd491cae99916d9c33a466909818 inherit pub_methods_class_sensor"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets a single, current sensor reading.  <a href="#ab1a1bd491cae99916d9c33a466909818">More...</a><br /></td></tr>
 <tr class="separator:ab1a1bd491cae99916d9c33a466909818 inherit pub_methods_class_sensor"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -167,6 +127,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ac6037416459904a23b264f5580ca1184 inherit pub_methods_class_sensor"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sensor.html#ac6037416459904a23b264f5580ca1184">isUpdated</a> ()</td></tr>
 <tr class="memdesc:ac6037416459904a23b264f5580ca1184 inherit pub_methods_class_sensor"><td class="mdescLeft">&#160;</td><td class="mdescRight">Determines whether this sensor has an updated value. Resets to false after this call.  <a href="#ac6037416459904a23b264f5580ca1184">More...</a><br /></td></tr>
 <tr class="separator:ac6037416459904a23b264f5580ca1184 inherit pub_methods_class_sensor"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aff8a77ea724887fce5923fd1eeca1ee3 inherit pub_methods_class_sensor"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sensor.html#aff8a77ea724887fce5923fd1eeca1ee3">writeAll</a> (const char *serviceName, <a class="el" href="struct_e_ptr.html">EPtr</a> values[], int count, <a class="el" href="struct_attr.html">Attr</a> extraAttributes[]=0, int extraAttributeCount=0)</td></tr>
+<tr class="memdesc:aff8a77ea724887fce5923fd1eeca1ee3 inherit pub_methods_class_sensor"><td class="mdescLeft">&#160;</td><td class="mdescRight">Writes all <a class="el" href="struct_e_ptr.html">EPtr</a> values to the communication channel.  <a href="#aff8a77ea724887fce5923fd1eeca1ee3">More...</a><br /></td></tr>
+<tr class="separator:aff8a77ea724887fce5923fd1eeca1ee3 inherit pub_methods_class_sensor"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6e79bc02f674eca23c4cb0a0a087b155 inherit pub_methods_class_sensor"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sensor.html#a6e79bc02f674eca23c4cb0a0a087b155">sensorAction</a> (<a class="el" href="_sensor_models_8h.html#a81057b596bbe6eddf79b17caa56b8ff6">SensorAction</a> sensorAction, double delta=0, long interval=0) const </td></tr>
 <tr class="memdesc:a6e79bc02f674eca23c4cb0a0a087b155 inherit pub_methods_class_sensor"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sends the specific action to start/stop/get/onChange the sensor using a delta and interval.  <a href="#a6e79bc02f674eca23c4cb0a0a087b155">More...</a><br /></td></tr>
 <tr class="separator:a6e79bc02f674eca23c4cb0a0a087b155 inherit pub_methods_class_sensor"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -178,13 +141,13 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a1baa215e4a43f921a3910bca6ad2021e inherit pub_methods_class_sensor"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a06f3533d8e07a0ebccd1fefa71fa5002 inherit pub_methods_class_sensor"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sensor.html#a06f3533d8e07a0ebccd1fefa71fa5002">setOnEvent</a> (void(*<a class="el" href="class_sensor.html#a79faa85a9006cb9c609f7907514a8365">onEvent</a>)(<a class="el" href="struct_shield_event.html">ShieldEvent</a> *shieldEvent))</td></tr>
 <tr class="separator:a06f3533d8e07a0ebccd1fefa71fa5002 inherit pub_methods_class_sensor"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac01a7ab17df06db9be8654655afcea8e inherit pub_methods_class_sensor"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sensor.html#ac01a7ab17df06db9be8654655afcea8e">sendStop</a> (const char *serviceName)</td></tr>
+<tr class="separator:ac01a7ab17df06db9be8654655afcea8e inherit pub_methods_class_sensor"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
-<tr class="memitem:a78346b33a167e90983a94a77abff3211"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_speech.html#a78346b33a167e90983a94a77abff3211">recognizedIndex</a> = 0</td></tr>
-<tr class="separator:a78346b33a167e90983a94a77abff3211"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a89f4a707a9c47b135280dbd69c929c39"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_speech.html#a89f4a707a9c47b135280dbd69c929c39">confidence</a></td></tr>
-<tr class="separator:a89f4a707a9c47b135280dbd69c929c39"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1a27ac4d6c05cf0dc9062fc190e10f5c"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_speech.html#a1a27ac4d6c05cf0dc9062fc190e10f5c">IsSpeaking</a> = false</td></tr>
+<tr class="separator:a1a27ac4d6c05cf0dc9062fc190e10f5c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_attribs_class_sensor"><td colspan="2" onclick="javascript:toggleInherit('pub_attribs_class_sensor')"><img src="closed.png" alt="-"/>&#160;Public Attributes inherited from <a class="el" href="class_sensor.html">Sensor</a></td></tr>
 <tr class="memitem:a79faa85a9006cb9c609f7907514a8365 inherit pub_attribs_class_sensor"><td class="memItemLeft" align="right" valign="top">void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sensor.html#a79faa85a9006cb9c609f7907514a8365">onEvent</a> )(<a class="el" href="struct_shield_event.html">ShieldEvent</a> *shieldEvent)</td></tr>
 <tr class="separator:a79faa85a9006cb9c609f7907514a8365 inherit pub_attribs_class_sensor"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -229,56 +192,6 @@ Additional Inherited Members</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a class="anchor" id="aecfd929795be039a6c2a976f57077707"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool Speech::heard </td>
-          <td>(</td>
-          <td class="paramtype">String&#160;</td>
-          <td class="paramname"><em>text</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Verifies if the recognized spoken text matches the text parameter. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">text</td><td>The text to verify.</td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>true if the text matches.</dd></dl>
-
-</div>
-</div>
-<a class="anchor" id="aa653e3702a68303d53253bf0eea986ec"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool Speech::heard </td>
-          <td>(</td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>spokenNumber</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Verifies if the recognized spoken number matches the number parameter. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">text</td><td>The text to verify.</td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>true if the text matches.</dd></dl>
-
-</div>
-</div>
 <a class="anchor" id="adb4ecebfc0e79482f3806ebc1c557279"></a>
 <div class="memitem">
 <div class="memproto">
@@ -324,134 +237,6 @@ Additional Inherited Members</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a7bb70886ccab7df1be77a2892b9ab28a"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int Speech::recognize </td>
-          <td>(</td>
-          <td class="paramtype">String&#160;</td>
-          <td class="paramname"><em>recognitionText</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>expectedConfidence</em> = <code><a class="el" href="_speech_8h.html#a198da3023e278ac8ee6bd87219f93e22">Confidence_Medium</a></code>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Recognizes the specified constricted recognition text without a UI. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">recognitionText</td><td>The recognition text (words or groups).</td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>The id of the message. Negative if an error.</dd></dl>
-
-</div>
-</div>
-<a class="anchor" id="a8928f57f734f26bf033677b50a9b22bc"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int Speech::recognize </td>
-          <td>(</td>
-          <td class="paramtype">char *&#160;</td>
-          <td class="paramname"><em>openTextBuffer</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int *&#160;</td>
-          <td class="paramname"><em>length</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Recognizes open text / not constricted without a UI. </p>
-<dl class="section return"><dt>Returns</dt><dd>The id of the message. Negative if an error.</dd></dl>
-
-</div>
-</div>
-<a class="anchor" id="a586cae28b78fbbd7f2d66762a14cdfed"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int Speech::recognizeUI </td>
-          <td>(</td>
-          <td class="paramtype">String&#160;</td>
-          <td class="paramname"><em>recognitionText</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>expectedConfidence</em> = <code><a class="el" href="_speech_8h.html#a198da3023e278ac8ee6bd87219f93e22">Confidence_Medium</a></code>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Recognizes the specified constricted recognition text (words or groups) using the UI. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">recognitionText</td><td>The recognition text.</td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>The id of the message. Negative if an error.</dd></dl>
-
-</div>
-</div>
-<a class="anchor" id="ab8b3800de6f46bd3bb445f8875d04d16"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int Speech::recognizeUI </td>
-          <td>(</td>
-          <td class="paramtype">char *&#160;</td>
-          <td class="paramname"><em>openTextBuffer</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int *&#160;</td>
-          <td class="paramname"><em>length</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Recognizes open text / not constricted using the UI. </p>
-<dl class="section return"><dt>Returns</dt><dd>The id of the message. Negative if an error.</dd></dl>
-
-</div>
-</div>
 <a class="anchor" id="a3d956750ae6453b84c993cd3b65c3a42"></a>
 <div class="memitem">
 <div class="memproto">
@@ -477,25 +262,40 @@ Additional Inherited Members</h2></td></tr>
 
 </div>
 </div>
-<h2 class="groupheader">Member Data Documentation</h2>
-<a class="anchor" id="a89f4a707a9c47b135280dbd69c929c39"></a>
+<a class="anchor" id="a4765bdc9cb026362e921da78fb924b90"></a>
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">int Speech::confidence</td>
+          <td class="memname">int Speech::stop </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
+
+<p>Stops this sensor. </p>
+
+<p>Reimplemented from <a class="el" href="class_sensor.html#a78dbb562696597b7a3f39598aebdf589">Sensor</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a78346b33a167e90983a94a77abff3211"></a>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a class="anchor" id="a1a27ac4d6c05cf0dc9062fc190e10f5c"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int Speech::recognizedIndex = 0</td>
+          <td class="memname">bool Speech::IsSpeaking = false</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -503,19 +303,15 @@ Additional Inherited Members</h2></td></tr>
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li><a class="el" href="_speech_8h_source.html">Speech.h</a></li>
-<li><a class="el" href="_speech_8cpp.html">Speech.cpp</a></li>
+<li>C:/Users/jgord/Documents/ms-iot/virtual-shields-arduino/VirtualShield/<a class="el" href="_speech_8h_source.html">Speech.h</a></li>
+<li>C:/Users/jgord/Documents/ms-iot/virtual-shields-arduino/VirtualShield/<a class="el" href="_speech_8cpp.html">Speech.cpp</a></li>
 </ul>
 </div><!-- contents -->
-</div><!-- doc-content -->
 <!-- start footer part -->
-<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
-  <ul>
-    <li class="navelem"><a class="el" href="class_speech.html">Speech</a></li>
-    <li class="footer">Generated on Tue Apr 7 2015 00:10:52 for VirtualShield by
-    <a href="http://www.doxygen.org/index.html">
-    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.9.1 </li>
-  </ul>
-</div>
+<hr class="footer"/><address class="footer"><small>
+Generated on Wed Apr 29 2015 17:37:05 for Windows Virtual Shields for Arduino by &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.9.1
+</small></address>
 </body>
 </html>
