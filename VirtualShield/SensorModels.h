@@ -71,6 +71,8 @@ union ARGB
 	{
 	}
 
+	ARGB() :color(0) {}
+
 	ARGB(unsigned long color) : color(color) {}
 
 	ARGB(String hex) : ARGB((unsigned long)strtol(&hex[hex[0] == '#'], NULL, 16))
