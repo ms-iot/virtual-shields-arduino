@@ -22,7 +22,9 @@ void RGBGrid::setPixel(int x, int y, ARGB color)
 }
 
 int RGBGrid::XYtoPixel(int x, int y) {
-	int pixel = (count-1) - (y*(height + (x%2==1))) - x;
+    int ix = width-1-x;
+	int iy = height-1-y;
+	int pixel = ((int)(iy/2))*(width*2) + (iy%2 == 0 ? ix : 15-ix);
 	return pixel;
 }
 /*
