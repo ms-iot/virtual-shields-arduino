@@ -259,14 +259,13 @@ void VirtualShield::onJsonReceived(JsonObject& root, ShieldEvent* shieldEvent) {
 	}
 
 	shieldEvent->resultId = static_cast<long>(root["ResultId"]);
-	shieldEvent->tag = sensorType;
 
 	shieldEvent->result = static_cast<const char *>(root["Result"]);
 	shieldEvent->resultHash = hash(shieldEvent->result);
 	shieldEvent->action = static_cast<const char *>(root["Action"]);
 	shieldEvent->actionHash = hash(shieldEvent->action);
 	shieldEvent->value = static_cast<double>(root["Value"]);
-
+	
 	if (sensorType) {
 		// special '!' Type which means remote device just connected/reconnected
 		if (sensorType[0] == SYSTEM_EVENT)

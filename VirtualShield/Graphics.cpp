@@ -177,7 +177,7 @@ bool Graphics::isPressed(int id, ShieldEvent* shieldEvent)
 {
 	if (shieldEvent == 0)
 	{
-		shieldEvent = &recentEvent;
+		shieldEvent = recentEvent;
 	}
 
 	return Sensor::isEvent(id, "pressed", shieldEvent) || Sensor::isEvent(id, "click", shieldEvent);
@@ -193,7 +193,7 @@ bool Graphics::isPressed(String tag, ShieldEvent* shieldEvent)
 {
 	if (shieldEvent == 0)
 	{
-		shieldEvent = &recentEvent;
+		shieldEvent = recentEvent;
 	}
 
 	return Sensor::isEvent(tag.c_str(), "pressed", shieldEvent) || Sensor::isEvent(tag.c_str(), "click", shieldEvent);
@@ -209,7 +209,7 @@ bool Graphics::isReleased(int id, ShieldEvent* shieldEvent)
 {
 	if (shieldEvent == 0)
 	{
-		shieldEvent = &recentEvent;
+		shieldEvent = recentEvent;
 	}
 
 	return Sensor::isEvent(id, "released", shieldEvent) || Sensor::isEvent(id, "click", shieldEvent);
@@ -225,7 +225,7 @@ bool Graphics::isReleased(String tag, ShieldEvent* shieldEvent)
 {
 	if (shieldEvent == 0)
 	{
-		shieldEvent = &recentEvent;
+		shieldEvent = recentEvent;
 	}
 
 	return Sensor::isEvent(tag.c_str(), "released", shieldEvent) || Sensor::isEvent(tag.c_str(), "click", shieldEvent);
@@ -241,7 +241,7 @@ bool Graphics::isButtonClicked(String tag, ShieldEvent* shieldEvent)
 {
 	if (shieldEvent == 0)
 	{
-		shieldEvent = &recentEvent;
+		shieldEvent = recentEvent;
 	}
 
 	return Sensor::isEvent(tag.c_str(), "click", shieldEvent) || Sensor::isEvent(tag.c_str(), "tapped", shieldEvent);
@@ -257,7 +257,7 @@ bool Graphics::isButtonClicked(int id, ShieldEvent* shieldEvent)
 {
     if (shieldEvent == 0)
     {
-        shieldEvent = &recentEvent;
+        shieldEvent = recentEvent;
     }
 
     return Sensor::isEvent(id, "click", shieldEvent) || Sensor::isEvent(id, "tapped", shieldEvent);
@@ -272,7 +272,7 @@ bool Graphics::isTouchEvent(ShieldEvent* shieldEvent)
 {
 	if (shieldEvent == 0)
 	{
-		shieldEvent = &recentEvent;
+		shieldEvent = recentEvent;
 	}
 
 	return strcmp(area, "TOUCH") == 0;

@@ -53,7 +53,7 @@ public:
 	void(*onEvent)(ShieldEvent* shieldEvent);
 
 	VirtualShield& shield;
-	ShieldEvent recentEvent;
+	ShieldEvent* recentEvent;
 
 	const char sensorType;
 	bool isRunning = false;
