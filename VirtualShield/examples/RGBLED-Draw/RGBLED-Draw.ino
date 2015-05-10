@@ -39,6 +39,7 @@ const int selectedColorCellHeight = colorRowHeight * 0.8;
 const int tappedHash = 38322;
 const int pressedHash = 56990; 
 const int releasedHash = 13117;
+const int enteredHash = 54231;
 
 int ids[gridcolumns][gridrows];
 int touchX, touchY;
@@ -57,13 +58,14 @@ void setColor(int x, int y, ARGB color, bool shift = true)
     if (shift) {
       strip.ShiftAllPixels();
     }
-    char tag[3] = {48+x, 48+y, 0};
-    if (ids[x][y] > 0) {
-      screen.clearId(ids[x][y]);
-    }
     
-    ids[x][y] = screen.fillRectangle(cwidth * x + (cwidth/2 - cellwidth/2), rheight * y + (rheight/2 - cellheight/2),
-      cellwidth, cellheight, visibleColor(colors[x][y].color), String(tag));
+    if (false) { //ids[x][y] > 0) {
+      screen.change(ids[x][y], visibleColor(colors[x][y].color));
+    } else {
+      char tag[3] = {48+x, 48+y, 0};
+      ids[x][y] = screen.fillRectangle(cwidth * x + (cwidth/2 - cellwidth/2), rheight * y + (rheight/2 - cellheight/2),
+        cellwidth, cellheight, visibleColor(colors[x][y].color), String(tag), true);
+    }
 }
 
 void drawGrid() 
@@ -115,26 +117,7 @@ void screenEvent(ShieldEvent* shieldEvent)
       y = tag[1]-48;
   }
   
-  if (shieldEvent->actionHash == pressedHash) {
-    pressedX = x;
-    pressedY = y;
-  }
-  
-  if (shieldEvent->actionHash == releasedHash) {
-    releasedX = x;
-    releasedY = y;
-    if (pressedX <= releasedX && pressedY <= releasedY && (pressedX+pressedY < releasedX+releasedY)) {
-      for (int ix=pressedX; ix<=releasedX; ix++) {
-        for (int iy=pressedY; iy<=releasedY; iy++) {
-          setColor(ix,iy,selectedColor,false);
-        }
-      }
-      
-      strip.ShiftAllPixels();
-    }
-  }
-  
-  if (shieldEvent->actionHash == tappedHash) {
+  if (shieldEvent->actionHash == tappedHash || shieldEvent->actionHash == enteredHash) {
     if (tag[1] == 0 && tag[0] < 48+(colorCount+1) && tag[0] >= 48) {
       //color
       if (tag[0] == 48+(colorCount)) {
@@ -160,6 +143,12 @@ void refresh(ShieldEvent* shieldEvent)
 
 void setup()
 {
+  for (int x=0; x<gridcolumns; x++) {
+    for (int y=0; y<gridrows; y++) {
+      ids[x][y] = 0;
+    }
+  }
+  
   shield.setOnRefresh(refresh);
   screen.setOnEvent(screenEvent);
 
