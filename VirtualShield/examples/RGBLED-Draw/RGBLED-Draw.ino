@@ -45,6 +45,7 @@ int ids[gridcolumns][gridrows];
 int touchX, touchY;
 int pressedX, pressedY, releasedX, releasedY;
 int clearId = 0;
+int visibleHeight = height * 0.85;
 
 ARGB visibleColor(ARGB color)
 {
@@ -68,6 +69,18 @@ void setColor(int x, int y, ARGB color, bool shift = true)
     }
 }
 
+
+void drawClear() 
+{
+  if (clearId > 0) {
+    screen.clearId(clearId);
+  }
+
+  clearId = screen.fillRectangle(cwidth * (totalcolumns-1), 0, cwidth * totalcolumns, visibleHeight, visibleColor(selectedColor), String("8"));
+  screen.drawAt(cwidth * (totalcolumns-0.75), 110, "Set");
+  screen.drawAt(cwidth * (totalcolumns-0.75), 130, "All");
+}
+
 void drawGrid() 
 {
   screen.clear();
@@ -85,8 +98,7 @@ void drawGrid()
   }
   
   strip.ShiftAllPixels();
-
-  clearId = screen.fillRectangle(cwidth * (totalcolumns-1), 0, cwidth * totalcolumns, height, visibleColor(selectedColor), String("8"));
+  drawClear();
 }
 
 void clearGrid(bool firstTime = false) 
@@ -121,16 +133,19 @@ void screenEvent(ShieldEvent* shieldEvent)
     if (tag[1] == 0 && tag[0] < 48+(colorCount+1) && tag[0] >= 48) {
       //color
       if (tag[0] == 48+(colorCount)) {
-        //clear all
-        clearGrid();
+        if (shieldEvent->actionHash == tappedHash) {
+          //clear all
+          clearGrid();
+        }
       } else {
         selectedColor = ARGB(selectableColors[tag[0]-48]);
-        screen.clearId(clearId);
-        clearId = screen.fillRectangle(cwidth * (totalcolumns-1), 0, cwidth * totalcolumns, height, visibleColor(selectedColor), String("8"));
+        drawClear();
       }
     } else if (tag[0] != 0 && tag[2] == 0) {
       //grid
-      setColor(x,y,selectedColor);
+      if (shieldEvent->actionHash == enteredHash) {
+        setColor(x,y,selectedColor);
+      }
     }
   }
 }
