@@ -137,6 +137,7 @@ private:
 	void sendPingBack(ShieldEvent* shieldEvent);
     void sendStart();
 	int writeValue(EPtr eptr, int start = 0) const;
+    bool processInChar(ShieldEvent* shieldEvent, bool& hasEvent, char c);
 };
 
 #endif 

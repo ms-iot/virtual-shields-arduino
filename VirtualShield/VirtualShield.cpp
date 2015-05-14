@@ -74,8 +74,8 @@ const int requestInterval = 1000;
 const int perMessageInterval = 25;
 const int maxRememberedSensors = 10;
 
-const int maxReadBuffer = 128;
-const int maxJsonReadBuffer = 130;
+const int maxReadBuffer = 160;
+const int maxJsonReadBuffer = maxReadBuffer + 2;
 
 char readBuffer[maxReadBuffer];
 int readBufferIndex = 0;
@@ -182,6 +182,7 @@ bool VirtualShield::getEvent(ShieldEvent* shieldEvent) {
 		Serial.print(AWAITING_MESSAGE);
 #endif
 		_VShieldSerial->write(AWAITING_MESSAGE);
+        _VShieldSerial->flush();
 		lastOpenRequest = millis();
 	}
 
@@ -196,36 +197,37 @@ bool VirtualShield::getEvent(ShieldEvent* shieldEvent) {
 
 		if (readBufferIndex < maxReadBuffer-1) {
 			readBuffer[readBufferIndex++] = c;
-		}
-		
-		if (c == '{') {
-            if (bracketCount++ == 0)
+        } 
+        else
+        {
+            int i = readBufferIndex;
+            while (i >= 0)
             {
-                lastOpening = millis();
+                if (readBuffer[i] == '{')
+                {
+                    memmove(readBuffer, readBuffer + i, maxReadBuffer - i);
+                    readBufferIndex = maxReadBuffer - i;
+                    readBuffer[readBufferIndex++] = c;
+                    bracketCount = 0;
+
+                    for (int j = 0; j<readBufferIndex; j++)
+                    {
+                        if (readBuffer[j] == '{')
+                        {
+                            processInChar(shieldEvent, hasEvent, c);
+                        }
+                    }
+
+                    break;
+                }
+                i--;
             }
-		}
-		else if (c == '}') {
-			if (--bracketCount < 1) {
-				bracketCount = 0;
-                lastClosure = millis();
-
-				if (readBufferIndex < maxReadBuffer) {
-					readBuffer[readBufferIndex++] = 0;
-                    inEvent = true;
-#ifdef debugSerial
-                    Serial.print(AWAITING_MESSAGE);
-#endif
-                    _VShieldSerial->write(AWAITING_MESSAGE);
-                    onStringReceived(readBuffer, readBufferIndex, shieldEvent);
-                    inEvent = false;
-                    hasEvent = true;
-					readBufferIndex = 0;
-					break;
-				}
-
-				readBufferIndex = 0;
-			}
-		}
+        }
+		
+        if (processInChar(shieldEvent, hasEvent, c))
+        {
+            break;
+        }
 	}
 
 	if (hadData)
@@ -237,10 +239,49 @@ bool VirtualShield::getEvent(ShieldEvent* shieldEvent) {
     {
         readBufferIndex = 0;
         bracketCount = 0;
-        //reset buffer
     }
 
 	return hasEvent;
+}
+
+/// <summary>
+/// Process single incoming character - pass to full handler when recognized
+/// </summary>
+/// <param name="shieldEvent">The shield event.</param>
+bool VirtualShield::processInChar(ShieldEvent* shieldEvent, bool& hasEvent, char c) 
+{
+    if (c == '{') {
+        if (bracketCount++ == 0)
+        {
+            lastOpening = millis();
+        }
+    }
+    else if (c == '}') {
+        if (--bracketCount < 1) {
+            bracketCount = 0;
+            lastClosure = millis();
+
+            if (readBufferIndex < maxReadBuffer) {
+                readBuffer[readBufferIndex++] = 0;
+                inEvent = true;
+#ifdef debugSerial
+                Serial.print(AWAITING_MESSAGE);
+#endif
+                _VShieldSerial->write(AWAITING_MESSAGE);
+                _VShieldSerial->flush();
+                lastOpenRequest = millis();
+                onStringReceived(readBuffer, readBufferIndex, shieldEvent);
+                inEvent = false;
+                hasEvent = true;
+                readBufferIndex = 0;
+                return true;
+            }
+
+            readBufferIndex = 0;
+        }
+    }
+
+    return false;
 }
 
 /// <summary>
