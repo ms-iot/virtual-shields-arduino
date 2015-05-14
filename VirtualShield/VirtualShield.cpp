@@ -164,6 +164,10 @@ void VirtualShield::flush()
 	lastOpenRequest = millis();
 }
 
+long lastClosure = 0;
+long lastOpening = 0;
+bool inEvent = false;
+
 /// <summary>
 /// Gets zero or one available events for processing.
 /// </summary>
@@ -182,7 +186,7 @@ bool VirtualShield::getEvent(ShieldEvent* shieldEvent) {
 	}
 
 	bool hadData = false;
-	while (_VShieldSerial->available() > 0) {
+	while (!inEvent && _VShieldSerial->available() > 0) {
 		hadData = true;
 		char c = _VShieldSerial->read();
 
@@ -195,16 +199,26 @@ bool VirtualShield::getEvent(ShieldEvent* shieldEvent) {
 		}
 		
 		if (c == '{') {
-			bracketCount++;
+            if (bracketCount++ == 0)
+            {
+                lastOpening = millis();
+            }
 		}
 		else if (c == '}') {
 			if (--bracketCount < 1) {
 				bracketCount = 0;
+                lastClosure = millis();
 
 				if (readBufferIndex < maxReadBuffer) {
 					readBuffer[readBufferIndex++] = 0;
-					onStringReceived(readBuffer, readBufferIndex, shieldEvent);
-					hasEvent = true;
+                    inEvent = true;
+#ifdef debugSerial
+                    Serial.print(AWAITING_MESSAGE);
+#endif
+                    _VShieldSerial->write(AWAITING_MESSAGE);
+                    onStringReceived(readBuffer, readBufferIndex, shieldEvent);
+                    inEvent = false;
+                    hasEvent = true;
 					readBufferIndex = 0;
 					break;
 				}
@@ -218,6 +232,13 @@ bool VirtualShield::getEvent(ShieldEvent* shieldEvent) {
 	{
 		lastOpenRequest = millis() - requestInterval + perMessageInterval;
 	}
+
+    if (lastClosure - lastOpening > requestInterval)
+    {
+        readBufferIndex = 0;
+        bracketCount = 0;
+        //reset buffer
+    }
 
 	return hasEvent;
 }
@@ -350,6 +371,7 @@ void VirtualShield::onJsonStringReceived(char* json, ShieldEvent* shieldEvent) {
 	}
 }
 
+
 /// <summary>
 /// Event callback for when a full string is received.
 /// </summary>
@@ -357,11 +379,19 @@ void VirtualShield::onJsonStringReceived(char* json, ShieldEvent* shieldEvent) {
 /// <param name="length">The length.</param>
 /// <param name="shieldEvent">The shield event.</param>
 void VirtualShield::onStringReceived(char* buffer, int length, ShieldEvent* shieldEvent) {
-	char *json = new char[length];
-	strcpy(json, buffer);
-	//Serial.print(json);
-	onJsonStringReceived(json, shieldEvent);
-	free(json);
+    char json[maxJsonReadBuffer];
+    if (length < maxJsonReadBuffer)
+    {
+        strncpy(json, buffer, length);
+        json[length] = 0;
+        onJsonStringReceived(json, shieldEvent);
+    }
+    else
+    {
+#ifdef debugSerial
+        Serial.print("json buffer over limit:" + String(length));
+#endif
+    }
 }
 
 /// <summary>
