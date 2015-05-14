@@ -79,6 +79,7 @@ public:
 	}
 
 	int sendStop(const char* serviceName);
+    int filter(const char* serviceName, EPtr values[], int count);
 
 	virtual void onJsonReceived(JsonObject& root, ShieldEvent* shieldEvent);
 

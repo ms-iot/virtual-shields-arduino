@@ -192,6 +192,11 @@ int Sensor::sendStop(const char* serviceName)
 	return shield.writeAll(serviceName, eptrs, 1);
 }
 
+int Sensor::filter(const char* serviceName, EPtr values[], int count)
+{
+    
+}
+
 /// <summary>
 /// Initializes a new instance of the <see cref="SensorEvent"/> struct.
 /// </summary>
