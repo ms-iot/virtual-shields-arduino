@@ -73,10 +73,13 @@ int Graphics::line(UINT x1, UINT y1, UINT x2, UINT y2, ARGB argb, UINT weight)
 /// <param name="y">The y.</param>
 /// <param name="text">The text.</param>
 /// <returns>The id of the message. Negative if an error.</returns>
-int Graphics::drawAt(UINT x, UINT y, String text, ARGB argb)
+int Graphics::drawAt(UINT x, UINT y, String text, String tag, ARGB argb)
 {
-	EPtr eptrs[] = { EPtr(ACTION, TEXT), EPtr(Y, (uint32_t)y), EPtr(X, (uint32_t)x), EPtr(MemPtr, MESSAGE, text.c_str()), EPtr(RGBAKEY, (uint32_t)argb.color, (uint32_t)argb.color ? Uint : None) };
-	return writeAll(SERVICE_NAME_GRAPHICS, eptrs, 5);
+	EPtr eptrs[] = { EPtr(ACTION, TEXT), EPtr(Y, (uint32_t)y), 
+		EPtr(X, (uint32_t)x), EPtr(MemPtr, MESSAGE, text.c_str()), 
+		EPtr(RGBAKEY, (uint32_t)argb.color, (uint32_t)argb.color ? Uint : None),
+		EPtr(tag ? MemPtr : None, TAG, tag.c_str()) };
+	return writeAll(SERVICE_NAME_GRAPHICS, eptrs, 6);
 }
 
 /// <summary>
