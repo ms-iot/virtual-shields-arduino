@@ -52,7 +52,9 @@ public:
 	int addButton(UINT x, UINT y, String text, String tag = (const char*) 0);
 
 	int fillRectangle(UINT x, UINT y, UINT width, UINT height, 
-		ARGB argb, String tag = (const char*) 0);
+        ARGB argb, String tag = (const char*)0, bool enableExtendedEvents = false);
+
+    int change(UINT id, ARGB argb);
 
 	int line(UINT x1, UINT y1, UINT x2, UINT y2, ARGB color, UINT weight = 1);
 	int input(UINT x, UINT y, bool multiline = false, String text = (const char*) 0, UINT width = 0, UINT height = 0);

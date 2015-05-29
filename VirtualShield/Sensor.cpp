@@ -90,15 +90,9 @@ int Sensor::getOnChange(double delta)
 /// <param name="root">The root json object.</param>
 /// <param name="shieldEvent">The shield event.</param>
 void Sensor::onJsonReceived(JsonObject& root, ShieldEvent* shieldEvent) {
-	recentEvent.tag = root["Tag"];
-	recentEvent.action = root["Action"];
-	recentEvent.id = root["Id"];
-	recentEvent.resultId = root["ResultId"];
-	recentEvent.result = root["Result"];
-	shieldEvent = &recentEvent;
-
 	this->_isUpdated = true;
-
+	recentEvent = shieldEvent;
+	
 	if (onEvent)
 	{
 		onEvent(shieldEvent);
@@ -196,6 +190,11 @@ int Sensor::sendStop(const char* serviceName)
 {
 	EPtr eptrs[] = { EPtr(ACTION, STOP) };
 	return shield.writeAll(serviceName, eptrs, 1);
+}
+
+int Sensor::filter(const char* serviceName, EPtr values[], int count)
+{
+    
 }
 
 /// <summary>

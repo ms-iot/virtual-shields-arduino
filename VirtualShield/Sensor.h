@@ -53,7 +53,7 @@ public:
 	void(*onEvent)(ShieldEvent* shieldEvent);
 
 	VirtualShield& shield;
-	ShieldEvent recentEvent;
+	ShieldEvent* recentEvent;
 
 	const char sensorType;
 	bool isRunning = false;
@@ -79,6 +79,7 @@ public:
 	}
 
 	int sendStop(const char* serviceName);
+    int filter(const char* serviceName, EPtr values[], int count);
 
 	virtual void onJsonReceived(JsonObject& root, ShieldEvent* shieldEvent);
 
