@@ -45,7 +45,7 @@ class Graphics : public Text
 public:
     Graphics(const VirtualShield &shield);
 
-	int drawAt(UINT x, UINT y, String text, ARGB argb = 0);
+	int drawAt(UINT x, UINT y, String text, String tag = (const char*)0, ARGB argb = 0);
 	
 	int drawImage(UINT x, UINT y, String url, String tag = (const char*)0, UINT width = 0, UINT height = 0);
 

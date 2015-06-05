@@ -5,7 +5,7 @@
 #include <Colors.h>
 
 #include "RGBGrid.h"
-
+  
 VirtualShield shield;
 Graphics screen = Graphics(shield);
 
@@ -32,6 +32,7 @@ const int colorCount = 8;
 ARGB selectableColors[colorCount] = {BLACK, RED, ORANGE, YELLOW, GREEN, BLUE, PURPLE, WHITE};
 ARGB lightBlack = ARGB(0x222222);
 ARGB selectedColor = lightBlack;
+int selectedColorIndex = 0;
 
 const int colorRowHeight = (height / colorCount) * 0.9;
 const int colorCellHeight = colorRowHeight * 0.6;
@@ -46,6 +47,7 @@ int touchX, touchY;
 int pressedX, pressedY, releasedX, releasedY;
 int clearId = 0;
 int visibleHeight = height * 0.85;
+int text1, text2, text3, text4, clearId2;
 
 ARGB visibleColor(ARGB color)
 {
@@ -74,16 +76,28 @@ void drawClear()
 {
   if (clearId > 0) {
     screen.clearId(clearId);
+    screen.clearId(text1);
+    screen.clearId(text2);
+    
   }
+  
+    ARGB drawColor = ARGB(selectableColors[selectedColorIndex]);
+    clearId = screen.fillRectangle(cwidth * (totalcolumns-1), 0, cwidth * totalcolumns, visibleHeight/2-10, visibleColor(drawColor), String("8"));
+    text1 = screen.drawAt(cwidth * (totalcolumns-0.75), 5, "Set", String("8"));
+    text2 = screen.drawAt(cwidth * (totalcolumns-0.75), 25, "All", String("8"));
+  
 
-  clearId = screen.fillRectangle(cwidth * (totalcolumns-1), 0, cwidth * totalcolumns, visibleHeight, visibleColor(selectedColor), String("8"));
-  screen.drawAt(cwidth * (totalcolumns-0.75), 110, "Set");
-  screen.drawAt(cwidth * (totalcolumns-0.75), 130, "All");
+  if (clearId2 == 0) {
+    clearId2 = screen.fillRectangle(cwidth * (totalcolumns-1), visibleHeight/2+10, cwidth * totalcolumns, visibleHeight, visibleColor(lightBlack), String("9"));
+    text3 = screen.drawAt(cwidth * (totalcolumns-0.8), 250, "CLR", String("9"));
+  }  
 }
 
 void drawGrid() 
 {
   screen.clear();
+  clearId = 0;
+  clearId2 = 0;
   
   // draw colors
   for (int i=0; i<colorCount; i++) {
@@ -129,16 +143,21 @@ void screenEvent(ShieldEvent* shieldEvent)
       y = tag[1]-48;
   }
   
-  if (shieldEvent->actionHash == tappedHash || shieldEvent->actionHash == enteredHash) {
-    if (tag[1] == 0 && tag[0] < 48+(colorCount+1) && tag[0] >= 48) {
-      //color
-      if (tag[0] == 48+(colorCount)) {
-        if (shieldEvent->actionHash == tappedHash) {
-          //clear all
+  int id = shieldEvent->id;
+  
+  if (shieldEvent->actionHash == tappedHash || shieldEvent->actionHash == enteredHash || shieldEvent->actionHash == pressedHash) {
+    if ((tag[1] == 0 && tag[0] < 48+(colorCount+2) && tag[0] >= 48)) {
+      if (tag[0] == 48+(colorCount) || tag[0] == 48+(colorCount+1)) {
+        if (shieldEvent->actionHash == tappedHash || shieldEvent->actionHash == pressedHash) {
+          if ( tag[0] == 48+(colorCount+1)) {
+              selectedColor = BLACK;
+          }
           clearGrid();
+          selectedColor = ARGB(selectableColors[selectedColorIndex]);
         }
       } else {
-        selectedColor = ARGB(selectableColors[tag[0]-48]);
+        selectedColorIndex = tag[0]-48;
+        selectedColor = ARGB(selectableColors[selectedColorIndex]);
         drawClear();
       }
     } else if (tag[0] != 0 && tag[2] == 0) {
@@ -168,6 +187,7 @@ void setup()
   screen.setOnEvent(screenEvent);
 
   selectedColor = BLACK;
+  selectedColorIndex = 0;
   clearGrid(true);
 
   strip.begin();
