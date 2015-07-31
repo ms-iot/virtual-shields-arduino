@@ -45,6 +45,14 @@ VirtualShield shield;
 Text screen = Text(shield);
 Camera camera = Camera(shield);
 
+void cameraEvent(ShieldEvent* shieldEvent) 
+{
+  if (shieldEvent->resultId < 0) 
+  {
+    screen.printAt(6, "camera error or not present");
+  }
+}
+
 // Callback for startup, reconnection, and when the pushing 'Refresh' button
 void refresh(ShieldEvent* shieldEvent)
 {
@@ -60,6 +68,8 @@ void setup()
 {
   // Call 'refresh' on startup, on reconnection, and when the pushing 'Refresh' button
   shield.setOnRefresh(refresh);
+  
+  camera.setOnEvent(cameraEvent);
   
   // Begin the shield communication
   shield.begin();
