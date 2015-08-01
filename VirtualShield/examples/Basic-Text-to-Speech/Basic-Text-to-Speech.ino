@@ -22,32 +22,49 @@
     THE SOFTWARE.
 */
 
-#ifndef Text_h
-#define Text_h
+/*
+    The Speech shield speaks text.
+	
+*/
 
-#include "Sensor.h"
+// Include the ArduinoJson library, a dependency.
+#include <ArduinoJson.h>
 
-const PROGMEM char Y[] = "Y";
-const PROGMEM char CLEAR[] = "CLEAR";
-const PROGMEM char RGBAKEY[] = "ARGB";
-const PROGMEM char PID[] = "Pid";
+// VirtualShield is the core of all shields.
+#include <VirtualShield.h>
 
-class Text : public Sensor
+// Text is to display text onscreen.
+#include <Text.h>
+
+#include <Speech.h>
+
+// Instantiate the shields.
+VirtualShield shield;
+Text screen = Text(shield);
+Speech speech = Speech(shield);
+
+// Callback for startup, reconnection, and when the pushing 'Refresh' button
+void refresh(ShieldEvent* shieldEvent)
 {
-public:
-    Text(const VirtualShield &shield);
+  // clear the screen
+  screen.clear();
+  
+  screen.printAt(1, "Basic Text to Speech");
+  
+  speech.speak("Hello World from Windows Virtual Shields for Arduino");
+}
 
-	int clear(ARGB argb = 0);
-	int clearLine(UINT line);
-	int clearId(UINT id);
+void setup()
+{
+  // Call 'refresh' on startup, on reconnection, and when the pushing 'Refresh' button
+  shield.setOnRefresh(refresh);
 
-	int print(String text, ARGB argb = 0);
-	int printAt(UINT line, String text, ARGB argb);
-	int printAt(UINT line, String text, Attr extraAttributes[] = 0, int extraAttributeCount = 0);
-	int printAt(UINT line, EPtr text, Attr extraAttributes[] = 0, int extraAttributeCount = 0);
-	int printAt(UINT line, double value, ARGB argb = 0);
+  // Begin the shield communication
+  shield.begin();
+}
 
-	void onJsonReceived(JsonObject& root, ShieldEvent* shieldEvent) override;
-};
-
-#endif
+void loop()
+{
+  // checkSensors() checks for return events and handles them (calling callbacks). This is VirtualShield's single loop() method.
+  shield.checkSensors();
+}		 

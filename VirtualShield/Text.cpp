@@ -96,6 +96,18 @@ int Text::printAt(UINT line, double value, ARGB argb)
 }
 
 /// <summary>
+/// Prints the specified double at the specified line.
+/// </summary>
+/// <param name="line">The line.</param>
+/// <param name="value">The value.</param>
+/// <returns>The id of the message. Negative if an error.</returns>
+int Text::printAt(UINT line, String text, ARGB argb)
+{
+	EPtr eptrs[] = { EPtr(Y, (uint32_t)line), EPtr(MemPtr, MESSAGE, text.c_str()), EPtr(RGBAKEY, (uint32_t)argb.color, (uint32_t)argb.color ? Uint : None) };
+	return writeAll(SERVICE_NAME_LCDTEXT, eptrs, 3);
+}
+
+/// <summary>
 /// Prints the specified text at the specified line.
 /// </summary>
 /// <param name="line">The line.</param>
