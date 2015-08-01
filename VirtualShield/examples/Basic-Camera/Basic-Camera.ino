@@ -34,7 +34,7 @@
 // VirtualShield is the core of all shields.
 #include <VirtualShield.h>
 
-// Text is to display text onscreen.
+// Text is to display text on screen.
 #include <Text.h>
 
 // Camera is for Camera use.
@@ -69,6 +69,7 @@ void setup()
   // Call 'refresh' on startup, on reconnection, and when the pushing 'Refresh' button
   shield.setOnRefresh(refresh);
   
+  // When a camera result occurs, call the the cameraEvent method
   camera.setOnEvent(cameraEvent);
   
   // Begin the shield communication

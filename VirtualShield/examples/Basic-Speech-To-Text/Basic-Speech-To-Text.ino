@@ -22,6 +22,10 @@
     THE SOFTWARE.
 */
 
+/*
+	The Recognition shield listens for specific words or phrases.
+*/
+
 // Include the ArduinoJson library, a dependency.
 #include <ArduinoJson.h>
 
@@ -38,8 +42,6 @@
 VirtualShield shield;
 Text screen = Text(shield);
 Recognition recognition = Recognition(shield);
-
-int buttonId, rectangleId;
 
 void recognitionEvent(ShieldEvent* shieldEvent)
 {

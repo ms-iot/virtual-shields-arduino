@@ -25,7 +25,7 @@
 /*
     About the Email sensor:
     
-    The email capability is a haptick feedback.
+    The email capability begins an email, fills in the To, Subject and Body for the user to click send.
 */
 
 // Include the ArduinoJson library, a dependency.
@@ -53,11 +53,8 @@ void refresh(ShieldEvent* shieldEvent)
   screen.clear();
   screen.printAt(1, "Basic Email");
 
-  //if (!sent) {
-    // Email for 100 milliseconds.
-    sent = true;
-    email.send("jimgaleforce@gmail.com", "Subject", "Body");
-  //}
+  sent = true;
+  email.send("sample@sample.com", "Subject", "Body");
 }
 
 void setup()

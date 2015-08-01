@@ -23,7 +23,7 @@
 */
 
 /*
-    About the Camera sensor:
+    About the Microphone sensor:
     
     The microphone capability records audio and saves it to the local device library.
 */

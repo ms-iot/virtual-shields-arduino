@@ -42,6 +42,7 @@
 // Text is to display text onscreen.
 #include <Text.h>
 
+// Media is to play video and audio
 #include <Media.h>
 
 // Instantiate the shields.
@@ -49,10 +50,12 @@ VirtualShield shield;
 Text screen = Text(shield);
 Media media = Media(shield);
 
-int buttonId, rectangleId;
-
 void mediaEvent(ShieldEvent* shieldEvent) 
 {
+  if (shieldEvent->resultId < 0) 
+  {
+    screen.printAt(3, "a playback error occurred");
+  }
 }
 
 // Callback for startup, reconnection, and when the pushing 'Refresh' button

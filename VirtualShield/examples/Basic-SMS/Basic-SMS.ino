@@ -25,7 +25,7 @@
 /*
     About the Sms sensor:
     
-    The sms capability is a haptick feedback.
+    The sms capability begins an SMS message and allows the user to click Send.
 */
 
 // Include the ArduinoJson library, a dependency.
@@ -54,7 +54,6 @@ void refresh(ShieldEvent* shieldEvent)
   screen.printAt(1, "Basic Sms");
 
   if (!sent) {
-    // Sms for 100 milliseconds.
     sent = true;
     sms.send("+14255551212", "Message goes here");
   }

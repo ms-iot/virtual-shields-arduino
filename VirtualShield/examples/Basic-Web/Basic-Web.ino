@@ -47,8 +47,10 @@ void webEvent(ShieldEvent* shieldEvent)
   screen.printAt(3, "ResponseCode:");
   screen.printAt(4, shieldEvent->resultId);
   
+  // Get the response phrase after the parsing instructions parsed
   web.getResponse(response, MAX_RESPONSE);
   
+  // Further parse the result, separating from the vertical bar character (|)
   EPtr eptrs[3];
   int parts = EPtr::parse(response, eptrs, 3, '|', 0);
   

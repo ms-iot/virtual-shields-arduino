@@ -23,14 +23,8 @@
 */
 
 /*
-    About the Media Shield:
-    
-    Media provides video or audio playback with the ability to start, stop,
-    and receive notifications when playback has started or finished.
-    
-    Media provides these example methods:
-    play("http://...something.mp4") - play a video
-    play("http://...something.wav") - play audio
+    The Speech shield speaks text.
+	
 */
 
 // Include the ArduinoJson library, a dependency.
@@ -49,15 +43,12 @@ VirtualShield shield;
 Text screen = Text(shield);
 Speech speech = Speech(shield);
 
-int buttonId, rectangleId;
-
 // Callback for startup, reconnection, and when the pushing 'Refresh' button
 void refresh(ShieldEvent* shieldEvent)
 {
-  // clear the screen to a color
+  // clear the screen
   screen.clear();
   
-  // draw text (not LCD looking)
   screen.printAt(1, "Basic Text to Speech");
   
   speech.speak("Hello World from Windows Virtual Shields for Arduino");

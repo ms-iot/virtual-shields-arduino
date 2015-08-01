@@ -23,15 +23,10 @@
 */
 
 /*
-    About the Text Shield:
+    About the Graphics Shield:
     
-    Text provides a very simple LCD-like fixed font displayed on your device.
-    Text also provides a clear() to clear the whole screen, and a clearLine()
-    and clearId() to clear specific lines or ids.
-    
-    Text provides these example methods:
-    clear() ... clear the screen to black.
-    printAt(1, "Testing") ... displays Testing at line 1
+    Graphics includes, but goes beyond Text to add truetype font (drawAt),
+	images, buttons, rectangles, lines, colors and more.
     
 */
 
