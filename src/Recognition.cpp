@@ -133,7 +133,7 @@ bool Recognition::heard(int spokenNumber) {
 void Recognition::onJsonReceived(JsonObject& root, ShieldEvent* shieldEvent)
 {
 	recognizedIndex = shieldEvent->resultId;
-	confidence = shieldEvent->value;
+	confidence = static_cast<int>(shieldEvent->value);
 
 	if (this->openTextBuffer)
 	{

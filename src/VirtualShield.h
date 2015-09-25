@@ -25,13 +25,15 @@
 #ifndef VirtualShield_h
 #define VirtualShield_h
 
-#include "Arduino.h"
+#include <stdlib.h>
 
+#include <Arduino.h>
 #include <ArduinoJson.h>
 
-#include "Sensor.h"
-#include "ShieldEvent.h"
 #include "Attr.h"
+#include "Sensor.h"
+#include "SensorModels.h"
+#include "ShieldEvent.h"
 
 class Sensor;
 struct SensorEvent;
@@ -59,9 +61,9 @@ public:
 	void begin(long bitRate = DEFAULT_BAUDRATE);
 	void setPort(int port);
 
-	bool checkSensors(int watchForId = 0, long timeout = 0, int waitForResultId = -1);
-    int waitFor(int id, long timeout = WAITFOR_TIMEOUT, bool asSuccess = true, int resultId = -1);
 	bool hasError(ShieldEvent* shieldEvent = 0);
+	bool checkSensors(int watchForId = 0, int32_t timeout = 0, int waitForResultId = -1);
+    int waitFor(int id, uint32_t timeout = WAITFOR_TIMEOUT, bool asSuccess = true, int resultId = -1);
 
 	bool getEvent(ShieldEvent* shieldEvent);
 
@@ -72,7 +74,7 @@ public:
 	virtual void onJsonReceived(JsonObject& root, ShieldEvent* shieldEvent);
 
 	void write(const char* text);
-	int writeAll(const char* serviceName, EPtr values[], int count, Attr extraAttributes[] = 0, int extraAttributeCount = 0, const char sensorType = '\0');
+	int writeAll(const char* serviceName, EPtr values[], unsigned int count, Attr extraAttributes[] = 0, int extraAttributeCount = 0, const char sensorType = '\0');
 
 	int writeAll(const char* serviceName);
 
@@ -81,7 +83,7 @@ public:
 
 	int endWrite();
 
-    int block(int id, bool blocking, long timeout = WAITFOR_TIMEOUT, int waitForResultId = -1);
+    int block(int id, bool blocking, int32_t timeout = WAITFOR_TIMEOUT, int waitForResultId = -1);
 
 	void setOnEvent(void(*onEvent)(ShieldEvent*))
 	{

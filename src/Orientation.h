@@ -33,10 +33,10 @@
 
 class Orientation : public Sensor {
 public:
-	double X;
+    double W;
+    double X;
 	double Y;
 	double Z;
-	double W;
 
 	Orientation(const VirtualShield &shield);
 

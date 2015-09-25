@@ -35,7 +35,6 @@ const PROGMEM char SERVICE_WEB[] = "WEB";
 const PROGMEM char GET[] = "Get";
 const PROGMEM char POST[] = "Post";
 const PROGMEM char DATA[] = "Data";
-
 const PROGMEM char LEN[] = "Len";
 
 /// <summary>
