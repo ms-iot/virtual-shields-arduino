@@ -89,7 +89,7 @@ int Sensor::getOnChange(double delta)
 /// </summary>
 /// <param name="root">The root json object.</param>
 /// <param name="shieldEvent">The shield event.</param>
-void Sensor::onJsonReceived(JsonObject& root, ShieldEvent* shieldEvent) {
+void Sensor::onJsonReceived(JsonObject &, ShieldEvent *shieldEvent) {
 	this->_isUpdated = true;
 	recentEvent = shieldEvent;
 	
@@ -192,9 +192,10 @@ int Sensor::sendStop(const char* serviceName)
 	return shield.writeAll(serviceName, eptrs, 1);
 }
 
-int Sensor::filter(const char* serviceName, EPtr values[], int count)
+int Sensor::filter(const char *, EPtr [], int)
 {
-    
+    //TODO: Implement filter or remove
+    return 0;
 }
 
 /// <summary>

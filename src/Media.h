@@ -34,11 +34,11 @@ public:
 
 	int play(String url, long length = 0);
 
-	int playVideo(String url, long length = 0) {
+	inline int playVideo(String url, long length = 0) {
 		return play(String("VIDEOS:" + url), length);
 	}
 
-	int playAudio(String url, long length = 0) {
+	inline int playAudio(String url, long length = 0) {
 		return playVideo(url, length);
 	}
 

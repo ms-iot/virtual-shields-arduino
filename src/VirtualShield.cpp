@@ -26,7 +26,6 @@
 
 extern "C" {
 #include <string.h>
-#include <stdlib.h>
 #include <stdint.h>
 }
   
@@ -56,8 +55,6 @@ const PROGMEM char MESSAGE_QUOTE[] = "'";
 const PROGMEM char MESSAGE_SEPARATOR[] = ",'";
 const PROGMEM char MESSAGE_PAIR_SEPARATOR[] = "':";
 const PROGMEM char MESSAGE_END2[] = "}";
-const PROGMEM char TRUE[] = "true";
-const PROGMEM char FALSE[] = "false";
 const PROGMEM char ARRAY_START[] = "[{";
 const PROGMEM char ARRAY_END[] = "}]";
 const PROGMEM char NONTEXT_END[] = "}";
@@ -82,7 +79,7 @@ char readBuffer[maxReadBuffer];
 int readBufferIndex = 0;
 
 int bracketCount = 0;
-long lastOpenRequest = 0;
+uint32_t lastOpenRequest = 0;
 bool isArrayStarted = false;
 int recentEventErrorId = 0;
 
@@ -151,7 +148,7 @@ void VirtualShield::begin(long bitRate)
 /// <summary>
 /// Blocks while waiting for a specific id-based response (only when blocking is true and allowAutoBlocking is true).
 /// </summary>
-int VirtualShield::block(int id, bool blocking, long timeout, int watchForResultId)
+int VirtualShield::block(int id, bool blocking, int32_t timeout, int watchForResultId)
 {
     return allowAutoBlocking && blocking ? waitFor(id, timeout, watchForResultId) : id;
 }
@@ -299,7 +296,7 @@ void VirtualShield::sendStart()
 /// Sends the ping back form a ping request.
 /// </summary>
 /// <param name="shieldEvent">The shield event.</param>
-void VirtualShield::sendPingBack(ShieldEvent* shieldEvent)
+void VirtualShield::sendPingBack(ShieldEvent *)
 {
 	EPtr eptrs[] = { EPtr(ACTION, PONG), EPtr(MemPtr, TYPE, "!") };
 	writeAll(SERVICE_NAME_SERVICE, eptrs, 2);
@@ -442,10 +439,10 @@ void VirtualShield::onStringReceived(char* buffer, int length, ShieldEvent* shie
 /// <param name="watchForId">An id to return true if found. Otherwise true is returned for any events processed.</param>
 /// <param name="timeout">The timeout in milliseconds.</param>
 /// <returns>true if the id matched an incoming event, or if no id, any event.</returns>
-bool VirtualShield::checkSensors(int watchForId, long timeout, int watchForResultId) {
+bool VirtualShield::checkSensors(int watchForId, int32_t timeout, int watchForResultId) {
 	bool hadEvents = false;
 
-	long started = millis();
+	uint32_t started = millis();
 	recentEventErrorId = 0;
 	while (getEvent(&recentEvent) && (timeout == 0 || started+timeout <= millis()) ) {
 		hadEvents = (watchForId == 0 || recentEvent.id == watchForId) && (watchForResultId == -1 || recentEvent.resultId == watchForResultId);
@@ -483,7 +480,7 @@ int VirtualShield::writeAll(const char* serviceName)  {
 /// <param name="id">The id.</param>
 /// <param name="timeout">The timeout.</param>
 /// <returns>The matching id, or zero if not found.</returns>
-int VirtualShield::waitFor(int id, long timeout, bool asSuccess, int resultId)
+int VirtualShield::waitFor(int id, uint32_t timeout, bool asSuccess, int resultId)
 {
 	if (id < 0)
 	{
@@ -542,7 +539,7 @@ int VirtualShield::beginWrite(const char* serviceName)
 /// <param name="values">The values.</param>
 /// <param name="count">The count of values.</param>
 /// <returns>The new id of the message or a negative error.</returns>
-int VirtualShield::writeAll(const char* serviceName, EPtr values[], int count, Attr extraAttributes[], int extraAttributeCount, const char sensorType) {
+int VirtualShield::writeAll(const char* serviceName, EPtr values[], unsigned int count, Attr extraAttributes[], int extraAttributeCount, const char sensorType) {
 	uint8_t id = beginWrite(serviceName);
 
 	for (size_t i = 0; i < count; i++)
@@ -555,7 +552,7 @@ int VirtualShield::writeAll(const char* serviceName, EPtr values[], int count, A
 		write(EPtr(TYPE, sensorType));
 	}
 
-	for (size_t i = 0; i < extraAttributeCount; i++)
+	for (int i = 0; i < extraAttributeCount; i++)
 	{
 		write(extraAttributes[i]);
 	}
@@ -727,7 +724,7 @@ int VirtualShield::parseToHash(const char* text, unsigned int *hash, int hashCou
 	int hashIndex = 0;
 	int count = 0;
 
-	while ((length == -1 || length-- > 0) && (text[index] || index > start))
+	while ((length == static_cast<unsigned int>(-1) || length-- > 0) && (text[index] || index > start))
 	{
 		if (!text[index] || text[index] == separator || length == 0)
 		{
@@ -751,7 +748,7 @@ int VirtualShield::parseToHash(const char* text, unsigned int *hash, int hashCou
 unsigned int VirtualShield::hash(const char* s, unsigned int len, unsigned int seed)
 {
 	unsigned hash = seed;
-	while ((len == -1) ? *s : len-- > 0)
+	while ((len == static_cast<unsigned int>(-1)) ? *s : len-- > 0)
 	{
 		hash = hash * 101 + *s++;
 	}
@@ -784,10 +781,10 @@ int VirtualShield::directToSerial(const char* cmd)
 int VirtualShield::sendFlashStringOnSerial(const char* flashStringAdr, int start, bool encode) const
 {
 	unsigned char dataChar = 0;
-	const int actualStart = start < 0 ? 0 : start;
+	const size_t actualStart = start < 0 ? 0 : start;
 	const bool isFormatted = start > DEFAULT_LENGTH;
 
-	for (int i = actualStart; i < strlen_PF((uint_farptr_t)flashStringAdr); i++)
+	for (size_t i = actualStart; i < strlen_PF((uint_farptr_t)flashStringAdr); i++)
 	{
 		dataChar = pgm_read_byte_near(flashStringAdr + i);
 		if (isFormatted && dataChar == '~')
