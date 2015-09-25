@@ -25,6 +25,7 @@
 #ifndef VirtualShield_h
 #define VirtualShield_h
 
+#include <stdint.h>
 #include <stdlib.h>
 
 #include <Arduino.h>

@@ -25,7 +25,11 @@
 #ifndef Notification_h
 #define Notification_h
 
+#include <ArduinoJson.h>
+
 #include "Sensor.h"
+#include "ShieldEvent.h"
+#include "VirtualShield.h"
 
 class Notification : public Sensor
 {

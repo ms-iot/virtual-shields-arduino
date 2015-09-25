@@ -23,15 +23,10 @@
 */
 
 #include "Text.h"
-#include "SensorModels.h"
 
-extern "C" {
-#include <string.h>
-#include <stdlib.h>
-}
+#include <stdint.h>
 
 const PROGMEM char SERVICE_NAME_LCDTEXT[] = "LCDT";
-
 
 /// <summary>
 /// Initializes a new instance of the <see cref="Screen"/> class.

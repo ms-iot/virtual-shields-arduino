@@ -25,7 +25,11 @@
 #ifndef Camera_h
 #define Camera_h
 
+#include <ArduinoJson.h>
+
 #include "Sensor.h"
+#include "ShieldEvent.h"
+#include "VirtualShield.h"
 
 class Camera : public Sensor
 {

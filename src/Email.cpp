@@ -24,10 +24,7 @@
 
 #include "Email.h"
 
-extern "C" {
-#include <string.h>
-#include <stdlib.h>
-}
+#include "SensorModels.h"
 
 const PROGMEM char SERVICE_EMAIL[] = "EMAIL";
 const PROGMEM char SUBJECT[] = "Subject";

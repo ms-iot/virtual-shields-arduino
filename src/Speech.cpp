@@ -23,12 +23,8 @@
 */
 
 #include "Speech.h"
-#include "Sensor.h"
 
-extern "C" {
-#include <string.h>
-#include <stdlib.h>
-}
+#include "SensorModels.h"
 
 const PROGMEM char SERVICE_NAME_SPEECH[] = "SPEECH";
 const int MEDIA_PAUSED = 4;

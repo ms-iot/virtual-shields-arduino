@@ -25,11 +25,11 @@
 #ifndef Email_h
 #define Email_h
 
-#include "Sensor.h"
-#include "ShieldEvent.h"
 #include <ArduinoJson.h>
 
-#include "Arduino.h"
+#include "Sensor.h"
+#include "ShieldEvent.h"
+#include "VirtualShield.h"
 
 class Email : public Sensor {
 public:

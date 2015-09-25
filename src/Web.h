@@ -25,7 +25,12 @@
 #ifndef Web_h
 #define Web_h
 
+#include <ArduinoJson.h>
+
 #include "Sensor.h"
+#include "SensorModels.h"
+#include "ShieldEvent.h"
+#include "VirtualShield.h"
 
 const PROGMEM char PARSE[] = "Parse";
 

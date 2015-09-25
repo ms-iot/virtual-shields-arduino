@@ -25,7 +25,13 @@
 #ifndef Text_h
 #define Text_h
 
+#include <ArduinoJson.h>
+
+#include "Attr.h"
 #include "Sensor.h"
+#include "SensorModels.h"
+#include "ShieldEvent.h"
+#include "VirtualShield.h"
 
 const PROGMEM char Y[] = "Y";
 const PROGMEM char CLEAR[] = "CLEAR";

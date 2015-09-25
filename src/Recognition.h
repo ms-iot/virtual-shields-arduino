@@ -25,11 +25,12 @@
 #ifndef Recognition_h
 #define Recognition_h
 
-#include "Sensor.h"
-#include "ShieldEvent.h"
 #include <ArduinoJson.h>
 
-#include "Arduino.h"
+#include "Sensor.h"
+#include "SensorModels.h"
+#include "ShieldEvent.h"
+#include "VirtualShield.h"
 
 const int Confidence_High = 0;
 const int Confidence_Medium = 1;

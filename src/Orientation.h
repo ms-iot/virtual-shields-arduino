@@ -25,11 +25,11 @@
 #ifndef Orientation_h
 #define Orientation_h
 
-#include "Sensor.h"
-#include "ShieldEvent.h"
 #include <ArduinoJson.h>
 
-#include "Arduino.h"
+#include "Sensor.h"
+#include "ShieldEvent.h"
+#include "VirtualShield.h"
 
 class Orientation : public Sensor {
 public:

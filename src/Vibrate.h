@@ -25,11 +25,11 @@
 #ifndef Vibrate_h
 #define Vibrate_h
 
-#include "Sensor.h"
-#include "ShieldEvent.h"
 #include <ArduinoJson.h>
 
-#include "Arduino.h"
+#include "Sensor.h"
+#include "ShieldEvent.h"
+#include "VirtualShield.h"
 
 class Vibrate : public Sensor {
 public:

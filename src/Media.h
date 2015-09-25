@@ -25,7 +25,11 @@
 #ifndef Media_h
 #define Media_h
 
+#include <ArduinoJson.h>
+
 #include "Sensor.h"
+#include "ShieldEvent.h"
+#include "VirtualShield.h"
 
 class Media : public Sensor
 {

@@ -23,12 +23,8 @@
 */
 
 #include "Notification.h"
-#include "SensorModels.h"
 
-extern "C" {
-#include <string.h>
-#include <stdlib.h>
-}
+#include "SensorModels.h"
 
 const PROGMEM char SERVICE_NOTIFICATION[] = "NOTIFY";
 const PROGMEM char TOAST[] = "Toast";
