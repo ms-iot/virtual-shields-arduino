@@ -27,6 +27,7 @@
 extern "C" {
 #include <string.h>
 #include <stdlib.h>
+#include <stdint.h>
 }
   
 #include "SensorModels.h"
@@ -470,7 +471,7 @@ void VirtualShield::write(const char* text)
 /// <param name="serviceName">Name of the service.</param>
 /// <returns>int.</returns>
 int VirtualShield::writeAll(const char* serviceName)  {
-	byte id = beginWrite(serviceName);
+	uint8_t id = beginWrite(serviceName);
 	if (endWrite() != 0) return SERIAL_ERROR;
 
 	return id;
@@ -542,7 +543,7 @@ int VirtualShield::beginWrite(const char* serviceName)
 /// <param name="count">The count of values.</param>
 /// <returns>The new id of the message or a negative error.</returns>
 int VirtualShield::writeAll(const char* serviceName, EPtr values[], int count, Attr extraAttributes[], int extraAttributeCount, const char sensorType) {
-	byte id = beginWrite(serviceName);
+	uint8_t id = beginWrite(serviceName);
 
 	for (size_t i = 0; i < count; i++)
 	{

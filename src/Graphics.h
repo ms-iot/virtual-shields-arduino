@@ -45,19 +45,19 @@ class Graphics : public Text
 public:
     Graphics(const VirtualShield &shield);
 
-	int drawAt(UINT x, UINT y, String text, String tag = (const char*)0, ARGB argb = 0);
+	int drawAt(unsigned int x, unsigned int y, String text, String tag = (const char*)0, ARGB argb = 0);
 	
-	int drawImage(UINT x, UINT y, String url, String tag = (const char*)0, UINT width = 0, UINT height = 0);
+	int drawImage(unsigned int x, unsigned int y, String url, String tag = (const char*)0, unsigned int width = 0, unsigned int height = 0);
 
-	int addButton(UINT x, UINT y, String text, String tag = (const char*) 0);
+	int addButton(unsigned int x, unsigned int y, String text, String tag = (const char*) 0);
 
-	int fillRectangle(UINT x, UINT y, UINT width, UINT height, 
+	int fillRectangle(unsigned int x, unsigned int y, unsigned int width, unsigned int height, 
         ARGB argb, String tag = (const char*)0, bool enableExtendedEvents = false);
 
-    int change(UINT id, ARGB argb);
+    int change(unsigned int id, ARGB argb);
 
-	int line(UINT x1, UINT y1, UINT x2, UINT y2, ARGB color, UINT weight = 1);
-	int input(UINT x, UINT y, bool multiline = false, String text = (const char*) 0, UINT width = 0, UINT height = 0);
+	int line(unsigned int x1, unsigned int y1, unsigned int x2, unsigned int y2, ARGB color, unsigned int weight = 1);
+	int input(unsigned int x, unsigned int y, bool multiline = false, String text = (const char*) 0, unsigned int width = 0, unsigned int height = 0);
 
 	int orientation(int autoRotationPreferences = -1);
 

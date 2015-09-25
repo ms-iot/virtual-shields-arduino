@@ -25,7 +25,7 @@
 #ifndef SensorModels_h
 #define SensorModels_h
 
-typedef unsigned int UINT;
+#include <stdint.h>
 
 enum SensorAction
 {
@@ -61,12 +61,12 @@ union ARGB
 		uint8_t blue, green, red, alpha;
 	};
 
-	ARGB(byte alpha, byte red, byte green, byte blue) :
+	ARGB(uint8_t alpha, uint8_t red, uint8_t green, uint8_t blue) :
 		red(red), green(green), blue(blue), alpha(alpha)
 	{
 	}
 
-	ARGB(byte red, byte green, byte blue) :
+	ARGB(uint8_t red, uint8_t green, uint8_t blue) :
 		red(red), green(green), blue(blue), alpha(0)
 	{
 	}
@@ -79,13 +79,13 @@ union ARGB
 	{
 	}
 
-	void hex(char* hexSource)
+	void hex(uint8_t* hexSource)
 	{
-		char hex[9] =
-		{ alpha >> 4, alpha & 0x0F,
-		  red >> 4, red & 0x0F,
-		  green >> 4, green & 0x0F,
-		  blue >> 4, blue & 0x0F };
+        uint8_t hex[9] =
+        { static_cast<uint8_t>(alpha >> 4), static_cast<uint8_t>(alpha & 0x0F),
+            static_cast<uint8_t>(red >> 4), static_cast<uint8_t>(red & 0x0F),
+            static_cast<uint8_t>(green >> 4), static_cast<uint8_t>(green & 0x0F),
+            static_cast<uint8_t>(blue >> 4), static_cast<uint8_t>(blue & 0x0F) };
 
 		for (int i = 0; i < 8; i++)
 		{

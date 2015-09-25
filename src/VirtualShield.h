@@ -33,8 +33,6 @@
 #include "ShieldEvent.h"
 #include "Attr.h"
 
-typedef unsigned int UINT;
-
 class Sensor;
 struct SensorEvent;
 
