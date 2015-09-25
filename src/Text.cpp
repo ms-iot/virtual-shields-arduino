@@ -55,7 +55,7 @@ int Text::clear(ARGB argb)
 /// </summary>
 /// <param name="line">The line.</param>
 /// <returns>The id of the message. Negative if an error.</returns>
-int Text::clearLine(UINT line)
+int Text::clearLine(unsigned int line)
 {
 	EPtr eptrs[] = { EPtr(ACTION, CLEAR), EPtr(Y, (uint32_t) line) };
     return writeAll(SERVICE_NAME_LCDTEXT, eptrs, 2);
@@ -66,7 +66,7 @@ int Text::clearLine(UINT line)
 /// </summary>
 /// <param name="id">The id.</param>
 /// <returns>The id of the message. Negative if an error.</returns>
-int Text::clearId(UINT id)
+int Text::clearId(unsigned int id)
 {
 	EPtr eptrs[] = { EPtr(ACTION, CLEAR), EPtr(PID, (uint32_t) id) };
     return writeAll(SERVICE_NAME_LCDTEXT, eptrs, 2);
@@ -89,7 +89,7 @@ int Text::print(String text, ARGB argb)
 /// <param name="line">The line.</param>
 /// <param name="value">The value.</param>
 /// <returns>The id of the message. Negative if an error.</returns>
-int Text::printAt(UINT line, double value, ARGB argb)
+int Text::printAt(unsigned int line, double value, ARGB argb)
 {
 	EPtr eptrs[] = { EPtr(Y, (uint32_t)line), EPtr(MESSAGE, value), EPtr(RGBAKEY, (uint32_t)argb.color, (uint32_t)argb.color ? Uint : None) };
 	return writeAll(SERVICE_NAME_LCDTEXT, eptrs, 3);
@@ -101,7 +101,7 @@ int Text::printAt(UINT line, double value, ARGB argb)
 /// <param name="line">The line.</param>
 /// <param name="value">The value.</param>
 /// <returns>The id of the message. Negative if an error.</returns>
-int Text::printAt(UINT line, String text, ARGB argb)
+int Text::printAt(unsigned int line, String text, ARGB argb)
 {
 	EPtr eptrs[] = { EPtr(Y, (uint32_t)line), EPtr(MemPtr, MESSAGE, text.c_str()), EPtr(RGBAKEY, (uint32_t)argb.color, (uint32_t)argb.color ? Uint : None) };
 	return writeAll(SERVICE_NAME_LCDTEXT, eptrs, 3);
@@ -113,7 +113,7 @@ int Text::printAt(UINT line, String text, ARGB argb)
 /// <param name="line">The line.</param>
 /// <param name="text">The text.</param>
 /// <returns>The id of the message. Negative if an error.</returns>
-int Text::printAt(UINT line, String text, Attr extraAttributes[], int extraAttributeCount) {
+int Text::printAt(unsigned int line, String text, Attr extraAttributes[], int extraAttributeCount) {
 	return printAt(line, EPtr(MemPtr, MESSAGE, text.c_str()), extraAttributes, extraAttributeCount);
 }
 
@@ -123,7 +123,7 @@ int Text::printAt(UINT line, String text, Attr extraAttributes[], int extraAttri
 /// <param name="line">The line.</param>
 /// <param name="text">The text.</param>
 /// <returns>The id of the message. Negative if an error.</returns>
-int Text::printAt(UINT line, EPtr text, Attr extraAttributes[], int extraAttributeCount) {
+int Text::printAt(unsigned int line, EPtr text, Attr extraAttributes[], int extraAttributeCount) {
 	EPtr eptrs[] = { EPtr(Y, (uint32_t) line), text };
 	return writeAll(SERVICE_NAME_LCDTEXT, eptrs, 2, extraAttributes, extraAttributeCount);
 }

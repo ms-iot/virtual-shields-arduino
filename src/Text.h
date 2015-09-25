@@ -38,14 +38,14 @@ public:
     Text(const VirtualShield &shield);
 
 	int clear(ARGB argb = 0);
-	int clearLine(UINT line);
-	int clearId(UINT id);
+	int clearLine(unsigned int line);
+	int clearId(unsigned int id);
 
 	int print(String text, ARGB argb = 0);
-	int printAt(UINT line, String text, ARGB argb);
-	int printAt(UINT line, String text, Attr extraAttributes[] = 0, int extraAttributeCount = 0);
-	int printAt(UINT line, EPtr text, Attr extraAttributes[] = 0, int extraAttributeCount = 0);
-	int printAt(UINT line, double value, ARGB argb = 0);
+	int printAt(unsigned int line, String text, ARGB argb);
+	int printAt(unsigned int line, String text, Attr extraAttributes[] = 0, int extraAttributeCount = 0);
+	int printAt(unsigned int line, EPtr text, Attr extraAttributes[] = 0, int extraAttributeCount = 0);
+	int printAt(unsigned int line, double value, ARGB argb = 0);
 
 	void onJsonReceived(JsonObject& root, ShieldEvent* shieldEvent) override;
 };

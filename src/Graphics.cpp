@@ -56,7 +56,7 @@ const PROGMEM char CHANGEACTION[] = "CHANGE";
 Graphics::Graphics(const VirtualShield &shield) : Text(shield) {
 }
 
-int Graphics::line(UINT x1, UINT y1, UINT x2, UINT y2, ARGB argb, UINT weight)
+int Graphics::line(unsigned int x1, unsigned int y1, unsigned int x2, unsigned int y2, ARGB argb, unsigned int weight)
 {
 	EPtr eptrs[] = { EPtr(ACTION, LINE), EPtr(Y, (uint32_t)y1), EPtr(X, (uint32_t)x1),
 		EPtr(X2, (uint32_t)x2), EPtr(Y2, (uint32_t)y2),
@@ -73,7 +73,7 @@ int Graphics::line(UINT x1, UINT y1, UINT x2, UINT y2, ARGB argb, UINT weight)
 /// <param name="y">The y.</param>
 /// <param name="text">The text.</param>
 /// <returns>The id of the message. Negative if an error.</returns>
-int Graphics::drawAt(UINT x, UINT y, String text, String tag, ARGB argb)
+int Graphics::drawAt(unsigned int x, unsigned int y, String text, String tag, ARGB argb)
 {
 	EPtr eptrs[] = { EPtr(ACTION, TEXT), EPtr(Y, (uint32_t)y), 
 		EPtr(X, (uint32_t)x), EPtr(MemPtr, MESSAGE, text.c_str()), 
@@ -92,7 +92,7 @@ int Graphics::drawAt(UINT x, UINT y, String text, String tag, ARGB argb)
 /// <param name="width">The width.</param>
 /// <param name="height">The height.</param>
 /// <returns>The id of the message. Negative if an error.</returns>
-int Graphics::drawImage(UINT x, UINT y, String url, String tag, UINT width, UINT height)
+int Graphics::drawImage(unsigned int x, unsigned int y, String url, String tag, unsigned int width, unsigned int height)
 {
 	EPtr eptrs[] = { EPtr(ACTION, IMAGE), EPtr(Y, (uint32_t)y), EPtr(X, (uint32_t)x),
 		EPtr(WIDTH, (uint32_t)width, width ? Uint : None), EPtr(HEIGHT, (uint32_t)height, height ? Uint : None),
@@ -111,7 +111,7 @@ int Graphics::drawImage(UINT x, UINT y, String url, String tag, UINT width, UINT
 /// <param name="width">The width.</param>
 /// <param name="height">The height.</param>
 /// <returns>The id of the message. Negative if an error.</returns>
-int Graphics::input(UINT x, UINT y, bool multiline, String text, UINT width, UINT height)
+int Graphics::input(unsigned int x, unsigned int y, bool multiline, String text, unsigned int width, unsigned int height)
 {
 	EPtr eptrs[] = { EPtr(ACTION, INPUTTXT), EPtr(Y, (uint32_t)y), EPtr(X, (uint32_t)x),
 		EPtr(WIDTH, (uint32_t)width, width ? Uint : None), EPtr(HEIGHT, (uint32_t)height, height ? Uint : None),
@@ -121,7 +121,7 @@ int Graphics::input(UINT x, UINT y, bool multiline, String text, UINT width, UIN
 	return writeAll(SERVICE_NAME_GRAPHICS, eptrs, 7);
 }
 
-int Graphics::change(UINT id, ARGB argb)
+int Graphics::change(unsigned int id, ARGB argb)
 {
     EPtr eptrs[] = { EPtr(ACTION, CHANGEACTION), EPtr(PID, (uint32_t)id), EPtr(RGBAKEY, (uint32_t)argb.color, (uint32_t)argb.color ? Uint : None) };
     return writeAll(SERVICE_NAME_GRAPHICS, eptrs, 3);
@@ -137,7 +137,7 @@ int Graphics::change(UINT id, ARGB argb)
 /// <param name="rgba">The rgba.</param>
 /// <param name="tag">The tag. Returned back for event recognition.</param>
 /// <returns>The id of the message. Negative if an error.</returns>
-int Graphics::fillRectangle(UINT x, UINT y, UINT width, UINT height, ARGB argb, String tag, bool enableExtendedEvents)
+int Graphics::fillRectangle(unsigned int x, unsigned int y, unsigned int width, unsigned int height, ARGB argb, String tag, bool enableExtendedEvents)
 {
 	EPtr eptrs[] = { EPtr(ACTION, RECTANGLE), EPtr(Y, (uint32_t)y), EPtr(X, (uint32_t)x),
 		EPtr(WIDTH, (uint32_t)width), EPtr(HEIGHT, (uint32_t)height),
@@ -163,7 +163,7 @@ int Graphics::orientation(int autoRotationPreferences)
 /// <param name="text">The text.</param>
 /// <param name="tag">The tag. Returned back for event recognition.</param>
 /// <returns>The id of the message. Negative if an error.</returns>
-int Graphics::addButton(UINT x, UINT y, String text, String tag)
+int Graphics::addButton(unsigned int x, unsigned int y, String text, String tag)
 {
 	EPtr eptrs[] = { EPtr(ACTION, BUTTON), EPtr(Y, (uint32_t)y), EPtr(X, (uint32_t)x), EPtr(MemPtr, MESSAGE, text.c_str()), EPtr(MemPtr, TAG, tag.c_str() ? tag.c_str() : text.c_str()) };
 	return shield.block(writeAll(SERVICE_NAME_GRAPHICS, eptrs, 5), onEvent == 0);
