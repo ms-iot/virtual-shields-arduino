@@ -25,8 +25,12 @@
 #ifndef Graphics_h
 #define Graphics_h
 
+#include <ArduinoJson.h>
+
+#include "SensorModels.h"
+#include "ShieldEvent.h"
 #include "Text.h"
-#include "Sensor.h"
+#include "VirtualShield.h"
 
 const PROGMEM char HorizontalAlignment[] = "HorizontalAlignment";
 const PROGMEM char Foreground[] = "Foreground";

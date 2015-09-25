@@ -25,11 +25,11 @@
 #ifndef Speech_h
 #define Speech_h
 
-#include "Sensor.h"
-#include "ShieldEvent.h"
 #include <ArduinoJson.h>
 
-#include "Arduino.h"
+#include "Sensor.h"
+#include "ShieldEvent.h"
+#include "VirtualShield.h"
 
 class Speech : public Sensor {
 public:

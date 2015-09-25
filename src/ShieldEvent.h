@@ -25,8 +25,6 @@
 #ifndef ShieldEvent_h
 #define ShieldEvent_h
 
-#include "Arduino.h"
-
 enum ShieldEventType {
 	UnknownShieldEventType = 0,
 	SensorShieldEventType = 1

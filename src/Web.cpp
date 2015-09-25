@@ -22,14 +22,7 @@
     THE SOFTWARE.
 */
 
-#include "Sensor.h"
 #include "Web.h"
-#include "SensorModels.h"
-
-extern "C" {
-#include <string.h>
-#include <stdlib.h>
-}
 
 const PROGMEM char SERVICE_WEB[] = "WEB";
 const PROGMEM char GET[] = "Get";

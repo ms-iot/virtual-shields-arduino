@@ -22,14 +22,9 @@
     THE SOFTWARE.
 */
 
-#include "Sensor.h"
 #include "Media.h"
-#include "SensorModels.h"
 
-extern "C" {
-#include <string.h>
-#include <stdlib.h>
-}
+#include "SensorModels.h"
 
 const PROGMEM char SERVICE_PLAY[] = "PLAY";
 

@@ -24,11 +24,6 @@
 
 #include "Sensor.h"
 
-extern "C" {
-#include <string.h>
-#include <stdlib.h>
-}
-
 const PROGMEM char SERVICE_SENSORS[] = "SENSORS";
 const PROGMEM char SENSORS[] = "Sensors";
 const PROGMEM char DELTA[] = "Delta";

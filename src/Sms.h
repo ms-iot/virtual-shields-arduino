@@ -25,11 +25,11 @@
 #ifndef Sms_h
 #define Sms_h
 
-#include "Sensor.h"
-#include "ShieldEvent.h"
 #include <ArduinoJson.h>
 
-#include "Arduino.h"
+#include "Sensor.h"
+#include "ShieldEvent.h"
+#include "VirtualShield.h"
 
 class Sms : public Sensor {
 public:

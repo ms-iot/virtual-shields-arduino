@@ -23,12 +23,6 @@
 */
 
 #include "Recognition.h"
-#include "Sensor.h"
-
-extern "C" {
-#include <string.h>
-#include <stdlib.h>
-}
 
 const PROGMEM char SERVICE_NAME_RECOGNIZE[] = "RECOGNIZE";
 const PROGMEM char SPEECH_UI[] = "UI";

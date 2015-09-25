@@ -24,13 +24,10 @@
 
 #include "VirtualShield.h"
 
-extern "C" {
 #include <string.h>
-#include <stdint.h>
-}
   
-#include "SensorModels.h"
 #include <ArduinoJson.h>
+#include "SensorModels.h"
 
 // Define the serial port that is used to talk to the virtual shield.
 #define VIRTUAL_SERIAL_PORT0 Serial

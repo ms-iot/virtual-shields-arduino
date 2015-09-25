@@ -25,13 +25,12 @@
 #ifndef Sensor_h
 #define Sensor_h
 
-#include "Arduino.h"
-
-#include "SensorModels.h"
-#include "VirtualShield.h"
-#include "ShieldEvent.h"
 #include <ArduinoJson.h>
+
 #include "Attr.h"
+#include "SensorModels.h"
+#include "ShieldEvent.h"
+#include "VirtualShield.h"
 
 class VirtualShield;
 

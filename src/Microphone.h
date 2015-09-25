@@ -25,7 +25,11 @@
 #ifndef Microphone_h
 #define Microphone_h
 
+#include <ArduinoJson.h>
+
 #include "Sensor.h"
+#include "ShieldEvent.h"
+#include "VirtualShield.h"
 
 class Microphone : public Sensor
 {

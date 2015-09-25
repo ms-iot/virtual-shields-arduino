@@ -25,11 +25,11 @@
 #ifndef LightSensor_h
 #define LightSensor_h
 
-#include "Sensor.h"
-#include "ShieldEvent.h"
 #include <ArduinoJson.h>
 
-#include "Arduino.h"
+#include "Sensor.h"
+#include "ShieldEvent.h"
+#include "VirtualShield.h"
 
 class LightSensor : public Sensor {
 public:

@@ -22,14 +22,9 @@
     THE SOFTWARE.
 */
 
-#include "Sensor.h"
 #include "Camera.h"
-#include "SensorModels.h"
 
-extern "C" {
-#include <string.h>
-#include <stdlib.h>
-}
+#include "SensorModels.h"
 
 const PROGMEM char SERVICE_CAMERA[] = "CAMERA";
 const PROGMEM char PREVIEW[] = "PREVIEW";
