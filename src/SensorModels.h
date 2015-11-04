@@ -92,7 +92,7 @@ union ARGB
 			hexSource[i] = hex[i] + (hex[i] > 0x09 ? 0x37 : 0x30);
 		}
 
-		hexSource[8] = 0;
+		hexSource[8] = '\0';
 
 		return;
 	}
@@ -103,10 +103,10 @@ const bool AsText = true;
 struct EPtr
 {
 	EPtrType ptrType;
-	const char* key = 0;
+	const char* key = NULL;
 	union
 	{
-		const char* value = 0;
+		const char* value = NULL;
 		double doubleValue;
 		uint32_t uintValue;
 		int intValue;
@@ -119,7 +119,7 @@ struct EPtr
 	bool keyIsMem = false;
 	bool asText = false;
 	bool encoded = false;
-	EPtr* eptrs = 0;
+	EPtr* eptrs = NULL;
 
 	/// <summary>
 	/// Initializes a new instance of the <see cref="EPtr"/> struct.
@@ -227,7 +227,7 @@ struct EPtr
 		{
 			if (!text[index] || text[index] == separator)
 			{
-				eptrs[eptrStartIndex++] = EPtr(0, text + start, index - start);
+				eptrs[eptrStartIndex++] = EPtr(NULL, text + start, index - start);
 				start = index + 1;
 
 				if (++count == length || !text[index])

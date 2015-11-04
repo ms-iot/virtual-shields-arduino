@@ -55,7 +55,7 @@ int Camera::enablePreview(bool enable)
 int Camera::capture(String url)
 {
 	EPtr eptrs[] = { EPtr(url ? MemPtr : None, URL, url.c_str()) };
-	return shield.block(writeAll(SERVICE_CAMERA, eptrs, 1), onEvent == 0);
+	return shield.block(writeAll(SERVICE_CAMERA, eptrs, 1), onEvent == NULL);
 }
 
 /// <summary>

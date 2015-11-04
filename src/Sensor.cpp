@@ -66,7 +66,7 @@ int Sensor::get()  {
 	int result = sensorAction(Once);
 	this->isRunning = false;
 
-	return shield.block(result, onEvent == 0);
+	return shield.block(result, onEvent == NULL);
 }
 
 /// <summary>
@@ -154,7 +154,7 @@ int Sensor::sensorAction(SensorAction sensorAction, double delta, long interval)
 		Serial.print("starting...");
 	}
 #endif
-	const char sensorTypeSet[2] = { sensorType, 0 };
+	const char sensorTypeSet[2] = { sensorType, '\0' };
 
 	EPtr eptr2 = EPtr(sensorTypeSet, static_cast<int>(sensorAction));
 	eptr2.keyIsMem = true;

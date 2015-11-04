@@ -48,7 +48,7 @@ int Microphone::record(long milliseconds, String url, bool keepLocal, bool autop
 	EPtr eptrs[] = { EPtr(MS, milliseconds), EPtr(url ? MemPtr : None, URL, url.c_str()),
 		EPtr(KEEP, keepLocal, keepLocal ? Bool : None),
 		EPtr(AUTOPLAY, autoplay, autoplay ? Bool : None) };
-	return shield.block(writeAll(SERVICE_MICROPHONE, eptrs, 4), onEvent == 0);
+	return shield.block(writeAll(SERVICE_MICROPHONE, eptrs, 4), onEvent == NULL);
 }
 
 /// <summary>

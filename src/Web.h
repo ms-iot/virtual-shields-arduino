@@ -47,13 +47,13 @@ public:
 
 	Web(const VirtualShield &shield);
 
-	int get(String url, String parsingInstructions = (const char*) 0, int maxLength = 0);
-	int post(String url, String data, String parsingInstructions = (const char*) 0, int maxLength = 0);
+	int get(String url, String parsingInstructions = NULL, int maxLength = 0);
+	int post(String url, String data, String parsingInstructions = NULL, int maxLength = 0);
 
 	int get(EPtr url, EPtr parsingInstructions, int maxLength = 0);
 	int post(EPtr url, EPtr data, EPtr parsingInstructions, int maxLength = 0);
 
-	void getResponse(char* responseBuffer, int length, char** parts = 0, int partCount = 0);
+	void getResponse(char* responseBuffer, int length, char** parts = NULL, int partCount = 0);
 
 	void onJsonReceived(ArduinoJson::JsonObject& root, ShieldEvent* shieldEvent) override;
 private:

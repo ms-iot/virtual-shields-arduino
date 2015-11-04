@@ -44,7 +44,7 @@ Media::Media(const VirtualShield &shield) : Sensor(shield, 'E') {
 int Media::play(String url, long length)
 {
 	EPtr eptrs[] = { EPtr(MemPtr, URL, url.c_str()), EPtr(MS, length, length ? Long : None) };
-	return shield.block(writeAll(SERVICE_PLAY, eptrs, 2), onEvent == 0);
+	return shield.block(writeAll(SERVICE_PLAY, eptrs, 2), onEvent == NULL);
 }
 
 /// <summary>
