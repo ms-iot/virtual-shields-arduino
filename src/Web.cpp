@@ -74,7 +74,7 @@ int Web::get(EPtr url, EPtr parsingInstructions, int maxLength)
 	EPtr eptrs[] = { EPtr(ACTION, GET), url,
 		EPtr(LEN, maxLength),
 		parsingInstructions };
-	return shield.block(writeAll(SERVICE_WEB, eptrs, 4), onEvent == 0);
+	return shield.block(writeAll(SERVICE_WEB, eptrs, 4), onEvent == NULL);
 }
 
 /// <summary>
@@ -90,7 +90,7 @@ int Web::post(EPtr url, EPtr data, EPtr parsingInstructions, int maxLength)
 	EPtr eptrs[] = { EPtr(ACTION, POST), url, data,
 		EPtr(LEN, maxLength),
 		parsingInstructions };
-	return shield.block(writeAll(SERVICE_WEB, eptrs, 5), onEvent == 0);
+	return shield.block(writeAll(SERVICE_WEB, eptrs, 5), onEvent == NULL);
 }
 
 /// <summary>
@@ -115,7 +115,7 @@ void Web::getResponse(char* responseBuffer, int length, char** parts, int partCo
 			if (responseBuffer[index] == '|')
 			{
 				parts[count++] = &responseBuffer[index + 1];
-				responseBuffer[index] = 0;
+				responseBuffer[index] = '\0';
 			}
 		}
 	}

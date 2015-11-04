@@ -44,11 +44,11 @@ int Recognition::listen(char* openTextBuffer, int* length, bool useUI, long time
 {
 	this->openTextBuffer = openTextBuffer;
 	this->length = length;
-	this->openTextBuffer[0] = 0;
+	this->openTextBuffer[0] = '\0';
 	this->recognizedIndex = 0;
 	
 	EPtr eptrs[] = { EPtr(SPEECH_UI, useUI), EPtr(MS, timeout) };
-    return shield.block(writeAll(SERVICE_NAME_RECOGNIZE, eptrs, 2), onEvent == 0);
+    return shield.block(writeAll(SERVICE_NAME_RECOGNIZE, eptrs, 2), onEvent == NULL);
 }
 
 int Recognition::stop()
@@ -83,11 +83,11 @@ int Recognition::listenFor(const char* recognitionText, bool useUI, int expected
 /// <returns>The id of the message. Negative if an error.</returns>
 int Recognition::listenFor(EPtr constraint, bool useUI, int expectedConfidence, long timeout)
 {
-	this->openTextBuffer = 0;
+	this->openTextBuffer = NULL;
 	this->recognizedIndex = 0;
 
 	EPtr eptrs[] = { constraint, EPtr(CONFIDENCE, expectedConfidence), EPtr(SPEECH_UI, useUI), EPtr(MS, timeout) };
-	return shield.block(writeAll(SERVICE_NAME_RECOGNIZE, eptrs, 4), onEvent == 0);
+	return shield.block(writeAll(SERVICE_NAME_RECOGNIZE, eptrs, 4), onEvent == NULL);
 }
 
 /// <summary>

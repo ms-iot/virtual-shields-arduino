@@ -46,7 +46,7 @@ int Speech::speak(String message)
 {
     IsSpeaking = true;
 	EPtr eptrs[] = { EPtr(MemPtr, MESSAGE, message.c_str()) };
-    return shield.block(writeAll(SERVICE_NAME_SPEECH, eptrs, 1), onEvent == 0, WAITFOR_TIMEOUT, MEDIA_PAUSED);
+    return shield.block(writeAll(SERVICE_NAME_SPEECH, eptrs, 1), onEvent == NULL, WAITFOR_TIMEOUT, MEDIA_PAUSED);
 }
 
 int Speech::stop()

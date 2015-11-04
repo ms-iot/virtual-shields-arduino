@@ -62,7 +62,7 @@ int Graphics::line(unsigned int x1, unsigned int y1, unsigned int x2, unsigned i
 		EPtr(RGBAKEY, (uint32_t)argb.color, argb.color ? Uint : None),
 		EPtr(WIDTH, (uint32_t) weight, weight == 1 ? None : Uint) };
 
-	return shield.block(writeAll(SERVICE_NAME_GRAPHICS, eptrs, 7), onEvent == 0);
+	return shield.block(writeAll(SERVICE_NAME_GRAPHICS, eptrs, 7), onEvent == NULL);
 }
 
 /// <summary>
@@ -145,13 +145,13 @@ int Graphics::fillRectangle(unsigned int x, unsigned int y, unsigned int width, 
         EPtr(EVENTS, enableExtendedEvents, enableExtendedEvents ? Bool : None)
     };
 
-	return shield.block(writeAll(SERVICE_NAME_GRAPHICS, eptrs, 8), onEvent == 0);
+	return shield.block(writeAll(SERVICE_NAME_GRAPHICS, eptrs, 8), onEvent == NULL);
 }
 
 int Graphics::orientation(int autoRotationPreferences)
 {
 	EPtr eptrs[] = { EPtr(ACTION, ORIENTATION), EPtr(VALUE, autoRotationPreferences, autoRotationPreferences == -1 ? None : Int) };
-	return shield.block(writeAll(SERVICE_NAME_GRAPHICS, eptrs, 2), onEvent == 0);
+	return shield.block(writeAll(SERVICE_NAME_GRAPHICS, eptrs, 2), onEvent == NULL);
 }
 
 /// <summary>
@@ -165,7 +165,7 @@ int Graphics::orientation(int autoRotationPreferences)
 int Graphics::addButton(unsigned int x, unsigned int y, String text, String tag)
 {
 	EPtr eptrs[] = { EPtr(ACTION, BUTTON), EPtr(Y, (uint32_t)y), EPtr(X, (uint32_t)x), EPtr(MemPtr, MESSAGE, text.c_str()), EPtr(MemPtr, TAG, tag.c_str() ? tag.c_str() : text.c_str()) };
-	return shield.block(writeAll(SERVICE_NAME_GRAPHICS, eptrs, 5), onEvent == 0);
+	return shield.block(writeAll(SERVICE_NAME_GRAPHICS, eptrs, 5), onEvent == NULL);
 }
 
 /// <summary>
@@ -187,7 +187,7 @@ int Graphics::enableTouch(bool enable)
 /// <returns>true if pressed or tapped</returns>
 bool Graphics::isPressed(int id, ShieldEvent* shieldEvent)
 {
-	if (shieldEvent == 0)
+	if (shieldEvent == NULL)
 	{
 		shieldEvent = recentEvent;
 	}
@@ -203,7 +203,7 @@ bool Graphics::isPressed(int id, ShieldEvent* shieldEvent)
 /// <returns>true if pressed or tapped</returns>
 bool Graphics::isPressed(String tag, ShieldEvent* shieldEvent)
 {
-	if (shieldEvent == 0)
+	if (shieldEvent == NULL)
 	{
 		shieldEvent = recentEvent;
 	}
@@ -219,7 +219,7 @@ bool Graphics::isPressed(String tag, ShieldEvent* shieldEvent)
 /// <returns>true if released or tapped</returns>
 bool Graphics::isReleased(int id, ShieldEvent* shieldEvent)
 {
-	if (shieldEvent == 0)
+	if (shieldEvent == NULL)
 	{
 		shieldEvent = recentEvent;
 	}
@@ -235,7 +235,7 @@ bool Graphics::isReleased(int id, ShieldEvent* shieldEvent)
 /// <returns>true if released or tapped</returns>
 bool Graphics::isReleased(String tag, ShieldEvent* shieldEvent)
 {
-	if (shieldEvent == 0)
+	if (shieldEvent == NULL)
 	{
 		shieldEvent = recentEvent;
 	}
@@ -251,7 +251,7 @@ bool Graphics::isReleased(String tag, ShieldEvent* shieldEvent)
 /// <returns>true if clicked or tapped</returns>
 bool Graphics::isButtonClicked(String tag, ShieldEvent* shieldEvent)
 {
-	if (shieldEvent == 0)
+	if (shieldEvent == NULL)
 	{
 		shieldEvent = recentEvent;
 	}
@@ -267,7 +267,7 @@ bool Graphics::isButtonClicked(String tag, ShieldEvent* shieldEvent)
 /// <returns>true if clicked or tapped</returns>
 bool Graphics::isButtonClicked(int id, ShieldEvent* shieldEvent)
 {
-    if (shieldEvent == 0)
+    if (shieldEvent == NULL)
     {
         shieldEvent = recentEvent;
     }
@@ -282,7 +282,7 @@ bool Graphics::isButtonClicked(int id, ShieldEvent* shieldEvent)
 /// <returns>true if this event is a touch input event</returns>
 bool Graphics::isTouchEvent(ShieldEvent* shieldEvent)
 {
-	if (shieldEvent == 0)
+	if (shieldEvent == NULL)
 	{
 		shieldEvent = recentEvent;
 	}

@@ -49,8 +49,8 @@ public:
 
 	int print(String text, ARGB argb = static_cast<uint32_t>(0));
 	int printAt(unsigned int line, String text, ARGB argb);
-	int printAt(unsigned int line, String text, Attr extraAttributes[] = 0, int extraAttributeCount = 0);
-	int printAt(unsigned int line, EPtr text, Attr extraAttributes[] = 0, int extraAttributeCount = 0);
+	int printAt(unsigned int line, String text, Attr extraAttributes[] = NULL, int extraAttributeCount = 0);
+	int printAt(unsigned int line, EPtr text, Attr extraAttributes[] = NULL, int extraAttributeCount = 0);
 	int printAt(unsigned int line, double value, ARGB argb = static_cast<uint32_t>(0));
 
 	void onJsonReceived(JsonObject& root, ShieldEvent* shieldEvent) override;

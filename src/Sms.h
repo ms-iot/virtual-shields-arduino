@@ -35,7 +35,7 @@ class Sms : public Sensor {
 public:
 	Sms(const VirtualShield &shield);
 
-	int send(String to, String message, String attachment = (const char*) 0);
+	int send(String to, String message, String attachment = NULL);
 
 	void onJsonReceived(JsonObject& root, ShieldEvent* shieldEvent) override;
 };

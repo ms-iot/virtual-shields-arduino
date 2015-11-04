@@ -66,7 +66,7 @@ public:
 
 	bool isUpdated();
 
-	int writeAll(const char* serviceName, EPtr values[], int count, Attr extraAttributes[] = 0, int extraAttributeCount = 0);
+	int writeAll(const char* serviceName, EPtr values[], int count, Attr extraAttributes[] = NULL, int extraAttributeCount = 0);
 	int sensorAction(SensorAction sensorAction, double delta = 0, long interval = 0) const;
 
 	virtual bool isEvent(const char* tag, const char* action, ShieldEvent* shieldEvent);

@@ -257,7 +257,7 @@ bool VirtualShield::processInChar(ShieldEvent* shieldEvent, bool& hasEvent, char
             lastClosure = millis();
 
             if (readBufferIndex < maxReadBuffer) {
-                readBuffer[readBufferIndex++] = 0;
+                readBuffer[readBufferIndex++] = '\0';
                 inEvent = true;
 #ifdef debugSerial
                 Serial.print(AWAITING_MESSAGE);
@@ -419,7 +419,7 @@ void VirtualShield::onStringReceived(char* buffer, int length, ShieldEvent* shie
     if (length < maxJsonReadBuffer)
     {
         strncpy(json, buffer, length);
-        json[length] = 0;
+        json[length] = '\0';
         onJsonStringReceived(json, shieldEvent);
     }
     else
@@ -466,7 +466,7 @@ void VirtualShield::write(const char* text)
 /// <returns>int.</returns>
 int VirtualShield::writeAll(const char* serviceName)  {
 	uint8_t id = beginWrite(serviceName);
-	if (endWrite() != 0) return SERIAL_ERROR;
+	if (endWrite() != SERIAL_SUCCESS) return SERIAL_ERROR;
 
 	return id;
 }
@@ -518,9 +518,9 @@ int VirtualShield::beginWrite(const char* serviceName)
 		nextId = 1;
 	}
 
-	if (sendFlashStringOnSerial(MESSAGE_SERVICE_START) != 0) return SERIAL_ERROR;
-	if (sendFlashStringOnSerial(serviceName) != 0) return SERIAL_ERROR;
-	if (sendFlashStringOnSerial(MESSAGE_SERVICE_TO_ID) != 0) return SERIAL_ERROR;
+	if (sendFlashStringOnSerial(MESSAGE_SERVICE_START) != SERIAL_SUCCESS) return SERIAL_ERROR;
+	if (sendFlashStringOnSerial(serviceName) != SERIAL_SUCCESS) return SERIAL_ERROR;
+	if (sendFlashStringOnSerial(MESSAGE_SERVICE_TO_ID) != SERIAL_SUCCESS) return SERIAL_ERROR;
 	_VShieldSerial->print(id);
 #ifdef debugSerial
 	Serial.print(id);
@@ -554,7 +554,7 @@ int VirtualShield::writeAll(const char* serviceName, EPtr values[], unsigned int
 		write(extraAttributes[i]);
 	}
 
-	if (endWrite() != 0) return SERIAL_ERROR;
+	if (endWrite() != SERIAL_SUCCESS) return SERIAL_ERROR;
 
 	return id;
 }
@@ -573,18 +573,18 @@ int VirtualShield::write(EPtr eptr)	const
 
 	if (eptr.ptrType == ArrayEnd)
 	{
-		if (sendFlashStringOnSerial(ARRAY_END) != 0) return SERIAL_ERROR;
+		if (sendFlashStringOnSerial(ARRAY_END) != SERIAL_SUCCESS) return SERIAL_ERROR;
 		return SERIAL_SUCCESS;
 	}
 
 	if (isArrayStarted)
 	{
-		if (sendFlashStringOnSerial(MESSAGE_QUOTE) != 0) return SERIAL_ERROR;
+		if (sendFlashStringOnSerial(MESSAGE_QUOTE) != SERIAL_SUCCESS) return SERIAL_ERROR;
 		isArrayStarted = false;
 	} 
 	else
 	{
-		if (sendFlashStringOnSerial(MESSAGE_SEPARATOR) != 0) return SERIAL_ERROR;
+		if (sendFlashStringOnSerial(MESSAGE_SEPARATOR) != SERIAL_SUCCESS) return SERIAL_ERROR;
 	}
 
 	if (eptr.keyIsMem)
@@ -596,21 +596,21 @@ int VirtualShield::write(EPtr eptr)	const
 	} 
 	else
 	{
-		if (sendFlashStringOnSerial(eptr.key) != 0) return SERIAL_ERROR;
+		if (sendFlashStringOnSerial(eptr.key) != SERIAL_SUCCESS) return SERIAL_ERROR;
 	}
 
-	if (sendFlashStringOnSerial(MESSAGE_PAIR_SEPARATOR) != 0) return SERIAL_ERROR;
+	if (sendFlashStringOnSerial(MESSAGE_PAIR_SEPARATOR) != SERIAL_SUCCESS) return SERIAL_ERROR;
 
 	if (eptr.asText)
 	{
-		if (sendFlashStringOnSerial(MESSAGE_QUOTE) != 0) return SERIAL_ERROR;
+		if (sendFlashStringOnSerial(MESSAGE_QUOTE) != SERIAL_SUCCESS) return SERIAL_ERROR;
 	}
 
 	writeValue(eptr);
 
 	if (eptr.asText)
 	{
-		if (sendFlashStringOnSerial(MESSAGE_QUOTE) != 0) return SERIAL_ERROR;
+		if (sendFlashStringOnSerial(MESSAGE_QUOTE) != SERIAL_SUCCESS) return SERIAL_ERROR;
 	}
 
 	return SERIAL_SUCCESS;
@@ -621,7 +621,7 @@ int VirtualShield::writeValue(EPtr eptr, int start) const
 	int valueIndex = 0;
 	int formatPositionIndex = 0;
 
-	int result = 0;
+	int result = SERIAL_SUCCESS;
 	switch (eptr.ptrType)
 	{
 	case ArrayStart:
@@ -700,7 +700,7 @@ int VirtualShield::writeValue(EPtr eptr, int start) const
 			}
 
 			result = writeValue(eptr.eptrs[++valueIndex], -1);
-			if (result != 0)
+			if (result != SERIAL_SUCCESS)
 			{
 				break;
 			}
@@ -759,7 +759,7 @@ unsigned int VirtualShield::hash(const char* s, unsigned int len, unsigned int s
 /// <returns>Zero if no error, negative if an error.</returns>
 int VirtualShield::endWrite()
 {
-	if (sendFlashStringOnSerial(MESSAGE_END2) != 0) return SERIAL_ERROR;
+	if (sendFlashStringOnSerial(MESSAGE_END2) != SERIAL_SUCCESS) return SERIAL_ERROR;
 	this->flush();
 	return SERIAL_SUCCESS;
 }
@@ -777,7 +777,7 @@ int VirtualShield::directToSerial(const char* cmd)
 /// <returns>Zero if no error, negative if an error.</returns>
 int VirtualShield::sendFlashStringOnSerial(const char* flashStringAdr, int start, bool encode) const
 {
-	unsigned char dataChar = 0;
+	char dataChar = '\0';
 	const size_t actualStart = start < 0 ? 0 : start;
 	const bool isFormatted = start > DEFAULT_LENGTH;
 

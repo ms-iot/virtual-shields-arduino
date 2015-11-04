@@ -35,7 +35,7 @@ class Email : public Sensor {
 public:
 	Email(const VirtualShield &shield);
 
-	int send(String to, String subject, String message, String cc = (const char *)0, String attachment = (const char *)0);
+	int send(String to, String subject, String message, String cc = NULL, String attachment = NULL);
 
 	void onJsonReceived(JsonObject& root, ShieldEvent* shieldEvent) override;
 };

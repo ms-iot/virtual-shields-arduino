@@ -51,18 +51,18 @@ const long WAITFOR_TIMEOUT = 30000;
 class VirtualShield
 {
 public:
-	void(*onEvent)(ShieldEvent*) = 0;
-	void(*onConnect)(ShieldEvent*) = 0;
-	void(*onRefresh)(ShieldEvent*) = 0;
-	void(*onSuspend)(ShieldEvent*) = 0;
-	void(*onResume)(ShieldEvent*) = 0;
+	void(*onEvent)(ShieldEvent*) = NULL;
+	void(*onConnect)(ShieldEvent*) = NULL;
+	void(*onRefresh)(ShieldEvent*) = NULL;
+	void(*onSuspend)(ShieldEvent*) = NULL;
+	void(*onResume)(ShieldEvent*) = NULL;
 
     VirtualShield();
 
 	void begin(long bitRate = DEFAULT_BAUDRATE);
 	void setPort(int port);
 
-	bool hasError(ShieldEvent* shieldEvent = 0);
+	bool hasError(ShieldEvent* shieldEvent = NULL);
 	bool checkSensors(int watchForId = 0, int32_t timeout = 0, int waitForResultId = -1);
     int waitFor(int id, uint32_t timeout = WAITFOR_TIMEOUT, bool asSuccess = true, int resultId = -1);
 

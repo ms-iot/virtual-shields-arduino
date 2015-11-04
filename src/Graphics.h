@@ -49,31 +49,31 @@ class Graphics : public Text
 public:
     Graphics(const VirtualShield &shield);
 
-	int drawAt(unsigned int x, unsigned int y, String text, String tag = (const char*)0, ARGB argb = static_cast<uint32_t>(0));
+	int drawAt(unsigned int x, unsigned int y, String text, String tag = NULL, ARGB argb = static_cast<uint32_t>(0));
 	
-	int drawImage(unsigned int x, unsigned int y, String url, String tag = (const char*)0, unsigned int width = 0, unsigned int height = 0);
+	int drawImage(unsigned int x, unsigned int y, String url, String tag = NULL, unsigned int width = 0, unsigned int height = 0);
 
-	int addButton(unsigned int x, unsigned int y, String text, String tag = (const char*) 0);
+	int addButton(unsigned int x, unsigned int y, String text, String tag = NULL);
 
 	int fillRectangle(unsigned int x, unsigned int y, unsigned int width, unsigned int height, 
-        ARGB argb, String tag = (const char*)0, bool enableExtendedEvents = false);
+        ARGB argb, String tag = NULL, bool enableExtendedEvents = false);
 
     int change(unsigned int id, ARGB argb);
 
 	int line(unsigned int x1, unsigned int y1, unsigned int x2, unsigned int y2, ARGB color, unsigned int weight = 1);
-	int input(unsigned int x, unsigned int y, bool multiline = false, String text = (const char*) 0, unsigned int width = 0, unsigned int height = 0);
+	int input(unsigned int x, unsigned int y, bool multiline = false, String text = NULL, unsigned int width = 0, unsigned int height = 0);
 
 	int orientation(int autoRotationPreferences = -1);
 
 	int enableTouch(bool enable);
 
-	bool isButtonClicked(String tag, ShieldEvent* shieldEvent = 0);
-    bool isButtonClicked(int id, ShieldEvent* shieldEvent = 0);
-	bool isTouchEvent(ShieldEvent* shieldEvent = 0);
-	bool isPressed(int id, ShieldEvent* shieldEvent = 0);
-	bool isPressed(String tag, ShieldEvent* shieldEvent = 0);
-	bool isReleased(int id, ShieldEvent* shieldEvent = 0);
-	bool isReleased(String tag, ShieldEvent* shieldEvent = 0);
+	bool isButtonClicked(String tag, ShieldEvent* shieldEvent = NULL);
+    bool isButtonClicked(int id, ShieldEvent* shieldEvent = NULL);
+	bool isTouchEvent(ShieldEvent* shieldEvent = NULL);
+	bool isPressed(int id, ShieldEvent* shieldEvent = NULL);
+	bool isPressed(String tag, ShieldEvent* shieldEvent = NULL);
+	bool isReleased(int id, ShieldEvent* shieldEvent = NULL);
+	bool isReleased(String tag, ShieldEvent* shieldEvent = NULL);
 
 	void onJsonReceived(JsonObject& root, ShieldEvent* shieldEvent) override;
 
