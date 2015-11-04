@@ -47,13 +47,12 @@ public:
 
     int listen(char* openTextBuffer, int* length, bool useUI = true, long timeout = 0);
 
-    int listenFor(String constraint, bool useUI = true, int expectedConfidence = Confidence_Medium, long timeout = 0);
     int listenFor(const char* constraint, bool useUI = true, int expectedConfidence = Confidence_Medium, long timeout = 0);
     int listenFor(EPtr constraint, bool useUI = true, int expectedConfidence = Confidence_Medium, long timeout = 0);
 
 	int stop() override;
 
-	bool heard(String text);
+	bool heard(const char * text);
 	bool heard(int spokenNumber);
 
 	void onJsonReceived(JsonObject& root, ShieldEvent* shieldEvent) override;

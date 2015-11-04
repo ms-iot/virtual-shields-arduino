@@ -37,7 +37,7 @@ public:
 
     bool IsSpeaking = false;
 
-	int speak(String message);
+	int speak(const char * message);
 	int stop() override;
 
 	void onJsonReceived(JsonObject& root, ShieldEvent* shieldEvent) override;

@@ -43,10 +43,10 @@ Notification::Notification(const VirtualShield &shield) : Sensor(shield, 'N') {
 /// <param name="milliseconds">The length in milliseconds.</param>
 /// <param name="url">The URL.</param>
 /// <returns>int.</returns>
-int Notification::toast(String message, String tag, String image, String audio)
+int Notification::toast(const char * message, const char * tag, const char * image, const char * audio)
 {
-	EPtr eptrs[] = { EPtr(MemPtr, MESSAGE, message.c_str()), EPtr(tag ? MemPtr : None, TAG, tag.c_str()), 
-		EPtr(image ? MemPtr : None, IMAGE, image.c_str()), EPtr(audio ? MemPtr : None, AUDIO, audio.c_str()), 
+	EPtr eptrs[] = { EPtr(MemPtr, MESSAGE, message), EPtr(tag ? MemPtr : None, TAG, tag), 
+		EPtr(image ? MemPtr : None, IMAGE, image), EPtr(audio ? MemPtr : None, AUDIO, audio), 
 		EPtr(ACTION, TOAST) };
 	return writeAll(SERVICE_NOTIFICATION, eptrs, 5);
 }
@@ -57,10 +57,10 @@ int Notification::toast(String message, String tag, String image, String audio)
 /// <param name="milliseconds">The length in milliseconds.</param>
 /// <param name="url">The URL.</param>
 /// <returns>int.</returns>
-int Notification::tile(String message, String tag, String image)
+int Notification::tile(const char * message, const char * tag, const char * image)
 {
-	EPtr eptrs[] = { EPtr(MemPtr, MESSAGE, message.c_str()), EPtr(tag ? MemPtr : None, TAG, tag.c_str()),
-		EPtr(image ? MemPtr : None, IMAGE, image.c_str()), EPtr(ACTION, TILE) };
+	EPtr eptrs[] = { EPtr(MemPtr, MESSAGE, message), EPtr(tag ? MemPtr : None, TAG, tag),
+		EPtr(image ? MemPtr : None, IMAGE, image), EPtr(ACTION, TILE) };
 	return writeAll(SERVICE_NOTIFICATION, eptrs, 4);
 }
 

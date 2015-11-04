@@ -52,10 +52,10 @@ int Camera::enablePreview(bool enable)
 /// </summary>
 /// <param name="url">The URL.</param>
 /// <returns>int.</returns>
-int Camera::capture(String url)
+int Camera::capture(const char * url)
 {
-	EPtr eptrs[] = { EPtr(url ? MemPtr : None, URL, url.c_str()) };
-	return shield.block(writeAll(SERVICE_CAMERA, eptrs, 1), onEvent == NULL);
+    EPtr eptrs[] = { EPtr(url ? MemPtr : None, URL, url) };
+    return shield.block(writeAll(SERVICE_CAMERA, eptrs, 1), onEvent == NULL);
 }
 
 /// <summary>

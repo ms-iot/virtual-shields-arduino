@@ -42,10 +42,10 @@ Speech::Speech(const VirtualShield &shield) : Sensor(shield, 'T')
 /// </summary>
 /// <param name="message">The message.</param>
 /// <returns>The id of the message. Negative if an error.</returns>
-int Speech::speak(String message)
+int Speech::speak(const char * message)
 {
     IsSpeaking = true;
-	EPtr eptrs[] = { EPtr(MemPtr, MESSAGE, message.c_str()) };
+	EPtr eptrs[] = { EPtr(MemPtr, MESSAGE, message) };
     return shield.block(writeAll(SERVICE_NAME_SPEECH, eptrs, 1), onEvent == NULL, WAITFOR_TIMEOUT, MEDIA_PAUSED);
 }
 

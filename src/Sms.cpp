@@ -44,8 +44,8 @@ Sms::Sms(const VirtualShield &shield) : Sensor(shield, 'Y') {
 /// <param name="message">The message.</param>
 /// <param name="attachment">The attachment url.</param>
 /// <returns>int.</returns>
-int Sms::send(String to, String message, String attachment) {
-	EPtr eptrs[] = { EPtr(MemPtr, TO, to.c_str()), EPtr(MemPtr, MESSAGE, message.c_str()), EPtr(attachment ? MemPtr : None, ATTACHMENT, attachment.c_str()) };
+int Sms::send(const char * to, const char * message, const char * attachment) {
+	EPtr eptrs[] = { EPtr(MemPtr, TO, to), EPtr(MemPtr, MESSAGE, message), EPtr(attachment ? MemPtr : None, ATTACHMENT, attachment) };
 	return shield.writeAll(SERVICE_SMS, eptrs, 3);
 }
 

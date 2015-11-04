@@ -61,16 +61,6 @@ int Recognition::stop()
 /// </summary>
 /// <param name="recognitionText">The recognition text (words or groups).</param>
 /// <returns>The id of the message. Negative if an error.</returns>
-int Recognition::listenFor(String recognitionText, bool useUI, int expectedConfidence, long timeout)
-{
-    return listenFor(recognitionText.c_str(), useUI, expectedConfidence, timeout);
-}
-
-/// <summary>
-/// Recognizes the specified constricted recognition text without a UI.
-/// </summary>
-/// <param name="recognitionText">The recognition text (words or groups).</param>
-/// <returns>The id of the message. Negative if an error.</returns>
 int Recognition::listenFor(const char* recognitionText, bool useUI, int expectedConfidence, long timeout)
 {
     return listenFor(EPtr(MemPtr, MESSAGE, recognitionText), useUI, expectedConfidence, timeout);
@@ -95,15 +85,14 @@ int Recognition::listenFor(EPtr constraint, bool useUI, int expectedConfidence, 
 /// </summary>
 /// <param name="text">The text to verify.</param>
 /// <returns>true if the text matches.</returns>
-bool Recognition::heard(String text)
+bool Recognition::heard(const char * text)
 {
 	const char* recognizedText = (const char*) this->openTextBuffer;
 
 	if (recognizedText) {
 		int length = this->length[0];
 		//recognized open text often ends with a period - do a comparison without.
-		const char* ctext = text.c_str();
-        return length > 0 && strncmp(ctext, recognizedText, length - (recognizedText[length - 1] == '.')) == 0;
+        return length > 0 && strncmp(text, recognizedText, length - (recognizedText[length - 1] == '.')) == 0;
 	}
 
     return false;
@@ -115,7 +104,14 @@ bool Recognition::heard(String text)
 /// <param name="text">The text to verify.</param>
 /// <returns>true if the text matches.</returns>
 bool Recognition::heard(int spokenNumber) {
-	return heard(String(spokenNumber));
+    const int length = this->length[0];
+    char * buffer = new char[length];
+    bool return_value = false;
+
+    snprintf(buffer, length, "%d", spokenNumber);
+	return_value = heard(buffer);
+    delete[] buffer;
+    return return_value;
 }
 
 /// <summary>

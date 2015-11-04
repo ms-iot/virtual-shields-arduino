@@ -43,9 +43,9 @@ Microphone::Microphone(const VirtualShield &shield) : Sensor(shield, 'U') {
 /// <param name="milliseconds">The length in milliseconds.</param>
 /// <param name="url">The URL.</param>
 /// <returns>int.</returns>
-int Microphone::record(long milliseconds, String url, bool keepLocal, bool autoplay)
+int Microphone::record(long milliseconds, const char * url, bool keepLocal, bool autoplay)
 {
-	EPtr eptrs[] = { EPtr(MS, milliseconds), EPtr(url ? MemPtr : None, URL, url.c_str()),
+	EPtr eptrs[] = { EPtr(MS, milliseconds), EPtr(url ? MemPtr : None, URL, url),
 		EPtr(KEEP, keepLocal, keepLocal ? Bool : None),
 		EPtr(AUTOPLAY, autoplay, autoplay ? Bool : None) };
 	return shield.block(writeAll(SERVICE_MICROPHONE, eptrs, 4), onEvent == NULL);

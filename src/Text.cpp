@@ -72,9 +72,9 @@ int Text::clearId(unsigned int id)
 /// </summary>
 /// <param name="text">The text.</param>
 /// <returns>The id of the message. Negative if an error.</returns>
-int Text::print(String text, ARGB argb)
+int Text::print(const char * text, ARGB argb)
 {
-	EPtr eptrs[] = { EPtr(MemPtr, MESSAGE, text.c_str()), EPtr(RGBAKEY, (uint32_t)argb.color, (uint32_t)argb.color ? Uint : None) };
+	EPtr eptrs[] = { EPtr(MemPtr, MESSAGE, text), EPtr(RGBAKEY, (uint32_t)argb.color, (uint32_t)argb.color ? Uint : None) };
 	return writeAll(SERVICE_NAME_LCDTEXT, eptrs, 2);
 }
 
@@ -96,9 +96,9 @@ int Text::printAt(unsigned int line, double value, ARGB argb)
 /// <param name="line">The line.</param>
 /// <param name="value">The value.</param>
 /// <returns>The id of the message. Negative if an error.</returns>
-int Text::printAt(unsigned int line, String text, ARGB argb)
+int Text::printAt(unsigned int line, const char * text, ARGB argb)
 {
-	EPtr eptrs[] = { EPtr(Y, (uint32_t)line), EPtr(MemPtr, MESSAGE, text.c_str()), EPtr(RGBAKEY, (uint32_t)argb.color, (uint32_t)argb.color ? Uint : None) };
+	EPtr eptrs[] = { EPtr(Y, (uint32_t)line), EPtr(MemPtr, MESSAGE, text), EPtr(RGBAKEY, (uint32_t)argb.color, (uint32_t)argb.color ? Uint : None) };
 	return writeAll(SERVICE_NAME_LCDTEXT, eptrs, 3);
 }
 
@@ -108,8 +108,8 @@ int Text::printAt(unsigned int line, String text, ARGB argb)
 /// <param name="line">The line.</param>
 /// <param name="text">The text.</param>
 /// <returns>The id of the message. Negative if an error.</returns>
-int Text::printAt(unsigned int line, String text, Attr extraAttributes[], int extraAttributeCount) {
-	return printAt(line, EPtr(MemPtr, MESSAGE, text.c_str()), extraAttributes, extraAttributeCount);
+int Text::printAt(unsigned int line, const char * text, Attr extraAttributes[], int extraAttributeCount) {
+	return printAt(line, EPtr(MemPtr, MESSAGE, text), extraAttributes, extraAttributeCount);
 }
 
 /// <summary>

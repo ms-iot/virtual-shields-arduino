@@ -75,7 +75,7 @@ union ARGB
 
 	ARGB(uint32_t color) : color(color) {}
 
-	ARGB(String hex) : ARGB((unsigned long)strtol(&hex[hex[0] == '#'], NULL, 16))
+	ARGB(const char * hex) : ARGB((unsigned long)strtol(&hex[hex[0] == '#'], NULL, 16))
 	{
 	}
 
@@ -159,16 +159,6 @@ struct EPtr
 	/// <param name="key">The key.</param>
 	/// <param name="value">The value.</param>
     EPtr(const char* key, const char* value) : ptrType(ProgPtr), key(key), value(value), asText(true) {}
-
-	/// <summary>
-	/// Initializes a new instance of the <see cref="EPtr"/> struct.
-	/// </summary>
-	/// <param name="key">The key.</param>
-	/// <param name="value">The value.</param>
-	EPtr(const char* key, String value) : ptrType(value ? MemPtr : None), key(key), length(-1), asText(true)
-	{
-		this->value = value.c_str();
-	}
 
 	/// <summary>
 	/// Initializes a new instance of the <see cref="EPtr"/> struct.

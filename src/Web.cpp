@@ -44,9 +44,9 @@ Web::Web(const VirtualShield &shield) : Sensor(shield, 'W') {
 /// <param name="parsingInstructions">The parsing instructions.</param>
 /// <param name="maxLength">The maximum length of the result.</param>
 /// <returns>The id of the message. Negative if an error.</returns>
-int Web::get(String url, String parsingInstructions, int maxLength)
+int Web::get(const char * url, const char * parsingInstructions, int maxLength)
 {
-	return get(EPtr(MemPtr, URL, url.c_str()), EPtr(parsingInstructions ? MemPtr : None, PARSE, parsingInstructions.c_str()), maxLength);
+	return get(EPtr(MemPtr, URL, url), EPtr(parsingInstructions ? MemPtr : None, PARSE, parsingInstructions), maxLength);
 }
 
 /// <summary>
@@ -57,9 +57,9 @@ int Web::get(String url, String parsingInstructions, int maxLength)
 /// <param name="parsingInstructions">The parsing instructions.</param>
 /// <param name="maxLength">The maximum length of the result.</param>
 /// <returns>The id of the message. Negative if an error.</returns>
-int Web::post(String url, String data, String parsingInstructions, int maxLength)
+int Web::post(const char * url, const char * data, const char * parsingInstructions, int maxLength)
 {
-	return post(EPtr(MemPtr, URL, url.c_str()), EPtr(MemPtr, DATA, data.c_str()), EPtr(parsingInstructions ? MemPtr : None, PARSE, parsingInstructions.c_str()), maxLength);
+	return post(EPtr(MemPtr, URL, url), EPtr(MemPtr, DATA, data), EPtr(parsingInstructions ? MemPtr : None, PARSE, parsingInstructions), maxLength);
 }
 
 /// <summary>
