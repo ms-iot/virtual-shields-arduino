@@ -47,9 +47,9 @@ public:
 	int clearLine(unsigned int line);
 	int clearId(unsigned int id);
 
-	int print(String text, ARGB argb = static_cast<uint32_t>(0));
-	int printAt(unsigned int line, String text, ARGB argb);
-	int printAt(unsigned int line, String text, Attr extraAttributes[] = NULL, int extraAttributeCount = 0);
+	int print(const char * text, ARGB argb = static_cast<uint32_t>(0));
+	int printAt(unsigned int line, const char * text, ARGB argb);
+	int printAt(unsigned int line, const char * text, Attr extraAttributes[] = NULL, int extraAttributeCount = 0);
 	int printAt(unsigned int line, EPtr text, Attr extraAttributes[] = NULL, int extraAttributeCount = 0);
 	int printAt(unsigned int line, double value, ARGB argb = static_cast<uint32_t>(0));
 

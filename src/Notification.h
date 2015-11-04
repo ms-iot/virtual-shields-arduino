@@ -36,8 +36,8 @@ class Notification : public Sensor
 public:
 	Notification(const VirtualShield &shield);
 
-	int toast(String message, String tag = NULL, String image = NULL, String audio = NULL);
-	int tile(String message, String tag = NULL, String image = NULL);
+	int toast(const char * message, const char * tag = NULL, const char * image = NULL, const char * audio = NULL);
+	int tile(const char * message, const char * tag = NULL, const char * image = NULL);
 
 	void onJsonReceived(JsonObject& root, ShieldEvent* shieldEvent) override;
 };

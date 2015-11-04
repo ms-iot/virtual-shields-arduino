@@ -72,12 +72,12 @@ int Graphics::line(unsigned int x1, unsigned int y1, unsigned int x2, unsigned i
 /// <param name="y">The y.</param>
 /// <param name="text">The text.</param>
 /// <returns>The id of the message. Negative if an error.</returns>
-int Graphics::drawAt(unsigned int x, unsigned int y, String text, String tag, ARGB argb)
+int Graphics::drawAt(unsigned int x, unsigned int y, const char * text, const char * tag, ARGB argb)
 {
 	EPtr eptrs[] = { EPtr(ACTION, TEXT), EPtr(Y, (uint32_t)y), 
-		EPtr(X, (uint32_t)x), EPtr(MemPtr, MESSAGE, text.c_str()), 
+		EPtr(X, (uint32_t)x), EPtr(MemPtr, MESSAGE, text), 
 		EPtr(RGBAKEY, (uint32_t)argb.color, (uint32_t)argb.color ? Uint : None),
-		EPtr(tag ? MemPtr : None, TAG, tag.c_str()) };
+		EPtr(tag ? MemPtr : None, TAG, tag) };
 	return writeAll(SERVICE_NAME_GRAPHICS, eptrs, 6);
 }
 
@@ -91,11 +91,11 @@ int Graphics::drawAt(unsigned int x, unsigned int y, String text, String tag, AR
 /// <param name="width">The width.</param>
 /// <param name="height">The height.</param>
 /// <returns>The id of the message. Negative if an error.</returns>
-int Graphics::drawImage(unsigned int x, unsigned int y, String url, String tag, unsigned int width, unsigned int height)
+int Graphics::drawImage(unsigned int x, unsigned int y, const char * url, const char * tag, unsigned int width, unsigned int height)
 {
 	EPtr eptrs[] = { EPtr(ACTION, IMAGE), EPtr(Y, (uint32_t)y), EPtr(X, (uint32_t)x),
 		EPtr(WIDTH, (uint32_t)width, width ? Uint : None), EPtr(HEIGHT, (uint32_t)height, height ? Uint : None),
-		EPtr(MemPtr, PATH, url.c_str()), EPtr(tag ? MemPtr : None, TAG, tag.c_str()) };
+		EPtr(MemPtr, PATH, url), EPtr(tag ? MemPtr : None, TAG, tag) };
 
 	return writeAll(SERVICE_NAME_GRAPHICS, eptrs, 7);
 }
@@ -110,12 +110,12 @@ int Graphics::drawImage(unsigned int x, unsigned int y, String url, String tag, 
 /// <param name="width">The width.</param>
 /// <param name="height">The height.</param>
 /// <returns>The id of the message. Negative if an error.</returns>
-int Graphics::input(unsigned int x, unsigned int y, bool multiline, String text, unsigned int width, unsigned int height)
+int Graphics::input(unsigned int x, unsigned int y, bool multiline, const char * text, unsigned int width, unsigned int height)
 {
 	EPtr eptrs[] = { EPtr(ACTION, INPUTTXT), EPtr(Y, (uint32_t)y), EPtr(X, (uint32_t)x),
 		EPtr(WIDTH, (uint32_t)width, width ? Uint : None), EPtr(HEIGHT, (uint32_t)height, height ? Uint : None),
 		EPtr(MULTI, multiline, multiline ? Bool : None),
-		EPtr(text ? MemPtr : None, MESSAGE, text.c_str()) };
+		EPtr(text ? MemPtr : None, MESSAGE, text) };
 
 	return writeAll(SERVICE_NAME_GRAPHICS, eptrs, 7);
 }
@@ -136,12 +136,12 @@ int Graphics::change(unsigned int id, ARGB argb)
 /// <param name="rgba">The rgba.</param>
 /// <param name="tag">The tag. Returned back for event recognition.</param>
 /// <returns>The id of the message. Negative if an error.</returns>
-int Graphics::fillRectangle(unsigned int x, unsigned int y, unsigned int width, unsigned int height, ARGB argb, String tag, bool enableExtendedEvents)
+int Graphics::fillRectangle(unsigned int x, unsigned int y, unsigned int width, unsigned int height, ARGB argb, const char * tag, bool enableExtendedEvents)
 {
 	EPtr eptrs[] = { EPtr(ACTION, RECTANGLE), EPtr(Y, (uint32_t)y), EPtr(X, (uint32_t)x),
 		EPtr(WIDTH, (uint32_t)width), EPtr(HEIGHT, (uint32_t)height),
 		EPtr(RGBAKEY, (uint32_t)argb.color, argb.color ? Uint : None),
-		EPtr(tag ? MemPtr : None, TAG, tag.c_str()),
+		EPtr(tag ? MemPtr : None, TAG, tag),
         EPtr(EVENTS, enableExtendedEvents, enableExtendedEvents ? Bool : None)
     };
 
@@ -162,9 +162,9 @@ int Graphics::orientation(int autoRotationPreferences)
 /// <param name="text">The text.</param>
 /// <param name="tag">The tag. Returned back for event recognition.</param>
 /// <returns>The id of the message. Negative if an error.</returns>
-int Graphics::addButton(unsigned int x, unsigned int y, String text, String tag)
+int Graphics::addButton(unsigned int x, unsigned int y, const char * text, const char * tag)
 {
-	EPtr eptrs[] = { EPtr(ACTION, BUTTON), EPtr(Y, (uint32_t)y), EPtr(X, (uint32_t)x), EPtr(MemPtr, MESSAGE, text.c_str()), EPtr(MemPtr, TAG, tag.c_str() ? tag.c_str() : text.c_str()) };
+	EPtr eptrs[] = { EPtr(ACTION, BUTTON), EPtr(Y, (uint32_t)y), EPtr(X, (uint32_t)x), EPtr(MemPtr, MESSAGE, text), EPtr(MemPtr, TAG, tag ? tag : text) };
 	return shield.block(writeAll(SERVICE_NAME_GRAPHICS, eptrs, 5), onEvent == NULL);
 }
 
@@ -201,14 +201,14 @@ bool Graphics::isPressed(int id, ShieldEvent* shieldEvent)
 /// <param name="tag">The tag.</param>
 /// <param name="shieldEvent">The shield event.</param>
 /// <returns>true if pressed or tapped</returns>
-bool Graphics::isPressed(String tag, ShieldEvent* shieldEvent)
+bool Graphics::isPressed(const char * tag, ShieldEvent* shieldEvent)
 {
 	if (shieldEvent == NULL)
 	{
 		shieldEvent = recentEvent;
 	}
 
-	return Sensor::isEvent(tag.c_str(), "pressed", shieldEvent) || Sensor::isEvent(tag.c_str(), "click", shieldEvent);
+	return Sensor::isEvent(tag, "pressed", shieldEvent) || Sensor::isEvent(tag, "click", shieldEvent);
 }
 
 /// <summary>
@@ -233,14 +233,14 @@ bool Graphics::isReleased(int id, ShieldEvent* shieldEvent)
 /// <param name="tag">The tag.</param>
 /// <param name="shieldEvent">The shield event.</param>
 /// <returns>true if released or tapped</returns>
-bool Graphics::isReleased(String tag, ShieldEvent* shieldEvent)
+bool Graphics::isReleased(const char * tag, ShieldEvent* shieldEvent)
 {
 	if (shieldEvent == NULL)
 	{
 		shieldEvent = recentEvent;
 	}
 
-	return Sensor::isEvent(tag.c_str(), "released", shieldEvent) || Sensor::isEvent(tag.c_str(), "click", shieldEvent);
+	return Sensor::isEvent(tag, "released", shieldEvent) || Sensor::isEvent(tag, "click", shieldEvent);
 }
 
 /// <summary>
@@ -249,14 +249,14 @@ bool Graphics::isReleased(String tag, ShieldEvent* shieldEvent)
 /// <param name="tag">The tag.</param>
 /// <param name="shieldEvent">The shield event.</param>
 /// <returns>true if clicked or tapped</returns>
-bool Graphics::isButtonClicked(String tag, ShieldEvent* shieldEvent)
+bool Graphics::isButtonClicked(const char * tag, ShieldEvent* shieldEvent)
 {
 	if (shieldEvent == NULL)
 	{
 		shieldEvent = recentEvent;
 	}
 
-	return Sensor::isEvent(tag.c_str(), "click", shieldEvent) || Sensor::isEvent(tag.c_str(), "tapped", shieldEvent);
+	return Sensor::isEvent(tag, "click", shieldEvent) || Sensor::isEvent(tag, "tapped", shieldEvent);
 }
 
 /// <summary>
@@ -298,6 +298,6 @@ bool Graphics::isTouchEvent(ShieldEvent* shieldEvent)
 /// <param name="shieldEvent">The shield event.</param>
 void Graphics::onJsonReceived(JsonObject& root, ShieldEvent* shieldEvent)
 {
-	area = root["Area"];
+	area = static_cast<const char *>(root["Area"]);
 	Sensor::onJsonReceived(root, shieldEvent);
 }
