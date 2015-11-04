@@ -51,11 +51,11 @@ const long WAITFOR_TIMEOUT = 30000;
 class VirtualShield
 {
 public:
-	void(*onEvent)(ShieldEvent*) = NULL;
-	void(*onConnect)(ShieldEvent*) = NULL;
-	void(*onRefresh)(ShieldEvent*) = NULL;
-	void(*onSuspend)(ShieldEvent*) = NULL;
-	void(*onResume)(ShieldEvent*) = NULL;
+    ShieldEvent::callback_t onEvent = NULL;
+    ShieldEvent::callback_t onConnect = NULL;
+    ShieldEvent::callback_t onRefresh = NULL;
+    ShieldEvent::callback_t onSuspend = NULL;
+    ShieldEvent::callback_t onResume = NULL;
 
     VirtualShield();
 
@@ -86,27 +86,27 @@ public:
 
     int block(int id, bool blocking, int32_t timeout = WAITFOR_TIMEOUT, int waitForResultId = -1);
 
-	void setOnEvent(void(*onEvent)(ShieldEvent*))
+	void setOnEvent(ShieldEvent::callback_t onEvent)
 	{
 		this->onEvent = onEvent;
 	}
 
-	void setOnConnect(void(*onConnect)(ShieldEvent*))
+	void setOnConnect(ShieldEvent::callback_t onConnect)
 	{
 		this->onConnect = onConnect;
 	}
 
-	void setOnRefresh(void(*onRefresh)(ShieldEvent*))
+	void setOnRefresh(ShieldEvent::callback_t onRefresh)
 	{
 		this->onRefresh = onRefresh;
 	}
 
-	void setOnSuspend(void(*onSuspend)(ShieldEvent*))
+	void setOnSuspend(ShieldEvent::callback_t onSuspend)
 	{
 		this->onSuspend = onSuspend;
 	}
 
-	void setOnResume(void(*onResume)(ShieldEvent*))
+	void setOnResume(ShieldEvent::callback_t onResume)
 	{
 		this->onResume = onResume;
 	}
