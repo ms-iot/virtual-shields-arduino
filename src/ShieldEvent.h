@@ -31,6 +31,8 @@ enum ShieldEventType {
 };
 
 struct ShieldEvent {
+    typedef void(*callback_t)(ShieldEvent* shieldEvent);
+
 	ShieldEventType	shieldEventType;
 	int id;
 	long resultId;

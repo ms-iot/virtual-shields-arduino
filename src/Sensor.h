@@ -49,7 +49,7 @@ const PROGMEM char STOP[] = "STOP";
 
 class Sensor {
 public:
-	void(*onEvent)(ShieldEvent* shieldEvent);
+    ShieldEvent::callback_t onEvent;
 
 	VirtualShield& shield;
 	ShieldEvent* recentEvent;
@@ -72,7 +72,7 @@ public:
 	virtual bool isEvent(const char* tag, const char* action, ShieldEvent* shieldEvent);
 	virtual bool isEvent(int id, const char* action, ShieldEvent* shieldEvent);
 
-	void setOnEvent(void(*onEvent)(ShieldEvent* shieldEvent))
+	void setOnEvent(ShieldEvent::callback_t onEvent)
 	{
 		this->onEvent = onEvent;
 	}
