@@ -744,6 +744,7 @@ int VirtualShield::parseToHash(const char* text, unsigned int *hash, int hashCou
 // per Paul Larson - Microsoft Research
 unsigned int VirtualShield::hash(const char* s, unsigned int len, unsigned int seed)
 {
+    if (!s) { return seed; }
 	unsigned hash = seed;
 	while ((len == static_cast<unsigned int>(-1)) ? *s : len-- > 0)
 	{
