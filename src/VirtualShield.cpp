@@ -782,9 +782,15 @@ int VirtualShield::sendFlashStringOnSerial(const char* flashStringAdr, int start
 	const size_t actualStart = start < 0 ? 0 : start;
 	const bool isFormatted = start > DEFAULT_LENGTH;
 
+#if defined(_WINDOWS_)
+	for (size_t i = actualStart; i < strlen(flashStringAdr); i++)
+	{
+		dataChar = *(flashStringAdr + i);
+#else
 	for (size_t i = actualStart; i < strlen_PF((uint_farptr_t)flashStringAdr); i++)
 	{
 		dataChar = pgm_read_byte_near(flashStringAdr + i);
+#endif
 		if (isFormatted && dataChar == '~')
 		{
 			return i + 1;
