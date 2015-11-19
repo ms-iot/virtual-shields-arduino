@@ -396,7 +396,11 @@ void VirtualShield::onJsonReceived(JsonObject& root, ShieldEvent* shieldEvent) {
 /// <param name="json">The json string.</param>
 /// <param name="shieldEvent">The shield event to populate.</param>
 void VirtualShield::onJsonStringReceived(char* json, ShieldEvent* shieldEvent) {
+#if defined(_WINDOWS_)
+	DynamicJsonBuffer jsonBuffer;
+#else
     StaticJsonBuffer<maxJsonReadBuffer> jsonBuffer;
+#endif
 	JsonObject& root = jsonBuffer.parseObject(json);
 	if (root.success()) {
 		onJsonReceived(root, shieldEvent);
@@ -415,12 +419,18 @@ void VirtualShield::onJsonStringReceived(char* json, ShieldEvent* shieldEvent) {
 /// <param name="length">The length.</param>
 /// <param name="shieldEvent">The shield event.</param>
 void VirtualShield::onStringReceived(char* buffer, int length, ShieldEvent* shieldEvent) {
+#if defined(_WINDOWS_)
+	char *json = new char[length + 1];
+#else
     char json[maxJsonReadBuffer];
-    if (length < maxJsonReadBuffer)
-    {
+	if (length < maxJsonReadBuffer)
+	{
+#endif
+    
         strncpy(json, buffer, length);
         json[length] = '\0';
         onJsonStringReceived(json, shieldEvent);
+#if !defined(_WINDOWS_)
     }
     else
     {
@@ -428,6 +438,9 @@ void VirtualShield::onStringReceived(char* buffer, int length, ShieldEvent* shie
         Serial.print("json buffer over limit:" + String(length));
 #endif
     }
+#else
+		delete[] json;
+#endif
 }
 
 /// <summary>
