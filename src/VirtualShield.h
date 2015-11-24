@@ -125,7 +125,7 @@ protected:
 	int sendFlashStringOnSerial(const char* flashStringAdr, int start = -1, bool encode = false) const;
 
 	void onJsonStringReceived(char* json, ShieldEvent* shieldEvent);
-	void onStringReceived(char* buffer, int length, ShieldEvent* shieldEvent);
+	int onStringReceived(char* buffer, size_t length, ShieldEvent* shieldEvent);
 
 	void flush();
 
