@@ -23,7 +23,11 @@
 */
 
 #include "VirtualShield.h"
-
+#if defined(_WINDOWS_)
+  #include <malloc.h>
+#else
+  #include <alloca.h>
+#endif
 #include <string.h>
   
 #include <ArduinoJson.h>
@@ -418,29 +422,17 @@ void VirtualShield::onJsonStringReceived(char* json, ShieldEvent* shieldEvent) {
 /// <param name="buffer">The buffer.</param>
 /// <param name="length">The length.</param>
 /// <param name="shieldEvent">The shield event.</param>
-void VirtualShield::onStringReceived(char* buffer, int length, ShieldEvent* shieldEvent) {
-#if defined(_WINDOWS_)
-	char *json = new char[length + 1];
-#else
-    char json[maxJsonReadBuffer];
-	if (length < maxJsonReadBuffer)
-	{
-#endif
-    
-        strncpy(json, buffer, length);
-        json[length] = '\0';
-        onJsonStringReceived(json, shieldEvent);
-#if !defined(_WINDOWS_)
-    }
-    else
-    {
-#ifdef debugSerial
-        Serial.print("json buffer over limit:" + String(length));
-#endif
-    }
-#else
-		delete[] json;
-#endif
+int VirtualShield::onStringReceived(char* buffer, size_t length, ShieldEvent* shieldEvent) {
+
+	if (length >= maxJsonReadBuffer) { return SERIAL_ERROR; }
+
+	char *json = static_cast<char*>(alloca(length + 1));
+	if (!json) { return SERIAL_ERROR; }
+
+    strncpy(json, buffer, length);
+    json[length] = '\0';
+    onJsonStringReceived(json, shieldEvent);
+	return SERIAL_SUCCESS;
 }
 
 /// <summary>
