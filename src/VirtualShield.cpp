@@ -33,16 +33,22 @@
 #include <ArduinoJson.h>
 #include "SensorModels.h"
 
-// Define the serial port that is used to talk to the virtual shield.
-#define VIRTUAL_SERIAL_PORT0 Serial
+#if defined(ARDUINO) && ARDUINO > 100
+  // Define the serial port that is used to talk to the virtual shield.
+  #define VIRTUAL_SERIAL_PORT0 Serial
 
-// If it has dual serial ports (Leonardo), prefer the second one (pins 0, 1) for bluetooth.
-#if defined(__AVR_ATmega32U4__)
-#define VIRTUAL_SERIAL_PORT1 Serial1
-#define debugSerial
-#define debugSerialIn
-#else 
-#define VIRTUAL_SERIAL_PORT1 Serial
+  // If it has dual serial ports (Leonardo), prefer the second one (pins 0, 1) for bluetooth.
+  #if defined(__AVR_ATmega32U4__)
+    #define VIRTUAL_SERIAL_PORT1 Serial1
+    #define debugSerial
+    #define debugSerialIn
+  #else 
+    #define VIRTUAL_SERIAL_PORT1 Serial
+  #endif
+#else
+  #include "..\Time.h"
+  using namespace Windows::Storage::Streams;
+  using namespace Microsoft::Maker::Time;
 #endif
 
 static const int SERIAL_ERROR = -1;
@@ -74,6 +80,7 @@ const int maxRememberedSensors = 10;
 
 const int maxReadBuffer = 160;
 const int maxJsonReadBuffer = maxReadBuffer + 2;
+const int maxJsonWriteBuffer = 65536;
 
 char readBuffer[maxReadBuffer];
 int readBufferIndex = 0;
@@ -91,7 +98,7 @@ int sensorCount = 0;
 /// </summary>
 VirtualShield::VirtualShield()
 {
-    _VShieldSerial = &VIRTUAL_SERIAL_PORT1;
+    //_VShieldSerial = &VIRTUAL_SERIAL_PORT1;
 }
 
 /// <summary>
@@ -108,7 +115,7 @@ bool VirtualShield::addSensor(Sensor* sensor) {
 	sensors[sensorCount++] = sensor;
 	return true;
 }
-
+/*
 /// <summary>
 /// Sets the port for bluetooth (this only works for __AVR_ATmega32U4__ where there are more than one port).
 /// </summary>
@@ -122,16 +129,20 @@ void VirtualShield::setPort(int port)
 		_VShieldSerial = &VIRTUAL_SERIAL_PORT1;
 	}
 }
-
+*/
 /// <summary>
 /// Begins the specified bit rate.
 /// </summary>
 /// <param name="bitRate">The bit rate to use for the virtual shield serial connection.</param>
 void VirtualShield::begin(long bitRate)
 {
+#if defined(ARDUINO) && ARDUINO >= 100
     reinterpret_cast<HardwareSerial *>(_VShieldSerial)->begin(bitRate);
-	delay(500);
-    flush();
+#else
+    _VShieldSerial->begin(static_cast<uint32_t>(bitRate), SerialConfig::SERIAL_8N1);
+#endif
+
+    delay(500);
     sendStart();
 
 	if (this->onConnect)
@@ -179,7 +190,9 @@ bool VirtualShield::getEvent(ShieldEvent* shieldEvent) {
 #ifdef debugSerial
 		Serial.print(AWAITING_MESSAGE);
 #endif
-		_VShieldSerial->write(AWAITING_MESSAGE);
+		_VShieldSerial->write(AWAITING_MESSAGE[0]);
+        _VShieldSerial->write(AWAITING_MESSAGE[1]);
+        _VShieldSerial->write(AWAITING_MESSAGE[2]);
         _VShieldSerial->flush();
 		lastOpenRequest = millis();
 	}
@@ -187,7 +200,7 @@ bool VirtualShield::getEvent(ShieldEvent* shieldEvent) {
 	bool hadData = false;
 	while (!inEvent && _VShieldSerial->available() > 0) {
 		hadData = true;
-		char c = _VShieldSerial->read();
+		char c = static_cast<char>(_VShieldSerial->read());
 
 #ifdef debugSerialIn
 		Serial.print(c);
@@ -265,7 +278,9 @@ bool VirtualShield::processInChar(ShieldEvent* shieldEvent, bool& hasEvent, char
 #ifdef debugSerial
                 Serial.print(AWAITING_MESSAGE);
 #endif
-                _VShieldSerial->write(AWAITING_MESSAGE);
+                _VShieldSerial->write(AWAITING_MESSAGE[0]);
+                _VShieldSerial->write(AWAITING_MESSAGE[1]);
+                _VShieldSerial->write(AWAITING_MESSAGE[2]);
                 _VShieldSerial->flush();
                 lastOpenRequest = millis();
                 onStringReceived(readBuffer, readBufferIndex, shieldEvent);
@@ -460,7 +475,11 @@ bool VirtualShield::checkSensors(int watchForId, int32_t timeout, int watchForRe
 /// <param name="text">The text.</param>
 void VirtualShield::write(const char* text)
 {
+#if defined(_WINRT_DLL)
+    _VShieldSerial->write(Platform::ArrayReference<uint8_t>(reinterpret_cast<uint8_t *>(const_cast<char *>(text)), strnlen(text, maxJsonWriteBuffer)));
+#else
 	_VShieldSerial->write(text);
+#endif
 }
 
 /// <summary>
@@ -593,11 +612,15 @@ int VirtualShield::write(EPtr eptr)	const
 
 	if (eptr.keyIsMem)
 	{
-		_VShieldSerial->print(eptr.key);
-#ifdef debugSerial
+#if defined(_WINRT_DLL)
+        _VShieldSerial->write(Platform::ArrayReference<uint8_t>(reinterpret_cast<uint8_t *>(const_cast<char *>(eptr.key)), strnlen(eptr.key, maxJsonWriteBuffer)));
+#else
+        _VShieldSerial->print(eptr.key);
+  #ifdef debugSerial
 		Serial.print(eptr.key);
-#endif			
-	} 
+  #endif
+#endif
+    }
 	else
 	{
 		if (sendFlashStringOnSerial(eptr.key) != SERIAL_SUCCESS) return SERIAL_ERROR;
@@ -675,7 +698,7 @@ int VirtualShield::writeValue(EPtr eptr, int start) const
 #endif
 		break;
 	case Long:
-		_VShieldSerial->print(eptr.longValue);
+		_VShieldSerial->print(static_cast<int32_t>(eptr.longValue));
 #ifdef debugSerial
 		Serial.print(eptr.longValue);
 #endif
@@ -771,7 +794,11 @@ int VirtualShield::endWrite()
 
 int VirtualShield::directToSerial(const char* cmd)
 {
-	_VShieldSerial->print(cmd);
+#if defined(_WINRT_DLL)
+    _VShieldSerial->write(Platform::ArrayReference<uint8_t>(reinterpret_cast<uint8_t *>(const_cast<char *>(cmd)), strnlen(cmd, maxJsonWriteBuffer)));
+#else
+    _VShieldSerial->print(cmd);
+#endif
 	return SERIAL_SUCCESS;
 }
 

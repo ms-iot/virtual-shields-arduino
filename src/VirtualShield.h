@@ -28,7 +28,13 @@
 #include <stdint.h>
 #include <stdlib.h>
 
-#include <Arduino.h>
+#if defined(ARDUINO) && ARDUINO >= 100
+  #include <Arduino.h>
+#elif defined(_WINRT_DLL)
+  #define PROGMEM
+  using namespace Microsoft::Maker::Serial;
+#endif // defined(ARDUINO)
+
 #include <ArduinoJson.h>
 
 #include "Attr.h"
@@ -60,7 +66,7 @@ public:
     VirtualShield();
 
 	void begin(long bitRate = DEFAULT_BAUDRATE);
-	void setPort(int port);
+	//void setPort(int port);
 
 	bool hasError(ShieldEvent* shieldEvent = NULL);
 	bool checkSensors(int watchForId = 0, int32_t timeout = 0, int waitForResultId = -1);
@@ -129,7 +135,12 @@ protected:
 
 	void flush();
 
+#if defined(ARDUINO) && ARDUINO > 100
     Stream* _VShieldSerial;
+#elif defined(_WINRT_DLL)
+    IStream^ _VShieldSerial;
+#endif
+
 private:
 	int nextId = 1;
 	ShieldEvent recentEvent;
