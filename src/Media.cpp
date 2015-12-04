@@ -48,6 +48,16 @@ int Media::play(const char * url, long length)
 }
 
 /// <summary>
+/// Plays the specified media specified by the URL.
+/// </summary>
+/// <param name="url">The URL.</param>
+/// <returns>int.</returns>
+int Media::play(const String &url, long length)
+{
+	return play(url.c_str(), length);
+}
+
+/// <summary>
 /// Event called when a valid json message was received. 
 /// Consumes the proper values for this sensor.
 /// </summary>

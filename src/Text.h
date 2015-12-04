@@ -50,6 +50,9 @@ public:
 	int print(const char * text, ARGB argb = static_cast<uint32_t>(0));
 	int printAt(unsigned int line, const char * text, ARGB argb);
 	int printAt(unsigned int line, const char * text, Attr extraAttributes[] = NULL, int extraAttributeCount = 0);
+	int print(const String &text, ARGB argb = static_cast<uint32_t>(0));
+	int printAt(unsigned int line, const String &text, ARGB argb);
+	int printAt(unsigned int line, const String &text, Attr extraAttributes[] = NULL, int extraAttributeCount = 0);
 	int printAt(unsigned int line, EPtr text, Attr extraAttributes[] = NULL, int extraAttributeCount = 0);
 	int printAt(unsigned int line, double value, ARGB argb = static_cast<uint32_t>(0));
 

@@ -36,6 +36,7 @@ public:
 	Sms(const VirtualShield &shield);
 
 	int send(const char * to, const char * message, const char * attachment = NULL);
+	int send(const String &to, const String &message, const String &attachment = "");
 
 	void onJsonReceived(JsonObject& root, ShieldEvent* shieldEvent) override;
 };

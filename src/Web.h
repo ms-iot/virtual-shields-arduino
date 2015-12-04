@@ -50,6 +50,9 @@ public:
 	int get(const char * url, const char * parsingInstructions = NULL, int maxLength = 0);
 	int post(const char * url, const char * data, const char * parsingInstructions = NULL, int maxLength = 0);
 
+	int get(const String &url, const String &parsingInstructions = "", int maxLength = 0);
+	int post(const String &url, const String &data, const String &parsingInstructions = "", int maxLength = 0);
+
 	int get(EPtr url, EPtr parsingInstructions, int maxLength = 0);
 	int post(EPtr url, EPtr data, EPtr parsingInstructions, int maxLength = 0);
 

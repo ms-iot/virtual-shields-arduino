@@ -79,6 +79,16 @@ int Text::print(const char * text, ARGB argb)
 }
 
 /// <summary>
+/// Prints the specified text.
+/// </summary>
+/// <param name="text">The text.</param>
+/// <returns>The id of the message. Negative if an error.</returns>
+int Text::print(const String &text, ARGB argb)
+{
+	return print(text.c_str(), argb);
+}
+
+/// <summary>
 /// Prints the specified double at the specified line.
 /// </summary>
 /// <param name="line">The line.</param>
@@ -103,6 +113,17 @@ int Text::printAt(unsigned int line, const char * text, ARGB argb)
 }
 
 /// <summary>
+/// Prints the specified double at the specified line.
+/// </summary>
+/// <param name="line">The line.</param>
+/// <param name="value">The value.</param>
+/// <returns>The id of the message. Negative if an error.</returns>
+int Text::printAt(unsigned int line, const String &text, ARGB argb)
+{
+	return printAt(line, text.c_str(), argb);
+}
+
+/// <summary>
 /// Prints the specified text at the specified line.
 /// </summary>
 /// <param name="line">The line.</param>
@@ -110,6 +131,16 @@ int Text::printAt(unsigned int line, const char * text, ARGB argb)
 /// <returns>The id of the message. Negative if an error.</returns>
 int Text::printAt(unsigned int line, const char * text, Attr extraAttributes[], int extraAttributeCount) {
 	return printAt(line, EPtr(MemPtr, MESSAGE, text), extraAttributes, extraAttributeCount);
+}
+
+/// <summary>
+/// Prints the specified text at the specified line.
+/// </summary>
+/// <param name="line">The line.</param>
+/// <param name="text">The text.</param>
+/// <returns>The id of the message. Negative if an error.</returns>
+int Text::printAt(unsigned int line, const String &text, Attr extraAttributes[], int extraAttributeCount) {
+	return printAt(line, text.c_str(), extraAttributes, extraAttributeCount);
 }
 
 /// <summary>

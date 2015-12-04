@@ -71,6 +71,16 @@ int Recognition::listenFor(const char* recognitionText, bool useUI, int expected
 /// </summary>
 /// <param name="recognitionText">The recognition text (words or groups).</param>
 /// <returns>The id of the message. Negative if an error.</returns>
+int Recognition::listenFor(const String &recognitionText, bool useUI, int expectedConfidence, long timeout)
+{
+	return listenFor(recognitionText.c_str(), useUI, expectedConfidence, timeout);
+}
+
+/// <summary>
+/// Recognizes the specified constricted recognition text without a UI.
+/// </summary>
+/// <param name="recognitionText">The recognition text (words or groups).</param>
+/// <returns>The id of the message. Negative if an error.</returns>
 int Recognition::listenFor(EPtr constraint, bool useUI, int expectedConfidence, long timeout)
 {
 	this->openTextBuffer = NULL;
@@ -96,6 +106,16 @@ bool Recognition::heard(const char * text)
 	}
 
     return false;
+}
+
+/// <summary>
+/// Verifies if the recognized spoken text matches the text parameter.
+/// </summary>
+/// <param name="text">The text to verify.</param>
+/// <returns>true if the text matches.</returns>
+bool Recognition::heard(const String &text)
+{
+	return heard(text.c_str());
 }
 
 /// <summary>

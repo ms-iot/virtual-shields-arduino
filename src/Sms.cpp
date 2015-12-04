@@ -50,6 +50,17 @@ int Sms::send(const char * to, const char * message, const char * attachment) {
 }
 
 /// <summary>
+/// Initiates an SMS to the specified number.
+/// </summary>
+/// <param name="to">The destination number</param>
+/// <param name="message">The message.</param>
+/// <param name="attachment">The attachment url.</param>
+/// <returns>int.</returns>
+int Sms::send(const String &to, const String &message, const String &attachment) {
+	return send(to.c_str(), message.c_str(), attachment.length() ? attachment.c_str() : NULL);
+}
+
+/// <summary>
 /// Event called when a valid json message was received. 
 /// Consumes the proper values for this sensor.
 /// </summary>

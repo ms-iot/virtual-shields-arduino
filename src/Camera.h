@@ -37,7 +37,8 @@ public:
 	Camera(const VirtualShield &shield);
 
 	int enablePreview(bool enable);
-	int capture(const char * url = NULL);
+	int capture(const char *url = NULL);
+	int capture(const String &url);
 
 	void onJsonReceived(JsonObject& root, ShieldEvent* shieldEvent) override;
 };

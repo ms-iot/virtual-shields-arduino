@@ -52,6 +52,17 @@ int Microphone::record(long milliseconds, const char * url, bool keepLocal, bool
 }
 
 /// <summary>
+/// Records audio for the specified milliseconds and optionally saves/sends it to a url.
+/// </summary>
+/// <param name="milliseconds">The length in milliseconds.</param>
+/// <param name="url">The URL.</param>
+/// <returns>int.</returns>
+int Microphone::record(long milliseconds, const String &url, bool keepLocal, bool autoplay)
+{
+	return record(milliseconds, url.c_str(), keepLocal, autoplay);
+}
+
+/// <summary>
 /// Event called when a valid json message was received. 
 /// Consumes the proper values for this sensor.
 /// </summary>

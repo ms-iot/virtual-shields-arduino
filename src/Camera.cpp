@@ -59,6 +59,16 @@ int Camera::capture(const char * url)
 }
 
 /// <summary>
+/// Captures a picture and optionally saves/sends it to the specified URL.
+/// </summary>
+/// <param name="url">The URL.</param>
+/// <returns>int.</returns>
+int Camera::capture(const String &url)
+{
+	return capture(url.c_str());
+}
+
+/// <summary>
 /// Event called when a valid json message was received. 
 /// Consumes the proper values for this sensor.
 /// </summary>

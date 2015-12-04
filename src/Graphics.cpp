@@ -82,6 +82,18 @@ int Graphics::drawAt(unsigned int x, unsigned int y, const char * text, const ch
 }
 
 /// <summary>
+/// Draws graphical text at a location.
+/// </summary>
+/// <param name="x">The x.</param>
+/// <param name="y">The y.</param>
+/// <param name="text">The text.</param>
+/// <returns>The id of the message. Negative if an error.</returns>
+int Graphics::drawAt(unsigned int x, unsigned int y, const String &text, const String &tag, ARGB argb)
+{
+	return drawAt(x, y, text.c_str(), tag.length() ? tag.c_str() : NULL, argb);
+}
+
+/// <summary>
 /// Draws the image at a location.
 /// </summary>
 /// <param name="x">The x.</param>
@@ -110,6 +122,21 @@ int Graphics::drawImage(unsigned int x, unsigned int y, const char * url, const 
 /// <param name="width">The width.</param>
 /// <param name="height">The height.</param>
 /// <returns>The id of the message. Negative if an error.</returns>
+int Graphics::drawImage(unsigned int x, unsigned int y, const String &url, const String &tag, unsigned int width, unsigned int height)
+{
+	return drawImage(x, y, url.c_str(), tag.length() ? tag.c_str() : NULL, width, height);
+}
+
+/// <summary>
+/// Draws the image at a location.
+/// </summary>
+/// <param name="x">The x.</param>
+/// <param name="y">The y.</param>
+/// <param name="url">The url (local or remote) of the image to draw.</param>
+/// <param name="tag">The tag. Returned back for event recognition.</param>
+/// <param name="width">The width.</param>
+/// <param name="height">The height.</param>
+/// <returns>The id of the message. Negative if an error.</returns>
 int Graphics::input(unsigned int x, unsigned int y, bool multiline, const char * text, unsigned int width, unsigned int height)
 {
 	EPtr eptrs[] = { EPtr(ACTION, INPUTTXT), EPtr(Y, (uint32_t)y), EPtr(X, (uint32_t)x),
@@ -118,6 +145,21 @@ int Graphics::input(unsigned int x, unsigned int y, bool multiline, const char *
 		EPtr(text ? MemPtr : None, MESSAGE, text) };
 
 	return writeAll(SERVICE_NAME_GRAPHICS, eptrs, 7);
+}
+
+/// <summary>
+/// Draws the image at a location.
+/// </summary>
+/// <param name="x">The x.</param>
+/// <param name="y">The y.</param>
+/// <param name="url">The url (local or remote) of the image to draw.</param>
+/// <param name="tag">The tag. Returned back for event recognition.</param>
+/// <param name="width">The width.</param>
+/// <param name="height">The height.</param>
+/// <returns>The id of the message. Negative if an error.</returns>
+int Graphics::input(unsigned int x, unsigned int y, bool multiline, const String &text, unsigned int width, unsigned int height)
+{
+	return input(x, y, multiline, text.length() ? text.c_str() : NULL, width, height);
 }
 
 int Graphics::change(unsigned int id, ARGB argb)
@@ -148,6 +190,21 @@ int Graphics::fillRectangle(unsigned int x, unsigned int y, unsigned int width, 
 	return shield.block(writeAll(SERVICE_NAME_GRAPHICS, eptrs, 8), onEvent == NULL);
 }
 
+/// <summary>
+/// Fills a rectangle.
+/// </summary>
+/// <param name="x">The x.</param>
+/// <param name="y">The y.</param>
+/// <param name="width">The width.</param>
+/// <param name="height">The height.</param>
+/// <param name="rgba">The rgba.</param>
+/// <param name="tag">The tag. Returned back for event recognition.</param>
+/// <returns>The id of the message. Negative if an error.</returns>
+int Graphics::fillRectangle(unsigned int x, unsigned int y, unsigned int width, unsigned int height, ARGB argb, const String &tag, bool enableExtendedEvents)
+{
+	return fillRectangle(x, y, width, height, argb, tag.c_str(), enableExtendedEvents);
+}
+
 int Graphics::orientation(int autoRotationPreferences)
 {
 	EPtr eptrs[] = { EPtr(ACTION, ORIENTATION), EPtr(VALUE, autoRotationPreferences, autoRotationPreferences == -1 ? None : Int) };
@@ -166,6 +223,19 @@ int Graphics::addButton(unsigned int x, unsigned int y, const char * text, const
 {
 	EPtr eptrs[] = { EPtr(ACTION, BUTTON), EPtr(Y, (uint32_t)y), EPtr(X, (uint32_t)x), EPtr(MemPtr, MESSAGE, text), EPtr(MemPtr, TAG, tag ? tag : text) };
 	return shield.block(writeAll(SERVICE_NAME_GRAPHICS, eptrs, 5), onEvent == NULL);
+}
+
+/// <summary>
+/// Adds a button.
+/// </summary>
+/// <param name="x">The x.</param>
+/// <param name="y">The y.</param>
+/// <param name="text">The text.</param>
+/// <param name="tag">The tag. Returned back for event recognition.</param>
+/// <returns>The id of the message. Negative if an error.</returns>
+int Graphics::addButton(unsigned int x, unsigned int y, const String &text, const String &tag)
+{
+	return addButton(x, y, text.c_str(), tag.length() ? tag.c_str() : NULL);
 }
 
 /// <summary>
@@ -212,6 +282,17 @@ bool Graphics::isPressed(const char * tag, ShieldEvent* shieldEvent)
 }
 
 /// <summary>
+/// Determines whether the specified tag is pressed.
+/// </summary>
+/// <param name="tag">The tag.</param>
+/// <param name="shieldEvent">The shield event.</param>
+/// <returns>true if pressed or tapped</returns>
+bool Graphics::isPressed(const String &tag, ShieldEvent* shieldEvent)
+{
+	return isPressed(tag.c_str(), shieldEvent);
+}
+
+/// <summary>
 /// Determines whether the specified identifier is released.
 /// </summary>
 /// <param name="id">The identifier.</param>
@@ -244,6 +325,17 @@ bool Graphics::isReleased(const char * tag, ShieldEvent* shieldEvent)
 }
 
 /// <summary>
+/// Determines whether the specified tag is released.
+/// </summary>
+/// <param name="tag">The tag.</param>
+/// <param name="shieldEvent">The shield event.</param>
+/// <returns>true if released or tapped</returns>
+bool Graphics::isReleased(const String &tag, ShieldEvent* shieldEvent)
+{
+	return isReleased(tag.c_str(), shieldEvent);
+}
+
+/// <summary>
 /// Determines whether a tag was clicked or tapped.
 /// </summary>
 /// <param name="tag">The tag.</param>
@@ -257,6 +349,17 @@ bool Graphics::isButtonClicked(const char * tag, ShieldEvent* shieldEvent)
 	}
 
 	return Sensor::isEvent(tag, "click", shieldEvent) || Sensor::isEvent(tag, "tapped", shieldEvent);
+}
+
+/// <summary>
+/// Determines whether a tag was clicked or tapped.
+/// </summary>
+/// <param name="tag">The tag.</param>
+/// <param name="shieldEvent">The shield event.</param>
+/// <returns>true if clicked or tapped</returns>
+bool Graphics::isButtonClicked(const String &tag, ShieldEvent* shieldEvent)
+{
+	return isButtonClicked(tag.c_str(), shieldEvent);
 }
 
 /// <summary>
