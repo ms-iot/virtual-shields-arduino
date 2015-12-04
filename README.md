@@ -2,7 +2,7 @@
 
 #Windows Virtual Shields for Arduino (Library)
 
-This project allows an Arduino sketch control to a device running Windows 10 - be it a PC, a Windows Phone, or even a Raspberry Pi 2. The only code you write is to an Arduino sketch.
+This project lets an Arduino sketch control a device running Windows 10 - be it a PC, a Windows Phone, or even a Raspberry Pi 2. The only code you write is to an Arduino sketch.
 
 The Windows Virtual Shields for Arduino repository contains an Arduino library that allows an Arduino to connect over Bluetooth to the [Virtual Shields Universal Windows Application](https://github.com/ms-iot/virtual-shields-universal).  This open-source library was written primarily for Arduino UNO, and it can be used alongside any Windows 10 device running the Universal Windows Application linked above.
 
