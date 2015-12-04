@@ -2,13 +2,13 @@
 
 #Windows Virtual Shields for Arduino (Library)
 
-This project lets your Arduino sketch control your Windows 10 device (phone). The only code you write is to an Arduino sketch.
+This project lets an Arduino sketch control a device running Windows 10 - be it a PC, a Windows Phone, or even a Raspberry Pi 2. The only code you write is to an Arduino sketch.
 
-This repository is an Arduino library that allows the Arduino to connect over Bluetooth to the [Virtual Shields Universal Windows Application](https://github.com/ms-iot/virtual-shields-universal).
+The Windows Virtual Shields for Arduino repository contains an Arduino library that allows an Arduino to connect over Bluetooth to the [Virtual Shields Universal Windows Application](https://github.com/ms-iot/virtual-shields-universal).  This open-source library was written primarily for Arduino UNO, and it can be used alongside any Windows 10 device running the Universal Windows Application linked above.
 
-Windows Virtual Shields for Arduino is an open-source library primarily for the Arduino UNO which communicates with an open-source Windows Universal Application
-running on all Windows 10 devices, primarily focusing on Windows Phones.  The library exposes the Phones' sensors and capabilities to the an Arduino Wiring Sketch.
-The following sensors and capabilities can be used from Arduino Wiring:
+The power of this application is best exemplified when run on the Windows Phone - the library exposes most of the Phone's sensors and capabilities (or shields, if we're using Arduino terminology) to an Arduino Wiring Sketch.
+
+The following sensors and capabilities can be controlled directly from Arduino Wiring:
 
 Sensors:
 * Accelerometer
@@ -38,15 +38,15 @@ Capabilities:
 
 ##Within your Arduino Wiring Sketch, you can enable the following scenarios:
 
-* Place buttons on your Windows Phone's screen which directly affect pins, motors on your Arduino.
+* Place buttons on your device's screen which directly affect pins, motors on your Arduino.
   * Shields used:
      * Screen 
-* Send data gathered on the Arduino (Weather Station) to the cloud through the phone's data connection.
+* Send data gathered on the Arduino (Weather Station) to the cloud through the device's data connection.
 * or check a web page for a weather status and open or close windows in your house. 
   * Shields used:
      * GPS
      * Web 
-* Turn the phone's accelerometer into a remote driving controller for an Arduino robot.
+* Turn the accelerometer on a Windows Phone into a remote driving controller for an Arduino robot.
   * Shields used:
      * Accelerometer 
 * Ask questions and based on voice responses, control pins to turn on lights or motors.
@@ -63,7 +63,7 @@ Capabilities:
 ###What you need
  1. Arduino Uno or compatible device.
  2. Bluetooth module: SparkFun BlueSMiRF Silver (https://www.sparkfun.com/products/12577) and 4 wires to connect.
- 3. Windows 10 phone ([Lumia 520](http://www.microsoft.com/en-us/mobile/phone/lumia520/), [Lumia 635](http://www.microsoft.com/en-us/mobile/phone/lumia635/))
+ 3. A Windows 10 device: because of its many "shields", we recommend a Windows Phone ([Lumia 520](http://www.microsoft.com/en-us/mobile/phone/lumia520/), [Lumia 635](http://www.microsoft.com/en-us/mobile/phone/lumia635/))
 
 ###Set up your Arduino
  1. Prepare the Bluetooth module if necessary (the Bluetooth module may need to have headers soldered onto it).
@@ -73,9 +73,10 @@ Capabilities:
         The Bluetooth TX should connect to pin 0 (Arduino RX).  
         The Bluetooth RX should connect to pin 1 (Arduino TX).  
 
-###Set up your Windows 10 phone ( [using the virtual-shields-universal repository](https://github.com/ms-iot/virtual-shields-universal))
- 1. Windows 8 users can get the "Windows Insider" application from the app store. This allows the user to opt into receiving Windows 10 Technical Previews as updates.
- 2. Pair the Bluetooth device in the Bluetooth settings.  
+###Set up your Windows 10 device ( [using the virtual-shields-universal repository](https://github.com/ms-iot/virtual-shields-universal))
+ 1. For Windows Phone: Windows 8 users can get the "Windows Insider" application from the app store. This allows the user to opt into receiving Windows 10 Technical Previews as updates.
+ 2. For other devices: make sure you're running Windows 10.
+ 3. Pair your device to the Arduino Bluetooth device in the Bluetooth settings.  
     BlueSMiRF default pin code is 1234.  
     NOTE: The red blinking light on the BlueSMiRF continues to blink red after a successful pairing. This is expected. It only turns green after a connecting with the application.  
     When pairing you should see a device name like "RNBT-76BC" the last four characters are the last four characters of the MAC address printed on the sticker of the module.  
@@ -86,7 +87,7 @@ Capabilities:
  1. Arduino IDE 1.6 or better.
  2. ArduinoJson library.
  3. This repository.
- 4. Visual Studio 2015 to sideload UWA (phone app) onto developer unlocked phone.
+ 4. (OPTIONAL) Visual Studio 2015 to sideload UWA onto developer unlocked device.
 
 ###Set up your Arduino IDE
  1. Download and install the [Arduino IDE](http://www.arduino.cc/en/Main/Software).
@@ -99,12 +100,18 @@ Capabilities:
  1. Branch this repository or download the zip.
  2.	Copy this repository directly to your Arduino library (i.e. Documents\Arduino\libraries\).
 
-###Set up your Visual Studio 2015 [using the virtual-shields-universal repository](https://github.com/ms-iot/virtual-shields-universal)
+###Run the Virtual Shields for Arduino app on your device.
+There are two ways to get the app running on your device, outlined below.
+
+####Download the app from the Windows Store.
+1. If your device has the capability to access the Windows Store, simply download the "Virtual Shields for Arduino" application directly.  The app can be found [here](https://www.microsoft.com/store/apps/9nblgggz0mld).
+
+####Deploy the app with Visual Studio 2015 [using the virtual-shields-universal repository](https://github.com/ms-iot/virtual-shields-universal)
  1. Get the Windows 10 Technical Preview tools, including Visual Studio 2015 from [dev.windows.com](https://dev.windows.com/en-us/windows-10-developer-preview-tools).
  2. Load the Shield.sln from this repository (<repository>/Shield/Shield.sln).
- 3. Ensure your phone is developer-unlocked [run the Windows Phone Developer Registration tool installed with the tools](https://msdn.microsoft.com/en-us/library/windows/apps/dn614128.aspx). 
- 4. Deploy to your device.
- 5. Run the Virtual Shields for Arduino application.
+ 3. Ensure your device is developer-unlocked: on phone, [run the Windows Phone Developer Registration tool installed with the tools](https://msdn.microsoft.com/en-us/library/windows/apps/dn614128.aspx). 
+ 4. Deploy the solution to your device.
+ 5. Run the newly installed Virtual Shields for Arduino application.
  6. In the app settings, find your previously paired Bluetooth device and Connect.
 
 ###Test your setup
@@ -113,14 +120,14 @@ Capabilities:
  3. Download the sketch.
  4. Replace the Bluetooth TX and RX wires into the Arduino pins. (Bluetooth TX to Arduino RX and Bluetooth RX to Arduino TX).
  5. Press the Reset button on the Arduino to restart the sketch.
- 6. (You should see a message on your phone and be able to interact).
+ 6. You should see a message on your device and be able to interact.
 
 ##Examples included in this package:
- 1. Print Hello World on your phone (Screen text).
- 2. Using buttons on your phone to control pins (Screen graphics).
- 3. Create a Weather Forecast Indicator (GPS, Web).
- 4. Create a math-quiz door lock (open Speech Recognition).
- 5. Voice-controlled LED light (SRGS-constrained Speech Recognition)
+ 1. Print Hello World on your device (Screen text, multiple devices).
+ 2. Using buttons on your device to control pins (Screen graphics, multiple devices).
+ 3. Create a Weather Forecast Indicator (GPS and Web, Windows Phone).
+ 4. Create a math-quiz door lock (open Speech Recognition, multiple devices).
+ 5. Voice-controlled LED light (SRGS-constrained Speech Recognition, multiple devices)
 
 ##Troubleshooting:
 *	Did you build a custom sketch? Remember to include “ shield.begin() “ in your setup():
