@@ -165,6 +165,13 @@ struct EPtr
 	/// </summary>
 	/// <param name="key">The key.</param>
 	/// <param name="value">The value.</param>
+	EPtr(const char* key, String value) : ptrType(value ? MemPtr : None), key(key), value(value.c_str()), length(-1), asText(true) {}
+
+	/// <summary>
+	/// Initializes a new instance of the <see cref="EPtr"/> struct.
+	/// </summary>
+	/// <param name="key">The key.</param>
+	/// <param name="value">The value.</param>
     EPtr(const char* key, const char value) : ptrType(value ? Char : None), key(key), charValue(value), asText(true) {}
 
 	/// <summary>

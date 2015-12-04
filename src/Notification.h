@@ -37,7 +37,9 @@ public:
 	Notification(const VirtualShield &shield);
 
 	int toast(const char * message, const char * tag = NULL, const char * image = NULL, const char * audio = NULL);
+	int toast(const String &message, const String &tag = "", const String &image = "", const String &audio = "");
 	int tile(const char * message, const char * tag = NULL, const char * image = NULL);
+	int tile(const String &message, const String &tag = "", const String &image = "");
 
 	void onJsonReceived(JsonObject& root, ShieldEvent* shieldEvent) override;
 };

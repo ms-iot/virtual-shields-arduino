@@ -37,6 +37,7 @@ public:
 	Microphone(const VirtualShield &shield);
 
 	int record(long milliseconds, const char * url = NULL, bool keepLocal = false, bool autoplay = false);
+	int record(long milliseconds, const String &url, bool keepLocal = false, bool autoplay = false);
 
 	void onJsonReceived(JsonObject& root, ShieldEvent* shieldEvent) override;
 };

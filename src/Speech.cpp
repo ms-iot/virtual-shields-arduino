@@ -49,6 +49,16 @@ int Speech::speak(const char * message)
     return shield.block(writeAll(SERVICE_NAME_SPEECH, eptrs, 1), onEvent == NULL, WAITFOR_TIMEOUT, MEDIA_PAUSED);
 }
 
+/// <summary>
+/// Speaks the specified message.
+/// </summary>
+/// <param name="message">The message.</param>
+/// <returns>The id of the message. Negative if an error.</returns>
+int Speech::speak(const String &message)
+{
+	return speak(message.c_str());
+}
+
 int Speech::stop()
 {
 	return Sensor::sendStop(SERVICE_NAME_SPEECH);
