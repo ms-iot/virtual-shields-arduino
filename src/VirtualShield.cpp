@@ -23,7 +23,7 @@
 */
 
 #include "VirtualShield.h"
-#if defined(_WINDOWS_)
+#if defined(_WINDOWS_) || defined(_WINRT_DLL)
   #include <malloc.h>
 #else
   #include <alloca.h>
@@ -157,6 +157,45 @@ void VirtualShield::begin(long bitRate)
 }
 
 /// <summary>
+/// Begins the specified stream.
+/// </summary>
+/// <param name="bitRate">The bit rate to use for the virtual shield serial connection.</param>
+#if defined(ARDUINO) && ARDUINO > 100
+void VirtualShield::begin(Stream &s)
+{
+	_VShieldSerial = &s;
+
+	delay(500);
+	sendStart();
+
+	if (this->onConnect)
+	{
+		this->onConnect(&recentEvent);
+	}
+
+	if (this->onRefresh)
+	{
+		this->onRefresh(&recentEvent);
+	}
+}
+#elif defined(_WINRT_DLL)
+void VirtualShield::begin(IStream^ s)
+{
+	_VShieldSerial = s;
+	sendStart();
+	if (this->onConnect)
+	{
+		this->onConnect(&recentEvent);
+	}
+
+	if (this->onRefresh)
+	{
+		this->onRefresh(&recentEvent);
+	}
+}
+#endif
+
+/// <summary>
 /// Blocks while waiting for a specific id-based response (only when blocking is true and allowAutoBlocking is true).
 /// </summary>
 int VirtualShield::block(int id, bool blocking, int32_t timeout, int watchForResultId)
@@ -192,7 +231,7 @@ bool VirtualShield::getEvent(ShieldEvent* shieldEvent) {
 #endif
 		_VShieldSerial->write(AWAITING_MESSAGE[0]);
         _VShieldSerial->write(AWAITING_MESSAGE[1]);
-        _VShieldSerial->write(AWAITING_MESSAGE[2]);
+        //_VShieldSerial->write(AWAITING_MESSAGE[2]);
         _VShieldSerial->flush();
 		lastOpenRequest = millis();
 	}
@@ -280,7 +319,7 @@ bool VirtualShield::processInChar(ShieldEvent* shieldEvent, bool& hasEvent, char
 #endif
                 _VShieldSerial->write(AWAITING_MESSAGE[0]);
                 _VShieldSerial->write(AWAITING_MESSAGE[1]);
-                _VShieldSerial->write(AWAITING_MESSAGE[2]);
+                //_VShieldSerial->write(AWAITING_MESSAGE[2]);
                 _VShieldSerial->flush();
                 lastOpenRequest = millis();
                 onStringReceived(readBuffer, readBufferIndex, shieldEvent);
@@ -414,7 +453,7 @@ void VirtualShield::onJsonReceived(JsonObject& root, ShieldEvent* shieldEvent) {
 /// <param name="json">The json string.</param>
 /// <param name="shieldEvent">The shield event to populate.</param>
 void VirtualShield::onJsonStringReceived(char* json, ShieldEvent* shieldEvent) {
-#if defined(_WINDOWS_)
+#if defined(_WINDOWS_) || defined(_WINRT_DLL)
 	DynamicJsonBuffer jsonBuffer;
 #else
     StaticJsonBuffer<maxJsonReadBuffer> jsonBuffer;
@@ -680,7 +719,7 @@ int VirtualShield::writeValue(EPtr eptr, int start) const
 		break;
 	}
 	case Char:
-		_VShieldSerial->print(eptr.charValue);
+		_VShieldSerial->write(eptr.charValue);
 #ifdef debugSerial
 		Serial.print(eptr.charValue);
 #endif
@@ -813,7 +852,7 @@ int VirtualShield::sendFlashStringOnSerial(const char* flashStringAdr, int start
 	const size_t actualStart = start < 0 ? 0 : start;
 	const bool isFormatted = start > -1;
 
-#if defined(_WINDOWS_)
+#if defined(_WINDOWS_) || defined(_WINRT_DLL)
 	for (size_t i = actualStart; i < strlen(flashStringAdr); i++)
 	{
 		dataChar = *(flashStringAdr + i);
@@ -835,7 +874,7 @@ int VirtualShield::sendFlashStringOnSerial(const char* flashStringAdr, int start
 #endif
 		}
 
-		_VShieldSerial->print((char)dataChar);
+		_VShieldSerial->write((char)dataChar);
 #ifdef debugSerial
 		Serial.print((char)dataChar);
 #endif

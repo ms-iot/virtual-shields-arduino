@@ -66,6 +66,12 @@ public:
     VirtualShield();
 
 	void begin(long bitRate = DEFAULT_BAUDRATE);
+#if defined(ARDUINO) && ARDUINO > 100
+	void begin(Stream &s);
+#elif defined(_WINRT_DLL)
+	void begin(Microsoft::Maker::Serial::IStream ^s);
+#endif
+	
 	//void setPort(int port);
 
 	bool hasError(ShieldEvent* shieldEvent = NULL);
@@ -138,7 +144,7 @@ protected:
 #if defined(ARDUINO) && ARDUINO > 100
     Stream* _VShieldSerial;
 #elif defined(_WINRT_DLL)
-    IStream^ _VShieldSerial;
+    Microsoft::Maker::Serial::IStream^ _VShieldSerial;
 #endif
 
 private:
