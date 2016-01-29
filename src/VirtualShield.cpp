@@ -841,6 +841,10 @@ int VirtualShield::sendFlashStringOnSerial(const char* flashStringAdr, int start
 	for (size_t i = actualStart; i < strlen(flashStringAdr); i++)
 	{
 		dataChar = *(flashStringAdr + i);
+#elif defined(_VARIANT_ARDUINO_101_X_)
+	for (size_t i = actualStart; i < strlen_P(flashStringAdr); i++)
+	{
+		dataChar = pgm_read_byte_near(flashStringAdr + i);
 #else
 	for (size_t i = actualStart; i < strlen_PF((uint_farptr_t)flashStringAdr); i++)
 	{
