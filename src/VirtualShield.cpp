@@ -98,7 +98,7 @@ int sensorCount = 0;
 /// </summary>
 VirtualShield::VirtualShield()
 {
-    //_VShieldSerial = &VIRTUAL_SERIAL_PORT1;
+
 }
 
 /// <summary>
@@ -115,21 +115,7 @@ bool VirtualShield::addSensor(Sensor* sensor) {
 	sensors[sensorCount++] = sensor;
 	return true;
 }
-/*
-/// <summary>
-/// Sets the port for bluetooth (this only works for __AVR_ATmega32U4__ where there are more than one port).
-/// </summary>
-/// <param name="port">The port.</param>
-void VirtualShield::setPort(int port) 
-{
-	if (port == 0) {
-		_VShieldSerial = &VIRTUAL_SERIAL_PORT0;
-	}
-	else if (port == 1) {
-		_VShieldSerial = &VIRTUAL_SERIAL_PORT1;
-	}
-}
-*/
+
 /// <summary>
 /// Begins the specified bit rate.
 /// </summary>
@@ -231,7 +217,6 @@ bool VirtualShield::getEvent(ShieldEvent* shieldEvent) {
 #endif
 		_VShieldSerial->write(AWAITING_MESSAGE[0]);
         _VShieldSerial->write(AWAITING_MESSAGE[1]);
-        //_VShieldSerial->write(AWAITING_MESSAGE[2]);
         _VShieldSerial->flush();
 		lastOpenRequest = millis();
 	}
@@ -319,7 +304,6 @@ bool VirtualShield::processInChar(ShieldEvent* shieldEvent, bool& hasEvent, char
 #endif
                 _VShieldSerial->write(AWAITING_MESSAGE[0]);
                 _VShieldSerial->write(AWAITING_MESSAGE[1]);
-                //_VShieldSerial->write(AWAITING_MESSAGE[2]);
                 _VShieldSerial->flush();
                 lastOpenRequest = millis();
                 onStringReceived(readBuffer, readBufferIndex, shieldEvent);
