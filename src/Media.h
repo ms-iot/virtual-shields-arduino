@@ -37,6 +37,7 @@ public:
 	Media(const VirtualShield &shield);
 
 	int play(const char * url, long length = 0);
+	int play(const String &url, long length = 0);
 
 	inline int playVideo(const char * url, long length = 0) {
         const long full_length = length + 7;
@@ -49,8 +50,16 @@ public:
         return return_value;
 	}
 
+	inline int playVideo(const String &url, long length = 0) {
+		return playVideo(url.c_str(), length);
+	}
+
 	inline int playAudio(const char * url, long length = 0) {
 		return playVideo(url, length);
+	}
+
+	inline int playAudio(const String &url, long length = 0) {
+		return playVideo(url.c_str(), length);
 	}
 
 	void onJsonReceived(JsonObject& root, ShieldEvent* shieldEvent) override;

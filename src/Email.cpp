@@ -54,6 +54,25 @@ int Email::send(const char * to, const char * subject, const char * message, con
 }
 
 /// <summary>
+/// Initiates an email.
+/// </summary>
+/// <param name="to">To email address.</param>
+/// <param name="subject">The subject.</param>
+/// <param name="message">The message.</param>
+/// <param name="cc">The cc email address.</param>
+/// <param name="attachment">The attachment url.</param>
+/// <returns>The id of the message. Negative if an error.</returns>
+int Email::send(const String &to, const String &subject, const String &message, const String &cc, const String &attachment) {
+	return send(
+		to.length() ? to.c_str() : NULL, 
+		subject.length() ? subject.c_str() : NULL, 
+		message.length() ? message.c_str() : NULL,
+		cc.length() ? cc.c_str() : NULL,
+		attachment.length() ? attachment.c_str() : NULL
+		);
+}
+
+/// <summary>
 /// Event called when a valid json message was received. 
 /// Consumes the proper values for this sensor.
 /// </summary>

@@ -57,12 +57,44 @@ int Notification::toast(const char * message, const char * tag, const char * ima
 /// <param name="milliseconds">The length in milliseconds.</param>
 /// <param name="url">The URL.</param>
 /// <returns>int.</returns>
+int Notification::toast(const String &message, const String &tag, const String &image, const String &audio)
+{
+	return toast(
+		message.c_str(), 
+		tag.length() ? tag.c_str() : NULL, 
+		image.length() ? image.c_str() : NULL, 
+		audio.c_str()
+		);
+}
+
+/// <summary>
+/// Send/Show a toast notification.
+/// </summary>
+/// <param name="milliseconds">The length in milliseconds.</param>
+/// <param name="url">The URL.</param>
+/// <returns>int.</returns>
 int Notification::tile(const char * message, const char * tag, const char * image)
 {
 	EPtr eptrs[] = { EPtr(MemPtr, MESSAGE, message), EPtr(tag ? MemPtr : None, TAG, tag),
 		EPtr(image ? MemPtr : None, IMAGE, image), EPtr(ACTION, TILE) };
 	return writeAll(SERVICE_NOTIFICATION, eptrs, 4);
 }
+
+/// <summary>
+/// Send/Show a toast notification.
+/// </summary>
+/// <param name="milliseconds">The length in milliseconds.</param>
+/// <param name="url">The URL.</param>
+/// <returns>int.</returns>
+int Notification::tile(const String &message, const String &tag, const String &image)
+{
+	return tile(
+		message.c_str(), 
+		tag.length() ? tag.c_str() : NULL, 
+		image.length() ? image.c_str() : NULL
+		);
+}
+
 
 /// <summary>
 /// Event called when a valid json message was received. 

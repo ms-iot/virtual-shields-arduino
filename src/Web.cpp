@@ -50,6 +50,18 @@ int Web::get(const char * url, const char * parsingInstructions, int maxLength)
 }
 
 /// <summary>
+/// Performs a web Get, optionally returning a result.
+/// </summary>
+/// <param name="url">The url.</param>
+/// <param name="parsingInstructions">The parsing instructions.</param>
+/// <param name="maxLength">The maximum length of the result.</param>
+/// <returns>The id of the message. Negative if an error.</returns>
+int Web::get(const String &url, const String &parsingInstructions, int maxLength)
+{
+	return get(url.c_str(), parsingInstructions.length() ? parsingInstructions.c_str() : NULL, maxLength);
+}
+
+/// <summary>
 /// Performs a web Post, optionally returning a result.
 /// </summary>
 /// <param name="url">The url.</param>
@@ -60,6 +72,19 @@ int Web::get(const char * url, const char * parsingInstructions, int maxLength)
 int Web::post(const char * url, const char * data, const char * parsingInstructions, int maxLength)
 {
 	return post(EPtr(MemPtr, URL, url), EPtr(MemPtr, DATA, data), EPtr(parsingInstructions ? MemPtr : None, PARSE, parsingInstructions), maxLength);
+}
+
+/// <summary>
+/// Performs a web Post, optionally returning a result.
+/// </summary>
+/// <param name="url">The url.</param>
+/// <param name="data">The data.</param>
+/// <param name="parsingInstructions">The parsing instructions.</param>
+/// <param name="maxLength">The maximum length of the result.</param>
+/// <returns>The id of the message. Negative if an error.</returns>
+int Web::post(const String &url, const String &data, const String &parsingInstructions, int maxLength)
+{
+	return post(url.c_str(), data.c_str(), parsingInstructions.length() ? parsingInstructions.c_str() : NULL, maxLength);
 }
 
 /// <summary>
