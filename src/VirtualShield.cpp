@@ -80,7 +80,7 @@ const int maxRememberedSensors = 10;
 
 const int maxReadBuffer = 160;
 const int maxJsonReadBuffer = maxReadBuffer + 2;
-const int maxJsonWriteBuffer = 65536;
+const int maxJsonWriteBuffer = 32767;
 
 char readBuffer[maxReadBuffer];
 int readBufferIndex = 0;
