@@ -122,6 +122,7 @@ bool VirtualShield::addSensor(Sensor* sensor) {
 /// <param name="bitRate">The bit rate to use for the virtual shield serial connection.</param>
 void VirtualShield::begin(long bitRate)
 {
+	_VShieldSerial = &VIRTUAL_SERIAL_PORT1;
 #if defined(ARDUINO) && ARDUINO >= 100
     reinterpret_cast<HardwareSerial *>(_VShieldSerial)->begin(bitRate);
 #else

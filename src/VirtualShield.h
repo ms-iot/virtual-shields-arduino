@@ -71,8 +71,6 @@ public:
 #elif defined(_WINRT_DLL)
 	void begin(Microsoft::Maker::Serial::IStream ^s);
 #endif
-	
-	//void setPort(int port);
 
 	bool hasError(ShieldEvent* shieldEvent = NULL);
 	bool checkSensors(int watchForId = 0, int32_t timeout = 0, int waitForResultId = -1);
