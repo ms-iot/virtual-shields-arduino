@@ -38,17 +38,20 @@
   #define VIRTUAL_SERIAL_PORT0 Serial
 
   // If it has dual serial ports (Leonardo), prefer the second one (pins 0, 1) for bluetooth.
-  #if defined(__AVR_ATmega32U4__)
+  #if defined(__AVR_ATmega32U4__) || defined(ARDUINO_SAMD_MKR1000) || defined(_VARIANT_ARDUINO_101_X_)
     #define VIRTUAL_SERIAL_PORT1 Serial1
     #define debugSerial
     #define debugSerialIn
+	#define PLATFORM_CAST(x) (x)
   #else 
     #define VIRTUAL_SERIAL_PORT1 Serial
+#define PLATFORM_CAST(x) ((uint_farptr_t)x)
   #endif
 #else
   #include "..\Time.h"
   using namespace Windows::Storage::Streams;
   using namespace Microsoft::Maker::Time;
+  #define PLATFORM_CAST(x) ((uint_farptr_t)x)
 #endif
 
 static const int SERIAL_ERROR = -1;
@@ -842,7 +845,7 @@ int VirtualShield::sendFlashStringOnSerial(const char* flashStringAdr, int start
 	{
 		dataChar = *(flashStringAdr + i);
 #else
-	for (size_t i = actualStart; i < strlen_PF((uint_farptr_t)flashStringAdr); i++)
+	for (size_t i = actualStart; i < strlen_PF(PLATFORM_CAST(flashStringAdr)); i++)
 	{
 		dataChar = pgm_read_byte_near(flashStringAdr + i);
 #endif
