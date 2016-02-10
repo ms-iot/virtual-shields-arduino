@@ -36,22 +36,25 @@
 #if defined(ARDUINO) && ARDUINO > 100
   // Define the serial port that is used to talk to the virtual shield.
   #define VIRTUAL_SERIAL_PORT0 Serial
+  
+  //Force a link to printf float functionality. There is a bug where some boards do not link this properly.
+  asm(".global _printf_float");
 
   // If it has dual serial ports (Leonardo), prefer the second one (pins 0, 1) for bluetooth.
   #if defined(__AVR_ATmega32U4__) || defined(ARDUINO_SAMD_MKR1000) || defined(_VARIANT_ARDUINO_101_X_)
     #define VIRTUAL_SERIAL_PORT1 Serial1
     #define debugSerial
     #define debugSerialIn
-	#define PLATFORM_CAST(x) (x)
+	#define PLATFORM_CAST(x) (const char*)(x)
   #else 
     #define VIRTUAL_SERIAL_PORT1 Serial
-#define PLATFORM_CAST(x) ((uint_farptr_t)x)
+	#define PLATFORM_CAST(x) (uint_farptr_t)(x)
   #endif
 #else
   #include "..\Time.h"
   using namespace Windows::Storage::Streams;
   using namespace Microsoft::Maker::Time;
-  #define PLATFORM_CAST(x) ((uint_farptr_t)x)
+  #define PLATFORM_CAST(x) (uint_farptr_t)(x)
 #endif
 
 static const int SERIAL_ERROR = -1;
