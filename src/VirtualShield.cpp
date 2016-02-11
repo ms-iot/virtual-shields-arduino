@@ -45,16 +45,16 @@
     #define VIRTUAL_SERIAL_PORT1 Serial1
     #define debugSerial
     #define debugSerialIn
-	#define PLATFORM_CAST(x) (const char*)(x)
+	#define PLATFORM_CAST(x) ((const char*)(x))
   #else 
     #define VIRTUAL_SERIAL_PORT1 Serial
-	#define PLATFORM_CAST(x) (uint_farptr_t)(x)
+	#define PLATFORM_CAST(x) ((uint_farptr_t)(x))
   #endif
 #else
   #include "..\Time.h"
   using namespace Windows::Storage::Streams;
   using namespace Microsoft::Maker::Time;
-  #define PLATFORM_CAST(x) (uint_farptr_t)(x)
+  #define PLATFORM_CAST(x) ((uint_farptr_t)(x))
 #endif
 
 static const int SERIAL_ERROR = -1;
