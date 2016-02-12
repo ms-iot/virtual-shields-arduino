@@ -36,14 +36,22 @@
 #if defined(ARDUINO) && ARDUINO > 100
   // Define the serial port that is used to talk to the virtual shield.
   #define VIRTUAL_SERIAL_PORT0 Serial
-
-  // If it has dual serial ports (Leonardo), prefer the second one (pins 0, 1) for bluetooth.
-  #if defined(__AVR_ATmega32U4__)
+  
+  // Force a link to printf float functionality. There is a bug where some boards do not link this properly.
+  asm(".global _printf_float");
+  
+  // For 32 bit boards, strlen_PF takes a char*, so this cast isn't needed
+  #if defined(ARDUINO_SAMD_MKR1000) || defined(_VARIANT_ARDUINO_101_X_)
+	#define uint_farptr_t	
+  #endif
+  
+  // If it has dual serial ports, prefer the second one (pins 0, 1) for bluetooth.
+  #if defined(__AVR_ATmega32U4__) || defined(ARDUINO_SAMD_MKR1000) || defined(_VARIANT_ARDUINO_101_X_)
     #define VIRTUAL_SERIAL_PORT1 Serial1
     #define debugSerial
     #define debugSerialIn
   #else 
-    #define VIRTUAL_SERIAL_PORT1 Serial
+    #define VIRTUAL_SERIAL_PORT1 Serial	
   #endif
 #else
   #include "..\Time.h"
@@ -842,7 +850,7 @@ int VirtualShield::sendFlashStringOnSerial(const char* flashStringAdr, int start
 	{
 		dataChar = *(flashStringAdr + i);
 #else
-	for (size_t i = actualStart; i < strlen_PF((uint_farptr_t)flashStringAdr); i++)
+	for (size_t i = actualStart; i < strlen_PF(uint_farptr_t(flashStringAdr)); i++)
 	{
 		dataChar = pgm_read_byte_near(flashStringAdr + i);
 #endif
