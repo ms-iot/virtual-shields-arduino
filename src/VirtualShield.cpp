@@ -40,11 +40,9 @@
   // Force a link to printf float functionality. There is a bug where some boards do not link this properly.
   asm(".global _printf_float");
   
-  // For 32 bit boards, strlen_PF takes a char*. Otherwise, it needs a uint_farprt_t.
+  // For 32 bit boards, strlen_PF takes a char*, so this cast isn't needed
   #if defined(ARDUINO_SAMD_MKR1000) || defined(_VARIANT_ARDUINO_101_X_)
-  	#define PLATFORM_CAST(x) ((const char*)(x))
-  #else
-	#define PLATFORM_CAST(x) ((uint_farptr_t)(x))
+	#define uint_farptr_t	
   #endif
   
   // If it has dual serial ports, prefer the second one (pins 0, 1) for bluetooth.
@@ -852,7 +850,7 @@ int VirtualShield::sendFlashStringOnSerial(const char* flashStringAdr, int start
 	{
 		dataChar = *(flashStringAdr + i);
 #else
-	for (size_t i = actualStart; i < strlen_PF(PLATFORM_CAST(flashStringAdr)); i++)
+	for (size_t i = actualStart; i < strlen_PF(uint_farptr_t(flashStringAdr)); i++)
 	{
 		dataChar = pgm_read_byte_near(flashStringAdr + i);
 #endif
