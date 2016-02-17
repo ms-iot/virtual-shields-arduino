@@ -24,10 +24,7 @@
 
 #include "Sms.h"
 
-extern "C" {
-#include <string.h>
-#include <stdlib.h>
-}
+#include "SensorModels.h"
 
 const PROGMEM char SERVICE_SMS[] = "SMS";
 const PROGMEM char SUBJECT[] = "Subject";
@@ -47,9 +44,20 @@ Sms::Sms(const VirtualShield &shield) : Sensor(shield, 'Y') {
 /// <param name="message">The message.</param>
 /// <param name="attachment">The attachment url.</param>
 /// <returns>int.</returns>
-int Sms::send(String to, String message, String attachment) {
-	EPtr eptrs[] = { EPtr(MemPtr, TO, to.c_str()), EPtr(MemPtr, MESSAGE, message.c_str()), EPtr(attachment ? MemPtr : None, ATTACHMENT, attachment.c_str()) };
+int Sms::send(const char * to, const char * message, const char * attachment) {
+	EPtr eptrs[] = { EPtr(MemPtr, TO, to), EPtr(MemPtr, MESSAGE, message), EPtr(attachment ? MemPtr : None, ATTACHMENT, attachment) };
 	return shield.writeAll(SERVICE_SMS, eptrs, 3);
+}
+
+/// <summary>
+/// Initiates an SMS to the specified number.
+/// </summary>
+/// <param name="to">The destination number</param>
+/// <param name="message">The message.</param>
+/// <param name="attachment">The attachment url.</param>
+/// <returns>int.</returns>
+int Sms::send(const String &to, const String &message, const String &attachment) {
+	return send(to.c_str(), message.c_str(), attachment.length() ? attachment.c_str() : NULL);
 }
 
 /// <summary>

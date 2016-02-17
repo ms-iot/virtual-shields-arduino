@@ -24,11 +24,6 @@
 
 #include "Compass.h"
 
-extern "C" {
-#include <string.h>
-#include <stdlib.h>
-}
-
 /// <summary>
 /// Initializes a new instance of the <see cref="Compass"/> class.
 /// </summary>

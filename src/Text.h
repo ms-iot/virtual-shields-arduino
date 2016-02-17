@@ -25,7 +25,13 @@
 #ifndef Text_h
 #define Text_h
 
+#include <ArduinoJson.h>
+
+#include "Attr.h"
 #include "Sensor.h"
+#include "SensorModels.h"
+#include "ShieldEvent.h"
+#include "VirtualShield.h"
 
 const PROGMEM char Y[] = "Y";
 const PROGMEM char CLEAR[] = "CLEAR";
@@ -37,15 +43,18 @@ class Text : public Sensor
 public:
     Text(const VirtualShield &shield);
 
-	int clear(ARGB argb = 0);
-	int clearLine(UINT line);
-	int clearId(UINT id);
+	int clear(ARGB argb = static_cast<uint32_t>(0));
+	int clearLine(unsigned int line);
+	int clearId(unsigned int id);
 
-	int print(String text, ARGB argb = 0);
-	int printAt(UINT line, String text, ARGB argb);
-	int printAt(UINT line, String text, Attr extraAttributes[] = 0, int extraAttributeCount = 0);
-	int printAt(UINT line, EPtr text, Attr extraAttributes[] = 0, int extraAttributeCount = 0);
-	int printAt(UINT line, double value, ARGB argb = 0);
+	int print(const char * text, ARGB argb = static_cast<uint32_t>(0));
+	int printAt(unsigned int line, const char * text, ARGB argb);
+	int printAt(unsigned int line, const char * text, Attr extraAttributes[] = NULL, int extraAttributeCount = 0);
+	int print(const String &text, ARGB argb = static_cast<uint32_t>(0));
+	int printAt(unsigned int line, const String &text, ARGB argb);
+	int printAt(unsigned int line, const String &text, Attr extraAttributes[] = NULL, int extraAttributeCount = 0);
+	int printAt(unsigned int line, EPtr text, Attr extraAttributes[] = NULL, int extraAttributeCount = 0);
+	int printAt(unsigned int line, double value, ARGB argb = static_cast<uint32_t>(0));
 
 	void onJsonReceived(JsonObject& root, ShieldEvent* shieldEvent) override;
 };

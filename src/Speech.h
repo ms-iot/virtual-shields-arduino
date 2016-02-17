@@ -25,11 +25,11 @@
 #ifndef Speech_h
 #define Speech_h
 
-#include "Sensor.h"
-#include "ShieldEvent.h"
 #include <ArduinoJson.h>
 
-#include "Arduino.h"
+#include "Sensor.h"
+#include "ShieldEvent.h"
+#include "VirtualShield.h"
 
 class Speech : public Sensor {
 public:
@@ -37,7 +37,8 @@ public:
 
     bool IsSpeaking = false;
 
-	int speak(String message);
+	int speak(const char * message);
+	int speak(const String &message);
 	int stop() override;
 
 	void onJsonReceived(JsonObject& root, ShieldEvent* shieldEvent) override;

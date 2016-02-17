@@ -22,14 +22,9 @@
     THE SOFTWARE.
 */
 
-#include "Sensor.h"
 #include "Media.h"
-#include "SensorModels.h"
 
-extern "C" {
-#include <string.h>
-#include <stdlib.h>
-}
+#include "SensorModels.h"
 
 const PROGMEM char SERVICE_PLAY[] = "PLAY";
 
@@ -46,10 +41,20 @@ Media::Media(const VirtualShield &shield) : Sensor(shield, 'E') {
 /// </summary>
 /// <param name="url">The URL.</param>
 /// <returns>int.</returns>
-int Media::play(String url, long length)
+int Media::play(const char * url, long length)
 {
-	EPtr eptrs[] = { EPtr(MemPtr, URL, url.c_str()), EPtr(MS, length, length ? Long : None) };
-	return shield.block(writeAll(SERVICE_PLAY, eptrs, 2), onEvent == 0);
+	EPtr eptrs[] = { EPtr(MemPtr, URL, url), EPtr(MS, length, length ? Long : None) };
+	return shield.block(writeAll(SERVICE_PLAY, eptrs, 2), onEvent == NULL);
+}
+
+/// <summary>
+/// Plays the specified media specified by the URL.
+/// </summary>
+/// <param name="url">The URL.</param>
+/// <returns>int.</returns>
+int Media::play(const String &url, long length)
+{
+	return play(url.c_str(), length);
 }
 
 /// <summary>

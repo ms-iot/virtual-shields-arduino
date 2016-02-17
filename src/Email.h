@@ -25,17 +25,18 @@
 #ifndef Email_h
 #define Email_h
 
-#include "Sensor.h"
-#include "ShieldEvent.h"
 #include <ArduinoJson.h>
 
-#include "Arduino.h"
+#include "Sensor.h"
+#include "ShieldEvent.h"
+#include "VirtualShield.h"
 
 class Email : public Sensor {
 public:
 	Email(const VirtualShield &shield);
 
-	int send(String to, String subject, String message, String cc = (const char *)0, String attachment = (const char *)0);
+	int send(const char * to, const char * subject, const char * message, const char * cc = NULL, const char * attachment = NULL);
+	int send(const String &to, const String &subject, const String &message, const String &cc = "", const String &attachment = "");
 
 	void onJsonReceived(JsonObject& root, ShieldEvent* shieldEvent) override;
 };

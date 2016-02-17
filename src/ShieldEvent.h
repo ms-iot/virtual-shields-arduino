@@ -25,14 +25,14 @@
 #ifndef ShieldEvent_h
 #define ShieldEvent_h
 
-#include "Arduino.h"
-
 enum ShieldEventType {
 	UnknownShieldEventType = 0,
 	SensorShieldEventType = 1
 };
 
 struct ShieldEvent {
+    typedef void(*callback_t)(ShieldEvent* shieldEvent);
+
 	ShieldEventType	shieldEventType;
 	int id;
 	long resultId;

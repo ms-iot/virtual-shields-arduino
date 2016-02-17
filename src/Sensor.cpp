@@ -24,11 +24,6 @@
 
 #include "Sensor.h"
 
-extern "C" {
-#include <string.h>
-#include <stdlib.h>
-}
-
 const PROGMEM char SERVICE_SENSORS[] = "SENSORS";
 const PROGMEM char SENSORS[] = "Sensors";
 const PROGMEM char DELTA[] = "Delta";
@@ -71,7 +66,7 @@ int Sensor::get()  {
 	int result = sensorAction(Once);
 	this->isRunning = false;
 
-	return shield.block(result, onEvent == 0);
+	return shield.block(result, onEvent == NULL);
 }
 
 /// <summary>
@@ -89,7 +84,7 @@ int Sensor::getOnChange(double delta)
 /// </summary>
 /// <param name="root">The root json object.</param>
 /// <param name="shieldEvent">The shield event.</param>
-void Sensor::onJsonReceived(JsonObject& root, ShieldEvent* shieldEvent) {
+void Sensor::onJsonReceived(JsonObject &, ShieldEvent *shieldEvent) {
 	this->_isUpdated = true;
 	recentEvent = shieldEvent;
 	
@@ -159,7 +154,7 @@ int Sensor::sensorAction(SensorAction sensorAction, double delta, long interval)
 		Serial.print("starting...");
 	}
 #endif
-	const char sensorTypeSet[2] = { sensorType, 0 };
+	const char sensorTypeSet[2] = { sensorType, '\0' };
 
 	EPtr eptr2 = EPtr(sensorTypeSet, static_cast<int>(sensorAction));
 	eptr2.keyIsMem = true;
@@ -192,9 +187,10 @@ int Sensor::sendStop(const char* serviceName)
 	return shield.writeAll(serviceName, eptrs, 1);
 }
 
-int Sensor::filter(const char* serviceName, EPtr values[], int count)
+int Sensor::filter(const char *, EPtr [], int)
 {
-    
+    //TODO: Implement filter or remove
+    return 0;
 }
 
 /// <summary>

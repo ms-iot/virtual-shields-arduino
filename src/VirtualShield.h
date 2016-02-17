@@ -25,15 +25,22 @@
 #ifndef VirtualShield_h
 #define VirtualShield_h
 
-#include "Arduino.h"
+#include <stdint.h>
+#include <stdlib.h>
+
+#if defined(ARDUINO) && ARDUINO >= 100
+  #include <Arduino.h>
+#elif defined(_WINRT_DLL)
+  #define PROGMEM
+  using namespace Microsoft::Maker::Serial;
+#endif // defined(ARDUINO)
 
 #include <ArduinoJson.h>
 
-#include "Sensor.h"
-#include "ShieldEvent.h"
 #include "Attr.h"
-
-typedef unsigned int UINT;
+#include "Sensor.h"
+#include "SensorModels.h"
+#include "ShieldEvent.h"
 
 class Sensor;
 struct SensorEvent;
@@ -50,20 +57,24 @@ const long WAITFOR_TIMEOUT = 30000;
 class VirtualShield
 {
 public:
-	void(*onEvent)(ShieldEvent*) = 0;
-	void(*onConnect)(ShieldEvent*) = 0;
-	void(*onRefresh)(ShieldEvent*) = 0;
-	void(*onSuspend)(ShieldEvent*) = 0;
-	void(*onResume)(ShieldEvent*) = 0;
+    ShieldEvent::callback_t onEvent = NULL;
+    ShieldEvent::callback_t onConnect = NULL;
+    ShieldEvent::callback_t onRefresh = NULL;
+    ShieldEvent::callback_t onSuspend = NULL;
+    ShieldEvent::callback_t onResume = NULL;
 
     VirtualShield();
 
 	void begin(long bitRate = DEFAULT_BAUDRATE);
-	void setPort(int port);
+#if defined(ARDUINO) && ARDUINO > 100
+	void begin(Stream &s);
+#elif defined(_WINRT_DLL)
+	void begin(Microsoft::Maker::Serial::IStream ^s);
+#endif
 
-	bool checkSensors(int watchForId = 0, long timeout = 0, int waitForResultId = -1);
-    int waitFor(int id, long timeout = WAITFOR_TIMEOUT, bool asSuccess = true, int resultId = -1);
-	bool hasError(ShieldEvent* shieldEvent = 0);
+	bool hasError(ShieldEvent* shieldEvent = NULL);
+	bool checkSensors(int watchForId = 0, int32_t timeout = 0, int waitForResultId = -1);
+    int waitFor(int id, uint32_t timeout = WAITFOR_TIMEOUT, bool asSuccess = true, int resultId = -1);
 
 	bool getEvent(ShieldEvent* shieldEvent);
 
@@ -74,7 +85,7 @@ public:
 	virtual void onJsonReceived(JsonObject& root, ShieldEvent* shieldEvent);
 
 	void write(const char* text);
-	int writeAll(const char* serviceName, EPtr values[], int count, Attr extraAttributes[] = 0, int extraAttributeCount = 0, const char sensorType = '\0');
+	int writeAll(const char* serviceName, EPtr values[], unsigned int count, Attr extraAttributes[] = 0, int extraAttributeCount = 0, const char sensorType = '\0');
 
 	int writeAll(const char* serviceName);
 
@@ -83,29 +94,29 @@ public:
 
 	int endWrite();
 
-    int block(int id, bool blocking, long timeout = WAITFOR_TIMEOUT, int waitForResultId = -1);
+    int block(int id, bool blocking, int32_t timeout = WAITFOR_TIMEOUT, int waitForResultId = -1);
 
-	void setOnEvent(void(*onEvent)(ShieldEvent*))
+	void setOnEvent(ShieldEvent::callback_t onEvent)
 	{
 		this->onEvent = onEvent;
 	}
 
-	void setOnConnect(void(*onConnect)(ShieldEvent*))
+	void setOnConnect(ShieldEvent::callback_t onConnect)
 	{
 		this->onConnect = onConnect;
 	}
 
-	void setOnRefresh(void(*onRefresh)(ShieldEvent*))
+	void setOnRefresh(ShieldEvent::callback_t onRefresh)
 	{
 		this->onRefresh = onRefresh;
 	}
 
-	void setOnSuspend(void(*onSuspend)(ShieldEvent*))
+	void setOnSuspend(ShieldEvent::callback_t onSuspend)
 	{
 		this->onSuspend = onSuspend;
 	}
 
-	void setOnResume(void(*onResume)(ShieldEvent*))
+	void setOnResume(ShieldEvent::callback_t onResume)
 	{
 		this->onResume = onResume;
 	}
@@ -118,17 +129,22 @@ public:
 	}
 
 	int parseToHash(const char* text, unsigned int *hash, int hashCount, char separator = ' ', unsigned int length = -1);
-	static unsigned int hash(const char* s, unsigned int len = -1, unsigned int seed = 0);
+	static uint16_t hash(const char* s, size_t len = static_cast<size_t>(-2), unsigned int seed = 0);
 
 protected:
 	int sendFlashStringOnSerial(const char* flashStringAdr, int start = -1, bool encode = false) const;
 
 	void onJsonStringReceived(char* json, ShieldEvent* shieldEvent);
-	void onStringReceived(char* buffer, int length, ShieldEvent* shieldEvent);
+	int onStringReceived(char* buffer, size_t length, ShieldEvent* shieldEvent);
 
 	void flush();
 
+#if defined(ARDUINO) && ARDUINO > 100
     Stream* _VShieldSerial;
+#elif defined(_WINRT_DLL)
+    Microsoft::Maker::Serial::IStream^ _VShieldSerial;
+#endif
+
 private:
 	int nextId = 1;
 	ShieldEvent recentEvent;

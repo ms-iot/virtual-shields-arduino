@@ -25,14 +25,19 @@
 #ifndef Microphone_h
 #define Microphone_h
 
+#include <ArduinoJson.h>
+
 #include "Sensor.h"
+#include "ShieldEvent.h"
+#include "VirtualShield.h"
 
 class Microphone : public Sensor
 {
 public:
 	Microphone(const VirtualShield &shield);
 
-	int record(long milliseconds, String url = (const char*)0, bool keepLocal = false, bool autoplay = false);
+	int record(long milliseconds, const char * url = NULL, bool keepLocal = false, bool autoplay = false);
+	int record(long milliseconds, const String &url, bool keepLocal = false, bool autoplay = false);
 
 	void onJsonReceived(JsonObject& root, ShieldEvent* shieldEvent) override;
 };

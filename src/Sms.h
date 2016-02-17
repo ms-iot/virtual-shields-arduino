@@ -25,17 +25,18 @@
 #ifndef Sms_h
 #define Sms_h
 
-#include "Sensor.h"
-#include "ShieldEvent.h"
 #include <ArduinoJson.h>
 
-#include "Arduino.h"
+#include "Sensor.h"
+#include "ShieldEvent.h"
+#include "VirtualShield.h"
 
 class Sms : public Sensor {
 public:
 	Sms(const VirtualShield &shield);
 
-	int send(String to, String message, String attachment = (const char*) 0);
+	int send(const char * to, const char * message, const char * attachment = NULL);
+	int send(const String &to, const String &message, const String &attachment = "");
 
 	void onJsonReceived(JsonObject& root, ShieldEvent* shieldEvent) override;
 };

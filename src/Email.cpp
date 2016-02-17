@@ -24,10 +24,7 @@
 
 #include "Email.h"
 
-extern "C" {
-#include <string.h>
-#include <stdlib.h>
-}
+#include "SensorModels.h"
 
 const PROGMEM char SERVICE_EMAIL[] = "EMAIL";
 const PROGMEM char SUBJECT[] = "Subject";
@@ -49,11 +46,30 @@ Email::Email(const VirtualShield &shield) : Sensor(shield, 'Y') {
 /// <param name="cc">The cc email address.</param>
 /// <param name="attachment">The attachment url.</param>
 /// <returns>The id of the message. Negative if an error.</returns>
-int Email::send(String to, String subject, String message, String cc, String attachment) {
-	EPtr eptrs[] = { EPtr(MemPtr, TO, to.c_str()), EPtr(MemPtr, SUBJECT, subject.c_str()), 
-		EPtr(MemPtr, MESSAGE, message.c_str()), EPtr(cc ? MemPtr : None, CC, cc.c_str()), 
-		EPtr(attachment ? MemPtr : None, ATTACHMENT, attachment.c_str()) };
+int Email::send(const char * to, const char * subject, const char * message, const char * cc, const char * attachment) {
+	EPtr eptrs[] = { EPtr(MemPtr, TO, to), EPtr(MemPtr, SUBJECT, subject), 
+		EPtr(MemPtr, MESSAGE, message), EPtr(cc ? MemPtr : None, CC, cc), 
+		EPtr(attachment ? MemPtr : None, ATTACHMENT, attachment) };
 	return shield.writeAll(SERVICE_EMAIL, eptrs, 5);
+}
+
+/// <summary>
+/// Initiates an email.
+/// </summary>
+/// <param name="to">To email address.</param>
+/// <param name="subject">The subject.</param>
+/// <param name="message">The message.</param>
+/// <param name="cc">The cc email address.</param>
+/// <param name="attachment">The attachment url.</param>
+/// <returns>The id of the message. Negative if an error.</returns>
+int Email::send(const String &to, const String &subject, const String &message, const String &cc, const String &attachment) {
+	return send(
+		to.length() ? to.c_str() : NULL, 
+		subject.length() ? subject.c_str() : NULL, 
+		message.length() ? message.c_str() : NULL,
+		cc.length() ? cc.c_str() : NULL,
+		attachment.length() ? attachment.c_str() : NULL
+		);
 }
 
 /// <summary>

@@ -25,13 +25,12 @@
 #ifndef Sensor_h
 #define Sensor_h
 
-#include "Arduino.h"
-
-#include "SensorModels.h"
-#include "VirtualShield.h"
-#include "ShieldEvent.h"
 #include <ArduinoJson.h>
+
 #include "Attr.h"
+#include "SensorModels.h"
+#include "ShieldEvent.h"
+#include "VirtualShield.h"
 
 class VirtualShield;
 
@@ -50,7 +49,7 @@ const PROGMEM char STOP[] = "STOP";
 
 class Sensor {
 public:
-	void(*onEvent)(ShieldEvent* shieldEvent);
+    ShieldEvent::callback_t onEvent;
 
 	VirtualShield& shield;
 	ShieldEvent* recentEvent;
@@ -67,13 +66,13 @@ public:
 
 	bool isUpdated();
 
-	int writeAll(const char* serviceName, EPtr values[], int count, Attr extraAttributes[] = 0, int extraAttributeCount = 0);
+	int writeAll(const char* serviceName, EPtr values[], int count, Attr extraAttributes[] = NULL, int extraAttributeCount = 0);
 	int sensorAction(SensorAction sensorAction, double delta = 0, long interval = 0) const;
 
 	virtual bool isEvent(const char* tag, const char* action, ShieldEvent* shieldEvent);
 	virtual bool isEvent(int id, const char* action, ShieldEvent* shieldEvent);
 
-	void setOnEvent(void(*onEvent)(ShieldEvent* shieldEvent))
+	void setOnEvent(ShieldEvent::callback_t onEvent)
 	{
 		this->onEvent = onEvent;
 	}

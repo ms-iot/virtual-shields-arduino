@@ -22,14 +22,9 @@
     THE SOFTWARE.
 */
 
-#include "Sensor.h"
 #include "Camera.h"
-#include "SensorModels.h"
 
-extern "C" {
-#include <string.h>
-#include <stdlib.h>
-}
+#include "SensorModels.h"
 
 const PROGMEM char SERVICE_CAMERA[] = "CAMERA";
 const PROGMEM char PREVIEW[] = "PREVIEW";
@@ -57,10 +52,20 @@ int Camera::enablePreview(bool enable)
 /// </summary>
 /// <param name="url">The URL.</param>
 /// <returns>int.</returns>
-int Camera::capture(String url)
+int Camera::capture(const char * url)
 {
-	EPtr eptrs[] = { EPtr(url ? MemPtr : None, URL, url.c_str()) };
-	return shield.block(writeAll(SERVICE_CAMERA, eptrs, 1), onEvent == 0);
+    EPtr eptrs[] = { EPtr(url ? MemPtr : None, URL, url) };
+    return shield.block(writeAll(SERVICE_CAMERA, eptrs, 1), onEvent == NULL);
+}
+
+/// <summary>
+/// Captures a picture and optionally saves/sends it to the specified URL.
+/// </summary>
+/// <param name="url">The URL.</param>
+/// <returns>int.</returns>
+int Camera::capture(const String &url)
+{
+	return capture(url.c_str());
 }
 
 /// <summary>

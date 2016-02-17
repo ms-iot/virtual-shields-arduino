@@ -25,7 +25,7 @@
 #ifndef SensorModels_h
 #define SensorModels_h
 
-typedef unsigned int UINT;
+#include <stdint.h>
 
 enum SensorAction
 {
@@ -58,41 +58,41 @@ union ARGB
 	uint32_t color;
 	struct
 	{
-		uint8_t blue, green, red, alpha;
+        uint8_t blue, green, red, alpha;
 	};
 
-	ARGB(byte alpha, byte red, byte green, byte blue) :
-		red(red), green(green), blue(blue), alpha(alpha)
+	ARGB(uint8_t alpha, uint8_t red, uint8_t green, uint8_t blue) :
+        blue(blue), green(green), red(red), alpha(alpha)
 	{
 	}
 
-	ARGB(byte red, byte green, byte blue) :
-		red(red), green(green), blue(blue), alpha(0)
+	ARGB(uint8_t red, uint8_t green, uint8_t blue) :
+        blue(blue), green(green), red(red), alpha(0)
 	{
 	}
 
-	ARGB() :color(0) {}
+	ARGB() : color(static_cast<uint32_t>(0)) {}
 
-	ARGB(unsigned long color) : color(color) {}
+	ARGB(uint32_t color) : color(color) {}
 
-	ARGB(String hex) : ARGB((unsigned long)strtol(&hex[hex[0] == '#'], NULL, 16))
+	ARGB(const char * hex) : ARGB((unsigned long)strtol(&hex[hex[0] == '#'], NULL, 16))
 	{
 	}
 
-	void hex(char* hexSource)
+	void hex(uint8_t* hexSource)
 	{
-		char hex[9] =
-		{ alpha >> 4, alpha & 0x0F,
-		  red >> 4, red & 0x0F,
-		  green >> 4, green & 0x0F,
-		  blue >> 4, blue & 0x0F };
+        uint8_t hex[9] =
+        { static_cast<uint8_t>(alpha >> 4), static_cast<uint8_t>(alpha & 0x0F),
+            static_cast<uint8_t>(red >> 4), static_cast<uint8_t>(red & 0x0F),
+            static_cast<uint8_t>(green >> 4), static_cast<uint8_t>(green & 0x0F),
+            static_cast<uint8_t>(blue >> 4), static_cast<uint8_t>(blue & 0x0F) };
 
 		for (int i = 0; i < 8; i++)
 		{
 			hexSource[i] = hex[i] + (hex[i] > 0x09 ? 0x37 : 0x30);
 		}
 
-		hexSource[8] = 0;
+		hexSource[8] = '\0';
 
 		return;
 	}
@@ -103,10 +103,10 @@ const bool AsText = true;
 struct EPtr
 {
 	EPtrType ptrType;
-	const char* key = 0;
+	const char* key = NULL;
 	union
 	{
-		const char* value = 0;
+		const char* value = NULL;
 		double doubleValue;
 		uint32_t uintValue;
 		int intValue;
@@ -119,7 +119,7 @@ struct EPtr
 	bool keyIsMem = false;
 	bool asText = false;
 	bool encoded = false;
-	EPtr* eptrs = 0;
+	EPtr* eptrs = NULL;
 
 	/// <summary>
 	/// Initializes a new instance of the <see cref="EPtr"/> struct.
@@ -136,7 +136,7 @@ struct EPtr
 	/// Initializes a new instance of the <see cref="EPtr"/> struct.
 	/// </summary>
 	/// <param name="ptrType">Type of the EPtr.</param>
-	EPtr(EPtrType ptrType, const char* key, EPtr* eptrs, int len) : ptrType(ptrType), key(key), intValue(len), eptrs(eptrs), asText(true) {}
+    EPtr(EPtrType ptrType, const char* key, EPtr* eptrs, int len) : ptrType(ptrType), key(key), intValue(len), asText(true), eptrs(eptrs) {}
 
 	/// <summary>
 	/// Initializes a new instance of the <see cref="EPtr"/> struct.
@@ -151,47 +151,28 @@ struct EPtr
 	/// <param name="ptrType">Type of the PTR.</param>
 	/// <param name="key">The key.</param>
 	/// <param name="value">The value.</param>
-	EPtr(EPtrType ptrType, const char* key, const char* value) : ptrType(ptrType), key(key), value(value), asText(true), length(-1) {}
+    EPtr(EPtrType ptrType, const char* key, const char* value) : ptrType(ptrType), key(key), value(value), length(-1), asText(true) {}
 
 	/// <summary>
 	/// Initializes a new instance of the <see cref="EPtr"/> struct.
 	/// </summary>
 	/// <param name="key">The key.</param>
 	/// <param name="value">The value.</param>
-	EPtr(const char* key, const char* value) : key(key), value(value), asText(true), ptrType(ProgPtr) {}
+    EPtr(const char* key, const char* value) : ptrType(ProgPtr), key(key), value(value), asText(true) {}
 
 	/// <summary>
 	/// Initializes a new instance of the <see cref="EPtr"/> struct.
 	/// </summary>
 	/// <param name="key">The key.</param>
 	/// <param name="value">The value.</param>
-	EPtr(const char* key, String value) : key(key), asText(true), ptrType(value ? MemPtr : None), length(-1)
-	{
-		this->value = value.c_str();
-	}
+	EPtr(const char* key, String value) : ptrType(value ? MemPtr : None), key(key), value(value.c_str()), length(-1), asText(true) {}
 
 	/// <summary>
 	/// Initializes a new instance of the <see cref="EPtr"/> struct.
 	/// </summary>
 	/// <param name="key">The key.</param>
 	/// <param name="value">The value.</param>
-	EPtr(const char* key, const char value) : key(key), asText(true), ptrType(value ? Char : None), charValue(value) {}
-
-	/// <summary>
-	/// Initializes a new instance of the <see cref="EPtr"/> struct.
-	/// </summary>
-	/// <param name="key">The key.</param>
-	/// <param name="value">The value.</param>
-	/// <param name="ptrType">Type of the EPtr.</param>
-	EPtr(const char* key, int value, EPtrType ptrType = Int) : key(key), intValue(value), ptrType(ptrType) {}
-	
-	/// <summary>
-	/// Initializes a new instance of the <see cref="EPtr"/> struct.
-	/// </summary>
-	/// <param name="key">The key.</param>
-	/// <param name="value">The value.</param>
-	/// <param name="ptrType">Type of the EPtr.</param>
-	EPtr(const char* key, uint32_t value, EPtrType ptrType = Uint) : key(key), uintValue(value), ptrType(ptrType) {}
+    EPtr(const char* key, const char value) : ptrType(value ? Char : None), key(key), charValue(value), asText(true) {}
 
 	/// <summary>
 	/// Initializes a new instance of the <see cref="EPtr"/> struct.
@@ -199,7 +180,23 @@ struct EPtr
 	/// <param name="key">The key.</param>
 	/// <param name="value">The value.</param>
 	/// <param name="ptrType">Type of the EPtr.</param>
-	EPtr(const char* key, long value, EPtrType ptrType = Long) : key(key), longValue(value), ptrType(ptrType) {}
+    EPtr(const char* key, int value, EPtrType ptrType = Int) : ptrType(ptrType), key(key), intValue(value) {}
+
+	/// <summary>
+	/// Initializes a new instance of the <see cref="EPtr"/> struct.
+	/// </summary>
+	/// <param name="key">The key.</param>
+	/// <param name="value">The value.</param>
+	/// <param name="ptrType">Type of the EPtr.</param>
+    EPtr(const char* key, uint32_t value, EPtrType ptrType = Uint) : ptrType(ptrType), key(key), uintValue(value) {}
+
+	/// <summary>
+	/// Initializes a new instance of the <see cref="EPtr"/> struct.
+	/// </summary>
+	/// <param name="key">The key.</param>
+	/// <param name="value">The value.</param>
+	/// <param name="ptrType">Type of the EPtr.</param>
+    EPtr(const char* key, long value, EPtrType ptrType = Long) : ptrType(ptrType), key(key), longValue(value) {}
 
 	/// <summary>
 	/// Initializes a new instance of the <see cref="EPtr"/> struct.
@@ -207,16 +204,16 @@ struct EPtr
 	/// <param name="key">The key.</param>
 	/// <param name="value">The value.</param>
 	/// <param name="asText">As text.</param>
-	EPtr(const char* key, double value, bool asText = false) : key(key), doubleValue(value), asText(asText), ptrType(Double) {}
+    EPtr(const char* key, double value, bool asText = false) : ptrType(Double), key(key), doubleValue(value), asText(asText) {}
 
 	/// <summary>
 	/// Initializes a new instance of the <see cref="EPtr"/> struct.
 	/// </summary>
 	/// <param name="key">The key.</param>
 	/// <param name="value">The value.</param>
-	EPtr(const char* key, bool value) : key(key), boolValue(value), ptrType(Bool) {}
+    EPtr(const char* key, bool value) : ptrType(Bool), key(key), boolValue(value) {}
 
-	EPtr(const char* key, const char* value, int length) : key(key), value(value), ptrType(MemPtr), length(length) {}
+    EPtr(const char* key, const char* value, int length) : ptrType(MemPtr), key(key), value(value), length(length) {}
 
 	static int parse(const char* text, EPtr* eptrs, int length, const char separator = '|', int eptrStartIndex = 0)
 	{
@@ -227,7 +224,7 @@ struct EPtr
 		{
 			if (!text[index] || text[index] == separator)
 			{
-				eptrs[eptrStartIndex++] = EPtr(0, text + start, index - start);
+				eptrs[eptrStartIndex++] = EPtr(NULL, text + start, index - start);
 				start = index + 1;
 
 				if (++count == length || !text[index])

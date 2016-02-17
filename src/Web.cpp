@@ -22,20 +22,12 @@
     THE SOFTWARE.
 */
 
-#include "Sensor.h"
 #include "Web.h"
-#include "SensorModels.h"
-
-extern "C" {
-#include <string.h>
-#include <stdlib.h>
-}
 
 const PROGMEM char SERVICE_WEB[] = "WEB";
 const PROGMEM char GET[] = "Get";
 const PROGMEM char POST[] = "Post";
 const PROGMEM char DATA[] = "Data";
-
 const PROGMEM char LEN[] = "Len";
 
 /// <summary>
@@ -52,9 +44,21 @@ Web::Web(const VirtualShield &shield) : Sensor(shield, 'W') {
 /// <param name="parsingInstructions">The parsing instructions.</param>
 /// <param name="maxLength">The maximum length of the result.</param>
 /// <returns>The id of the message. Negative if an error.</returns>
-int Web::get(String url, String parsingInstructions, int maxLength)
+int Web::get(const char * url, const char * parsingInstructions, int maxLength)
 {
-	return get(EPtr(MemPtr, URL, url.c_str()), EPtr(parsingInstructions ? MemPtr : None, PARSE, parsingInstructions.c_str()), maxLength);
+	return get(EPtr(MemPtr, URL, url), EPtr(parsingInstructions ? MemPtr : None, PARSE, parsingInstructions), maxLength);
+}
+
+/// <summary>
+/// Performs a web Get, optionally returning a result.
+/// </summary>
+/// <param name="url">The url.</param>
+/// <param name="parsingInstructions">The parsing instructions.</param>
+/// <param name="maxLength">The maximum length of the result.</param>
+/// <returns>The id of the message. Negative if an error.</returns>
+int Web::get(const String &url, const String &parsingInstructions, int maxLength)
+{
+	return get(url.c_str(), parsingInstructions.length() ? parsingInstructions.c_str() : NULL, maxLength);
 }
 
 /// <summary>
@@ -65,9 +69,22 @@ int Web::get(String url, String parsingInstructions, int maxLength)
 /// <param name="parsingInstructions">The parsing instructions.</param>
 /// <param name="maxLength">The maximum length of the result.</param>
 /// <returns>The id of the message. Negative if an error.</returns>
-int Web::post(String url, String data, String parsingInstructions, int maxLength)
+int Web::post(const char * url, const char * data, const char * parsingInstructions, int maxLength)
 {
-	return post(EPtr(MemPtr, URL, url.c_str()), EPtr(MemPtr, DATA, data.c_str()), EPtr(parsingInstructions ? MemPtr : None, PARSE, parsingInstructions.c_str()), maxLength);
+	return post(EPtr(MemPtr, URL, url), EPtr(MemPtr, DATA, data), EPtr(parsingInstructions ? MemPtr : None, PARSE, parsingInstructions), maxLength);
+}
+
+/// <summary>
+/// Performs a web Post, optionally returning a result.
+/// </summary>
+/// <param name="url">The url.</param>
+/// <param name="data">The data.</param>
+/// <param name="parsingInstructions">The parsing instructions.</param>
+/// <param name="maxLength">The maximum length of the result.</param>
+/// <returns>The id of the message. Negative if an error.</returns>
+int Web::post(const String &url, const String &data, const String &parsingInstructions, int maxLength)
+{
+	return post(url.c_str(), data.c_str(), parsingInstructions.length() ? parsingInstructions.c_str() : NULL, maxLength);
 }
 
 /// <summary>
@@ -82,7 +99,7 @@ int Web::get(EPtr url, EPtr parsingInstructions, int maxLength)
 	EPtr eptrs[] = { EPtr(ACTION, GET), url,
 		EPtr(LEN, maxLength),
 		parsingInstructions };
-	return shield.block(writeAll(SERVICE_WEB, eptrs, 4), onEvent == 0);
+	return shield.block(writeAll(SERVICE_WEB, eptrs, 4), onEvent == NULL);
 }
 
 /// <summary>
@@ -98,7 +115,7 @@ int Web::post(EPtr url, EPtr data, EPtr parsingInstructions, int maxLength)
 	EPtr eptrs[] = { EPtr(ACTION, POST), url, data,
 		EPtr(LEN, maxLength),
 		parsingInstructions };
-	return shield.block(writeAll(SERVICE_WEB, eptrs, 5), onEvent == 0);
+	return shield.block(writeAll(SERVICE_WEB, eptrs, 5), onEvent == NULL);
 }
 
 /// <summary>
@@ -123,7 +140,7 @@ void Web::getResponse(char* responseBuffer, int length, char** parts, int partCo
 			if (responseBuffer[index] == '|')
 			{
 				parts[count++] = &responseBuffer[index + 1];
-				responseBuffer[index] = 0;
+				responseBuffer[index] = '\0';
 			}
 		}
 	}

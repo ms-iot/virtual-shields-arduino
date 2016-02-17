@@ -25,11 +25,11 @@
 #ifndef Gyrometer_h
 #define Gyrometer_h
 
-#include "Sensor.h"
-#include "ShieldEvent.h"
 #include <ArduinoJson.h>
 
-#include "Arduino.h"
+#include "Sensor.h"
+#include "ShieldEvent.h"
+#include "VirtualShield.h"
 
 class Gyrometer : public Sensor {
 public:

@@ -25,7 +25,12 @@
 #ifndef Web_h
 #define Web_h
 
+#include <ArduinoJson.h>
+
 #include "Sensor.h"
+#include "SensorModels.h"
+#include "ShieldEvent.h"
+#include "VirtualShield.h"
 
 const PROGMEM char PARSE[] = "Parse";
 
@@ -42,13 +47,16 @@ public:
 
 	Web(const VirtualShield &shield);
 
-	int get(String url, String parsingInstructions = (const char*) 0, int maxLength = 0);
-	int post(String url, String data, String parsingInstructions = (const char*) 0, int maxLength = 0);
+	int get(const char * url, const char * parsingInstructions = NULL, int maxLength = 0);
+	int post(const char * url, const char * data, const char * parsingInstructions = NULL, int maxLength = 0);
+
+	int get(const String &url, const String &parsingInstructions = "", int maxLength = 0);
+	int post(const String &url, const String &data, const String &parsingInstructions = "", int maxLength = 0);
 
 	int get(EPtr url, EPtr parsingInstructions, int maxLength = 0);
 	int post(EPtr url, EPtr data, EPtr parsingInstructions, int maxLength = 0);
 
-	void getResponse(char* responseBuffer, int length, char** parts = 0, int partCount = 0);
+	void getResponse(char* responseBuffer, int length, char** parts = NULL, int partCount = 0);
 
 	void onJsonReceived(ArduinoJson::JsonObject& root, ShieldEvent* shieldEvent) override;
 private:

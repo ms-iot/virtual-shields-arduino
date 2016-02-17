@@ -23,12 +23,8 @@
 */
 
 #include "Speech.h"
-#include "Sensor.h"
 
-extern "C" {
-#include <string.h>
-#include <stdlib.h>
-}
+#include "SensorModels.h"
 
 const PROGMEM char SERVICE_NAME_SPEECH[] = "SPEECH";
 const int MEDIA_PAUSED = 4;
@@ -46,11 +42,21 @@ Speech::Speech(const VirtualShield &shield) : Sensor(shield, 'T')
 /// </summary>
 /// <param name="message">The message.</param>
 /// <returns>The id of the message. Negative if an error.</returns>
-int Speech::speak(String message)
+int Speech::speak(const char * message)
 {
     IsSpeaking = true;
-	EPtr eptrs[] = { EPtr(MemPtr, MESSAGE, message.c_str()) };
-    return shield.block(writeAll(SERVICE_NAME_SPEECH, eptrs, 1), onEvent == 0, WAITFOR_TIMEOUT, MEDIA_PAUSED);
+	EPtr eptrs[] = { EPtr(MemPtr, MESSAGE, message) };
+    return shield.block(writeAll(SERVICE_NAME_SPEECH, eptrs, 1), onEvent == NULL, WAITFOR_TIMEOUT, MEDIA_PAUSED);
+}
+
+/// <summary>
+/// Speaks the specified message.
+/// </summary>
+/// <param name="message">The message.</param>
+/// <returns>The id of the message. Negative if an error.</returns>
+int Speech::speak(const String &message)
+{
+	return speak(message.c_str());
 }
 
 int Speech::stop()
