@@ -46,7 +46,7 @@
   #endif
   
   // If it has dual serial ports, prefer the second one (pins 0, 1) for bluetooth.
-  #if defined(__AVR_ATmega32U4__) || defined(ARDUINO_SAMD_MKR1000) || defined(_VARIANT_ARDUINO_101_X_)
+  #if defined(__AVR_ATmega32U4__) || defined(ARDUINO_SAMD_MKR1000) || defined(_VARIANT_ARDUINO_101_X_) || (__AVR_ATmega1280__) || defined(__AVR_ATmega2560__)
     #define VIRTUAL_SERIAL_PORT1 Serial1
     #define debugSerial
     #define debugSerialIn
