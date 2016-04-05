@@ -31,38 +31,40 @@
 #include "ShieldEvent.h"
 #include "VirtualShield.h"
 
-class Media : public Sensor
-{
-public:
-	Media(const VirtualShield &shield);
+class Media : public Sensor {
+  public:
+    Media(const VirtualShield &shield);
 
-	int play(const char * url, long length = 0);
-	int play(const String &url, long length = 0);
+    int play(const char * url, long length = 0);
+    int play(const String &url, long length = 0);
 
-	inline int playVideo(const char * url, long length = 0) {
+    inline int playVideo(const char * url, long length = 0) {
         const long full_length = length + 7;
         char *full_url = new char[full_length];
         int return_value = 0;
 
-        snprintf(full_url, full_length, "VIDEOS:%s", url);
-		return_value = play(full_url, full_length);
+        //snprintf(full_url, full_length, "VIDEOS:%s", url);
+        strncpy(full_url, "VIDEOS:", 7);
+        strncpy(full_url + 7, url, length);
+
+        return_value = play(full_url, full_length);
         delete[] full_url;
         return return_value;
-	}
+    }
 
-	inline int playVideo(const String &url, long length = 0) {
-		return playVideo(url.c_str(), length);
-	}
+    inline int playVideo(const String &url, long length = 0) {
+        return playVideo(url.c_str(), length);
+    }
 
-	inline int playAudio(const char * url, long length = 0) {
-		return playVideo(url, length);
-	}
+    inline int playAudio(const char * url, long length = 0) {
+        return playVideo(url, length);
+    }
 
-	inline int playAudio(const String &url, long length = 0) {
-		return playVideo(url.c_str(), length);
-	}
+    inline int playAudio(const String &url, long length = 0) {
+        return playVideo(url.c_str(), length);
+    }
 
-	void onJsonReceived(JsonObject& root, ShieldEvent* shieldEvent) override;
+    void onJsonReceived(JsonObject& root, ShieldEvent* shieldEvent) override;
 };
 
 #endif

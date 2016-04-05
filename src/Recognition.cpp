@@ -127,9 +127,31 @@ bool Recognition::heard(int spokenNumber) {
     const int length = this->length[0];
     char * buffer = new char[length];
     bool return_value = false;
-
-    snprintf(buffer, length, "%d", spokenNumber);
-	return_value = heard(buffer);
+    int i = 0, val = spokenNumber;
+    
+    //snprintf(buffer, length, "%d", spokenNumber);
+    if ( length >= 1 ) { buffer[length - 1] = '\n'; }
+    if ( length >= 2 ) {
+        i = (length - 2);
+        if ( 0 == val ) {
+            buffer[i] = '0';
+        } else {
+            // Map each digit to the corresponding alpha character (from right to left)
+            for (; (i >= 0) ; --i, val /= 10) {
+                buffer[i] = "0123456789abcdef"[val % 10];
+            }
+            // Add the minus sign if negative
+            if ( spokenNumber < 0 && i >= 0) { buffer[i] = '-'; }
+        }
+        // Left justify the string
+        if ( i > 0 ) {
+            for (int j = 0 ; i < length; ++i, ++j) {
+                buffer[j] = buffer[i];
+            }
+        }
+    }
+    
+    return_value = heard(buffer);
     delete[] buffer;
     return return_value;
 }
